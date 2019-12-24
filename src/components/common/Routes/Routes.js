@@ -8,7 +8,7 @@ export default class Routes extends React.Component {
   render() {
     return (
       <ListeningBrowserRouter>
-        <Route exact path="/" component={Startpage} />
+        <Route exact path={process.env.PUBLIC_URL + '/'} component={Startpage} />
       </ListeningBrowserRouter>
     );
   }
