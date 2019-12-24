@@ -17,6 +17,10 @@ export default class ListeningBrowserRouter extends React.Component {
   }
 
   render() {
-    return <Router history={history}>{this.props.children}</Router>;
+    return (
+      <Router {...this.props} history={history}>
+        {this.props.children}
+      </Router>
+    );
   }
 }
