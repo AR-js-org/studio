@@ -20,3 +20,4 @@ jobs:
           BRANCH: gh-pages
           FOLDER: build
           CLEAN: true
+          TARGET_FOLDER: docs
