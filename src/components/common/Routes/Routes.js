@@ -9,8 +9,8 @@ export default class Routes extends React.Component {
     console.log(JSON.stringify(process.env));
     console.log('Hey4');
     return (
-      <ListeningBrowserRouter basename={process.env.PUBLIC_URL}>
-        <Route exact path="/" component={Startpage} />
+      <ListeningBrowserRouter>
+        <Route exact path={process.env.PUBLIC_URL + '/'} component={Startpage} />
       </ListeningBrowserRouter>
     );
   }
