@@ -5,7 +5,7 @@
   "private": false,
   "license": "MIT",
   "repository": "git@github.com:AR-js-org/studio.git",
-  "homepage": "https://AR-js-org.github.io/studio",
+  "homepage": "https://ar-js-org.github.io/studio/",
   "dependencies": {
     "@material-ui/core": "^4.8.1",
     "@material-ui/icons": "^4.5.1",
