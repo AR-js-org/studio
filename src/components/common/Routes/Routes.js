@@ -7,6 +7,7 @@ import Startpage from '../../pages/Startpage/Startpage.js';
 export default class Routes extends React.Component {
   render() {
     console.log(JSON.stringify(process.env));
+    console.log('Hey');
     return (
       <ListeningBrowserRouter basename={process.env.PUBLIC_URL}>
         <Route exact path="/" component={Startpage} />
