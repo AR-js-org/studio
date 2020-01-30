@@ -96,7 +96,7 @@ p.wide {
 
 img.marker {
   display: block;
-  width: 60%;
+  width: 65%;
 }
 
 /* LINKS */
@@ -153,9 +153,6 @@ p a:hover {
   background-color: var(--dark);
   border-radius: var(--base);
   padding: var(--base);
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1rem;
 }
 
 .highlight .border {
@@ -192,6 +189,11 @@ p a:hover {
 }
 
 @media (min-width: 700px) {
+  .highlight {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+  }
   .btn + .btn {
     margin-left: var(--base);
   }
