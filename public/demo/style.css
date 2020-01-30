@@ -1,0 +1,198 @@
+@import url('https://cdn.staticaly.com/gh/jonasjohansson/template/master/reset.css');
+@import url('https://fonts.googleapis.com/css?family=Chakra+Petch|IBM+Plex+Mono&display=swap');
+
+:root {
+  --base: 1.6rem;
+  --font-size-small: 80%;
+  --video-padding: 56.3%;
+  --accent: 5, 5, 18;
+  --white: #e1e1e1;
+  --black: #040404;
+  --dark: #0a0a0a;
+  --col-location: cyan;
+  --col-picture: magenta;
+  --col-marker: orange;
+  --sans-serif: Chakra Petch, BlinkMacSystemFont, system-ui, -apple-system;
+  --monospace: IBM Plex Mono, Consolas, Liberation Mono, Menlo, Courier, monospace;
+}
+
+html {
+  font: 24px/1.3 var(--sans-serif);
+  color: var(--white);
+  background-color: var(--black);
+}
+
+body {
+  padding-top: calc(var(--base) * 6);
+  padding-bottom: calc(var(--base) * 2);
+  max-width: 960px;
+  padding-left: var(--base);
+  padding-right: var(--base);
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+body > * {
+  margin-bottom: calc(var(--base) * 2);
+  text-align: center;
+  padding-left: var(--base);
+  padding-right: var(--base);
+}
+
+/* HEADINGS */
+
+h1,
+h2 {
+  font-weight: 500;
+  text-align: center;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-bottom: var(--base);
+}
+
+.location h3 {
+  color: var(--col-location);
+}
+
+.picture h3 {
+  color: var(--col-picture);
+}
+
+.marker h3 {
+  color: var(--col-marker);
+}
+
+/* PARAGRAPHS */
+
+p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p.preamble {
+  max-width: 600px;
+}
+
+p.narrow {
+  max-width: 480px;
+}
+
+p.wide {
+  max-width: 680px;
+}
+
+/* IMAGES */
+
+img.marker {
+  display: block;
+  width: 60%;
+}
+
+/* LINKS */
+
+p a {
+  color: var(--col-location);
+}
+
+p a:hover {
+  text-decoration: none;
+  box-shadow: 0px 1px 1px var(--col-marker);
+}
+
+/* CLASSES */
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* BUTTONS */
+
+.btn {
+  box-shadow: 10px 10px 0px rgba(130, 130, 130, 0.1);
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 600;
+  padding: 0.25rem 1rem;
+  text-transform: capitalize;
+  text-align: center;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+.btn-location {
+  background: var(--col-location);
+}
+
+.btn-picture {
+  background: var(--col-picture);
+}
+
+.btn-marker {
+  background: var(--col-marker);
+}
+
+/* HIGHLIGHT */
+
+.highlight {
+  background-color: var(--dark);
+  border-radius: var(--base);
+  padding: var(--base);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+.highlight .border {
+  margin: calc(var(--base) * 1) auto;
+  width: 100px;
+  height: 100px;
+}
+
+.location .border {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='cyan' stroke-width='45' stroke-dasharray='3%2c 9%2c 1%2c 3%2c 9%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e");
+  transform: rotate(45deg);
+}
+
+.picture .border {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100'  stroke='magenta' stroke-width='45' stroke-dasharray='3%2c 9%2c 1%2c 3%2c 9%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e");
+  border-radius: 100px;
+  transform: scale(1.2);
+}
+
+.marker .border {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='orange' stroke-width='45' stroke-dasharray='3%2c 9%2c 1%2c 3%2c 9%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e");
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 699px) {
+  .buttons a {
+    display: table;
+    margin: 0 auto;
+  }
+  .buttons a:not(:last-child) {
+    margin-bottom: var(--base);
+  }
+}
+
+@media (min-width: 700px) {
+  .btn + .btn {
+    margin-left: var(--base);
+  }
+}
