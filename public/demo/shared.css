@@ -7,12 +7,13 @@
   --video-padding: 56.3%;
   --accent: 5, 5, 18;
   --white: #e1e1e1;
-  --black: #040404;
+  --black: #272727;
   --gray: #777777;
-  --dark: #0a0a0a;
-  --col-location: cyan;
-  --col-picture: magenta;
-  --col-marker: orange;
+  --dark: #0e0e0e;
+  --border-radius: 10px;
+  --col-location: #ff2a2a; /* #90ffff; /* cyan; */
+  --col-picture: #46e44c; /* #ff33ff; /* magenta; */
+  --col-marker: #0c9aff; /* #ffeb3b; /* orange; */
   --sans-serif: Chakra Petch, BlinkMacSystemFont, system-ui, -apple-system;
   --monospace: IBM Plex Mono, Consolas, Liberation Mono, Menlo, Courier, monospace;
 }
@@ -105,8 +106,8 @@ p a:hover {
 /* BUTTONS */
 
 .btn {
-  box-shadow: 10px 10px 0px rgba(130, 130, 130, 0.2);
-  border-radius: 10px;
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.3);
+  border-radius: var(--border-radius);
   display: inline-block;
   font-style: normal;
   font-weight: 600;

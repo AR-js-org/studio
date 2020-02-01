@@ -18,29 +18,59 @@ img.marker {
 
 .highlight {
   background-color: var(--dark);
-  border-radius: var(--base);
+  border-radius: var(--border-radius);
   padding: var(--base);
 }
 
-.highlight .border {
-  margin: calc(var(--base) * 1) auto;
-  width: 100px;
-  height: 100px;
+.highlight svg {
+  margin: var(--base) 0;
 }
 
-.location .border {
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='cyan' stroke-width='45' stroke-dasharray='3%2c 9%2c 1%2c 3%2c 9%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e");
-  transform: rotate(45deg);
+.highlight > *:not(:last-child) {
+  margin-bottom: var(--base);
 }
 
-.picture .border {
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100'  stroke='magenta' stroke-width='45' stroke-dasharray='3%2c 9%2c 1%2c 3%2c 9%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e");
-  border-radius: 100px;
-  transform: scale(1.2);
+.highlight svg,
+.highlight svg > * {
+  width: 80px;
+  height: 80px;
+  overflow: visible;
 }
 
-.marker .border {
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='orange' stroke-width='45' stroke-dasharray='3%2c 9%2c 1%2c 3%2c 9%2c 1' stroke-dashoffset='0' stroke-linecap='butt'/%3e%3c/svg%3e");
+.highlight svg > * {
+  stroke-width: 25;
+  stroke-dasharray: 3;
+  fill: transparent;
+  stroke-dasharray: 3 2 1 6 9 1;
+  transition: stroke-dashoffset 20000ms linear;
+}
+
+.highlight > div:hover svg > * {
+  stroke-dashoffset: 100;
+}
+
+.location circle {
+  stroke: var(--col-location);
+  r: 40px;
+  cx: 40;
+  cy: 40;
+}
+
+.marker svg {
+  stroke: var(--col-marker);
+}
+
+.picture svg {
+  transform: rotate(45deg) scale(0.9, 0.9);
+  stroke: var(--col-picture);
+}
+
+/* ANIMATIONS */
+
+@keyframes stroke {
+  to {
+    stroke-dashoffset: 100;
+  }
 }
 
 /* MEDIA QUERIES */
