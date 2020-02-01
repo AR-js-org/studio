@@ -13,6 +13,10 @@ AR.js Studio is an authoring platform to build Web Augmented Reality experiences
 
 To run the React application locally, just clone the repository and then run `npm install` and `npm start`.
 
+## Design
+
+Design stuff can be found on `public/demo` folder.
+
 ## Developing
 
 For maintaining a consistent code style while developing, please use
