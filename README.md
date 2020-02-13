@@ -21,3 +21,8 @@ Design stuff can be found on `public/demo` folder.
 
 For maintaining a consistent code style while developing, please use
 [Visual Studio Code](https://code.visualstudio.com/)
+
+## Launching the web application
+
+Insall `npm install -g http-server` globally. 
+Use http-server to launch the public folder with a simple node server.

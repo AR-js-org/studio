@@ -1,0 +1,19 @@
+body{
+    margin:0px;
+}
+.home-page-bounds{
+    padding:100px;
+    padding-top:50px;
+}
+.header{
+    width:100%;
+    height:20px;
+    background-color: #80B9E3;
+}
+.card-barrier{
+    height:80px;
+    overflow: hidden;
+}
+.right-align{
+    text-align: right;
+}
