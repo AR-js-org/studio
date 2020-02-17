@@ -1,5 +1,5 @@
-@import url('https://cdn.staticaly.com/gh/jonasjohansson/template/master/reset.css');
-@import url('https://fonts.googleapis.com/css?family=Chakra+Petch|IBM+Plex+Mono|IBM+Plex+Sans&display=swap');
+@import url("https://cdn.staticaly.com/gh/jonasjohansson/template/master/reset.css");
+@import url("https://fonts.googleapis.com/css?family=Chakra+Petch|IBM+Plex+Mono|IBM+Plex+Sans&display=swap");
 
 :root {
   --base: 1.6rem;
@@ -30,6 +30,13 @@ body {
   padding-right: var(--base);
   box-sizing: border-box;
   margin: 0 auto;
+}
+
+main > * {
+  margin-bottom: calc(var(--base) * 2);
+  text-align: center;
+  padding-left: var(--base);
+  padding-right: var(--base);
 }
 
 /* HEADINGS */
@@ -153,7 +160,7 @@ pre code {
 }
 
 pre code::before {
-  content: counter(listing, decimal-leading-zero) ' ';
+  content: counter(listing, decimal-leading-zero) " ";
   display: inline-block;
   color: var(--gray);
   text-align: right;
