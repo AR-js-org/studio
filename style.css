@@ -156,6 +156,6 @@ body {
   padding-left: 30px;
 }
 
-.header a:visited {
+.header a * {
   color: black;
 }

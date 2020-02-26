@@ -12,9 +12,9 @@ If the radioState is not selected, displays an error.
 */
 function startBuildingOnclick() {
   if (radioState == "marker") {
-    window.location.href = "/pages/marker.html"
+    window.location.href = BASE_URL + "/pages/marker.html"
   } else if (radioState == "location") {
-    window.location.href = "/pages/location.html"
+    window.location.href = BASE_URL + "/pages/location.html"
   } else {
     // Display error message
   }
