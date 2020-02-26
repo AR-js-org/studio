@@ -1,0 +1,161 @@
+/* Google fonts */
+@import url("https://fonts.googleapis.com/css?family=Chakra+Petch&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+
+/* Color Variables */
+:root {
+  --primary-color: #FFF700;
+  --primary-color-dark: #E6DE00;
+  --secondary-color: #00DBA0;
+  --secondary-color-dark: #00C28E;
+  --passive-color: #F2F2F2;
+  --passive-color-dark: #D9D9D9;
+}
+
+/* Typography */
+.Title {
+  font-family: Chakra Petch;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 65px;
+  line-height: 84px;
+}
+
+.Lead {
+  font-family: Chakra Petch;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 35px;
+  line-height: 140%;
+}
+
+.Paragraph,
+.Small,
+.Link,
+.Error {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 150%;
+}
+
+.Paragraph {
+  font-size: 18px;
+}
+
+.Small {
+  font-size: 14px;
+}
+
+.Link {
+  font-size: 18px;
+  color: #0000FF;
+}
+
+.Error {
+  font-style: italic;
+  font-size: 18px;
+  color: #DF0000;
+}
+
+/* Buttons */
+.PrimaryButton,
+.SecondaryButton,
+.PassiveButton {
+  height: 55px;
+  border: none;
+  border: 1.5px solid black;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 0px black;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.PrimaryButton:active,
+.SecondaryButton:active,
+.PassiveButton:active {
+  box-shadow: 5px 5px 0px #000000;
+  transform: translateY(4px);
+}
+
+.PrimaryButton {
+  background: var(--primary-color);
+}
+
+.PrimaryButton:active {
+  background-color: var(--primary-color);
+}
+
+.PrimaryButton:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.SecondaryButton {
+  background: var(--secondary-color);
+}
+
+.SecondaryButton:active {
+  background-color: var(--secondary-color);
+}
+
+.SecondaryButton:hover {
+  background-color: var(--secondary-color-dark);
+}
+
+.PassiveButton {
+  background: var(--passive-color);
+}
+
+.PassiveButton:active {
+  background-color: var(--passive-color);
+}
+
+.PassiveButton:hover {
+  background-color: var(--passive-color-dark);
+}
+
+/* body */
+body {
+  margin: 0;
+}
+
+/* header */
+.header {
+  position: fixed;
+  width: 100%;
+  background: var(--passive-color);
+}
+
+.header a img {
+  width: 35px;
+  height: 35px;
+  background: var(--passive-color-dark);
+  padding: 0;
+  margin: 0;
+}
+
+.header a p {
+  font-family: Chakra Petch;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 25px;
+  padding-left: 10px;
+  margin: 5px;
+  font-size: 20px;
+}
+
+.header a {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: left;
+  align-content: center;
+  text-decoration: none;
+  height: 80px;
+  width: 200px;
+  padding-left: 30px;
+}
+
+.header a:visited {
+  color: black;
+}
