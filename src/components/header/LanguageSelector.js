@@ -9,6 +9,7 @@ export default () => {
         <>
           <Button onClick={() => i18n.changeLanguage('de-DE')}>Deutsch</Button>
           <Button onClick={() => i18n.changeLanguage('en-US')}>English (US)</Button>
+          <Button onClick={() => i18n.changeLanguage('pt-BR')}>Portuguese (BR)</Button>
         </>
       )}
     </Translation>

@@ -15,7 +15,7 @@ To run the React application locally, just clone the repository and then run `np
 
 ## Design
 
-Design stuff can be found @ https://www.figma.com/file/TUjZ2KYsmhA5LUkt9KIhcB/ARjs-Components?node-id=0%3A1
+Design stuff can be found on `public/demo` folder.
 
 ## Developing
 

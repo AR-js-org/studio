@@ -4,6 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import de_DE from './locales/de-DE/de-DE.js';
 import en_US from './locales/en-US/en-US.js';
+import pt_BR from './locales/pt-BR/pt-BR.js'
 
 i18next
   .use(LanguageDetector)
@@ -12,6 +13,7 @@ i18next
     resources: {
       'de-DE': de_DE,
       'en-US': en_US,
+      'pt-BR': pt_BR,
     },
 
     keySeparator: false,
