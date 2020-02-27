@@ -82,7 +82,7 @@
 
 /* Responsive */
 @media screen and (max-width: 900px) {
-  .Title {
+  .title {
     font-size: 50px;
   }
 

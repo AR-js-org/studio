@@ -13,7 +13,7 @@
 }
 
 /* Typography */
-.Title {
+.title {
   font-family: Chakra Petch;
   font-style: normal;
   font-weight: bold;
@@ -21,7 +21,7 @@
   line-height: 84px;
 }
 
-.Lead {
+.lead {
   font-family: Chakra Petch;
   font-style: normal;
   font-weight: bold;
@@ -29,25 +29,25 @@
   line-height: 140%;
 }
 
-.Paragraph,
-.Small,
-.Link,
-.Error {
+.paragraph,
+.small,
+.link,
+.error {
   font-family: Source Sans Pro;
   font-style: normal;
   font-weight: normal;
   line-height: 150%;
 }
 
-.Paragraph {
+.paragraph {
   font-size: 18px;
 }
 
-.Small {
+.small {
   font-size: 14px;
 }
 
-.Link {
+.link {
   font-size: 18px;
   color: #0000FF;
 }
@@ -59,9 +59,9 @@
 }
 
 /* Buttons */
-.PrimaryButton,
-.SecondaryButton,
-.PassiveButton {
+.primary-button,
+.Secondary-button,
+.Passive-button {
   height: 55px;
   border: none;
   border: 1.5px solid black;
@@ -72,46 +72,46 @@
   padding-right: 20px;
 }
 
-.PrimaryButton:active,
-.SecondaryButton:active,
-.PassiveButton:active {
+.primary-button:active,
+.secondary-button:active,
+.passive-button:active {
   box-shadow: 5px 5px 0px #000000;
   transform: translateY(4px);
 }
 
-.PrimaryButton {
+.primary-button {
   background: var(--primary-color);
 }
 
-.PrimaryButton:active {
+.primary-button:active {
   background-color: var(--primary-color);
 }
 
-.PrimaryButton:hover {
+.primary-button:hover {
   background-color: var(--primary-color-dark);
 }
 
-.SecondaryButton {
+.secondary-button {
   background: var(--secondary-color);
 }
 
-.SecondaryButton:active {
+.secondary-button:active {
   background-color: var(--secondary-color);
 }
 
-.SecondaryButton:hover {
+.secondary-button:hover {
   background-color: var(--secondary-color-dark);
 }
 
-.PassiveButton {
+.passive-button {
   background: var(--passive-color);
 }
 
-.PassiveButton:active {
+.passive-button:active {
   background-color: var(--passive-color);
 }
 
-.PassiveButton:hover {
+.passive-button:hover {
   background-color: var(--passive-color-dark);
 }
 
