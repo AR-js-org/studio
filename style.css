@@ -122,7 +122,6 @@ body {
 .header a img {
   width: 35px;
   height: 35px;
-  background: var(--passive-color-dark);
   padding: 0;
   margin: 0;
 }
