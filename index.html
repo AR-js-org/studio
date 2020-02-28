@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AR.js Studio</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="components/css/main.css" />
+
+    <!-- import the webpage's javascript file -->
+    <script src="script.js"></script>
+    <script src="components/js/main.js"></script>
+  </head>
+
+  <body>
+    <div class="header">
+      <a href="">
+        <img src="img/logo.png" alt="logo" />
+        <p>AR.js Studio</p>
+      </a>
+    </div>
+
+    <div class="background">
+      <div class="content">
+        <p class="title">Web-enabled AR experiences</p>
+        <p class="paragraph">
+          AR.js studio is an open-source AR development environment for creating
+          augumented web experiences. You can create location or marker-based AR
+          applications and deploy them straight to web. Working with AR.js
+          studio doesn’t require any knowledge of coding. You can start working
+          on your project now.
+        </p>
+
+        <p class="lead">Pick your project type</p>
+
+        <div>
+          <label class="radio-container">
+            Location-based
+            <input
+              id="location"
+              type="radio"
+              name="radio"
+              onclick="radioOnclick(this)"
+            />
+            <span class="checkmark"></span>
+          </label>
+          <label class="radio-container">
+            Marker-based
+            <input
+              id="marker"
+              type="radio"
+              name="radio"
+              onclick="radioOnclick(this)"
+            />
+            <span class="checkmark"></span>
+          </label>
+          <a id="start-building" class="primary-button" href="">Start building</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,153 @@
+/* Google fonts */
+@import url("https://fonts.googleapis.com/css?family=Chakra+Petch&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+
+/* Color Variables */
+:root {
+  --primary-color: #FFF700;
+  --primary-color-dark: #E6DE00;
+  --secondary-color: #00DBA0;
+  --secondary-color-dark: #00C28E;
+  --passive-color: #F2F2F2;
+  --passive-color-dark: #D9D9D9;
+}
+
+/* Typography */
+.title {
+  font-family: Chakra Petch;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 65px;
+  line-height: 84px;
+}
+
+.lead {
+  font-family: Chakra Petch;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 35px;
+  line-height: 140%;
+}
+
+.paragraph,
+.small,
+.link,
+.error {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 150%;
+}
+
+.paragraph {
+  font-size: 18px;
+}
+
+.small {
+  font-size: 14px;
+}
+
+.link {
+  font-size: 18px;
+  color: #0000FF;
+}
+
+.error {
+  font-style: italic;
+  font-size: 18px;
+  color: #DF0000;
+}
+
+/* Buttons */
+.primary-button,
+.secondary-button,
+.passive-button {
+  display: inline-block;
+  height: 55px;
+  border: none;
+  border: 1.5px solid black;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 0px black;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin: 30px 0px;
+  font-size: 19px;
+  text-decoration: none;
+  color: black;
+}
+
+.primary-button:active,
+.secondary-button:active,
+.passive-button:active {
+  box-shadow: 5px 5px 0px #000000;
+  transform: translateY(4px);
+}
+
+.primary-button {
+  background: var(--primary-color);
+}
+
+.primary-button:hover {
+  background: var(--primary-color-dark);
+}
+
+.secondary-button {
+  background: var(--secondary-color);
+}
+
+.secondary-button:hover {
+  background: var(--secondary-color-dark);
+}
+
+.passive-button {
+  background: var(--passive-color);
+}
+
+.passive-button:hover {
+  background: var(--passive-color-dark);
+}
+
+/* body */
+body {
+  margin: 0;
+}
+
+/* header */
+.header {
+  position: fixed;
+  width: 100%;
+  background: var(--passive-color);
+}
+
+.header a img {
+  width: 35px;
+  height: 35px;
+  background: var(--passive-color-dark);
+  padding: 0;
+  margin: 0;
+}
+
+.header a p {
+  font-family: Chakra Petch;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 25px;
+  padding-left: 10px;
+  margin: 5px;
+  font-size: 20px;
+}
+
+.header a {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: left;
+  align-content: center;
+  text-decoration: none;
+  height: 80px;
+  width: 200px;
+  padding-left: 30px;
+}
+
+.header a p {
+  color: black;
+}
