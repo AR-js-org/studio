@@ -11,9 +11,8 @@
   padding-right: 30%;
 }
 
-.content form * {
-  margin-top: 20px;
-  margin-bottom: 20px;
+.content .radio-container {
+  margin: 20px 0px;
 }
 
 /* Custom radio buttons */
@@ -83,7 +82,7 @@
 /* Responsive */
 @media screen and (max-width: 900px) {
   .title {
-    font-size: 50px;
+    font-size: 40px;
   }
 
   .background {
