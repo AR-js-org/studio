@@ -4,9 +4,9 @@ function radioOnclick(self) {
     let startBuilding = document.getElementById("start-building")
 
     if (radioState == "marker") {
-        startBuilding.href = BASE_URL + "/pages/marker.html"
+        startBuilding.href = BASE_URL + "pages/marker.html"
     } else if (radioState == "location") {
-        startBuilding.href = BASE_URL + "/pages/location.html"
+        startBuilding.href = BASE_URL + "pages/location.html"
     } else {
         // Display error message
     }

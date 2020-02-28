@@ -73,6 +73,7 @@
   margin: 30px 0px;
   font-size: 19px;
   text-decoration: none;
+  color: black;
 }
 
 .primary-button:active,
@@ -86,36 +87,24 @@
   background: var(--primary-color);
 }
 
-.primary-button:active {
-  background-color: var(--primary-color);
-}
-
 .primary-button:hover {
-  background-color: var(--primary-color-dark);
+  background: var(--primary-color-dark);
 }
 
 .secondary-button {
   background: var(--secondary-color);
 }
 
-.secondary-button:active {
-  background-color: var(--secondary-color);
-}
-
 .secondary-button:hover {
-  background-color: var(--secondary-color-dark);
+  background: var(--secondary-color-dark);
 }
 
 .passive-button {
   background: var(--passive-color);
 }
 
-.passive-button:active {
-  background-color: var(--passive-color);
-}
-
 .passive-button:hover {
-  background-color: var(--passive-color-dark);
+  background: var(--passive-color-dark);
 }
 
 /* body */
@@ -159,6 +148,6 @@ body {
   padding-left: 30px;
 }
 
-.header a * {
+.header a p {
   color: black;
 }
