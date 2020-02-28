@@ -52,7 +52,7 @@
   color: #0000FF;
 }
 
-.Error {
+.error {
   font-style: italic;
   font-size: 18px;
   color: #DF0000;
@@ -60,8 +60,8 @@
 
 /* Buttons */
 .primary-button,
-.Secondary-button,
-.Passive-button {
+.secondary-button,
+.passive-button {
   display: inline-block;
   height: 55px;
   border: none;
