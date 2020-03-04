@@ -10,6 +10,7 @@
   --secondary-color-dark: #00C28E;
   --passive-color: #F2F2F2;
   --passive-color-dark: #D9D9D9;
+  --max-z-index: 99999;
 }
 
 /* Typography */
@@ -117,6 +118,7 @@ body {
   position: fixed;
   width: 100%;
   background: var(--passive-color);
+  z-index: var(--max-z-index);
 }
 
 .header a img {
@@ -147,6 +149,18 @@ body {
   padding-left: 30px;
 }
 
+.content {
+    position: relative;
+}
+
 .header a p {
   color: black;
+}
+
+.splashscreen {
+    top: 20%;
+    position: absolute;
+    right: 0;
+    margin-right: -17em;
+    height: 75%;
 }
