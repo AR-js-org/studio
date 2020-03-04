@@ -1,17 +1,15 @@
 # AR.js Studio
 
-## Introduction
-
 AR.js Studio is an authoring platform to build Web Augmented Reality experiences.
 
-# External Resources
+## Try now!
+
+ 🚀[Online version](https://ar-js-org.github.io/studio/)
+
+## External Resources
 
 * [Google Drive Folder with Use Cases, Brainstorming, etc.](https://drive.google.com/open?id=1r2nJA8gfxFkty85DjPGUq56SOqNf0BsF)
 * [Design Mockup - only features, no real design](https://whimsical.com/D688LzTQQRyKESzRu1U4Au)
-
-## Getting started
-
-WIP
 
 ## Design
 
