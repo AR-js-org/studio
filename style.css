@@ -147,6 +147,18 @@ body {
   padding-left: 30px;
 }
 
+.content {
+    position: relative;
+}
+
 .header a p {
   color: black;
+}
+
+.splashscreen {
+    top: 20%;
+    position: absolute;
+    right: 0;
+    margin-right: -17em;
+    height: 75%;
 }
