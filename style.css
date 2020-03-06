@@ -151,7 +151,7 @@ body {
 }
 
 .content {
-    position: relative;
+  position: relative;
 }
 
 .header a p {
@@ -159,14 +159,37 @@ body {
 }
 
 .divider {
-  margin: 0px 10px;
+  margin: 35px 10px;
   border: 1px solid var(--passive-color);
 }
 
 .splashscreen {
-    top: 20%;
-    position: absolute;
-    right: 0;
-    margin-right: -17em;
-    height: 75%;
+  top: 20%;
+  position: absolute;
+  right: 0;
+  margin-right: -17em;
+  height: 75%;
+}
+
+.pages-content-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.pages-content-element {
+  width: 50%;
+}
+
+.pages-content-element .lead {
+  margin-top: 0;
+}
+
+.pages-content-element img {
+  margin: 0 auto;
+  display: block;
+}
+
+.pages-content-container:first-of-type {
+  margin-bottom: 35px;
 }
