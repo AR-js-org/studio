@@ -198,7 +198,6 @@ body {
 @media screen and (max-width: 900px) {
   .pages-content-container {
     flex-direction: column;
-    /* justify-content: center; */
   }
   .pages-content-element {
     width: 100%;
