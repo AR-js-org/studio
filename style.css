@@ -193,3 +193,14 @@ body {
 .pages-content-container:first-of-type {
   margin-bottom: 35px;
 }
+
+/* Responsive */
+@media screen and (max-width: 900px) {
+  .pages-content-container {
+    flex-direction: column;
+    /* justify-content: center; */
+  }
+  .pages-content-element {
+    width: 100%;
+  }
+}
