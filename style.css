@@ -19,6 +19,7 @@
   font-weight: bold;
   font-size: 65px;
   line-height: 84px;
+  margin: 40px 0;
 }
 
 .lead {
@@ -149,4 +150,9 @@ body {
 
 .header a p {
   color: black;
+}
+
+.divider {
+  margin: 0px 10px;
+  border: 1px solid var(--passive-color);
 }
