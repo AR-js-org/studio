@@ -185,9 +185,23 @@ body {
   margin-top: 0;
 }
 
-.pages-content-element img {
+.image-placeholder {
   margin: 0 auto;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 380px;
+  height: 380px;
+  background: var(--passive-color);
+  border: 1px solid var(--passive-color-dark);
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-family: Chakra Petch;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 25px;
+  color: var(--passive-color-dark);
 }
 
 .pages-content-container:first-of-type {
