@@ -8,7 +8,10 @@
 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../components/css/main.css" />
+    <link rel="stylesheet" href="../components/main/main.css" />
+
+    <!-- import web components -->
+    <script src="../components/back-anchor/back-anchor.js"></script>
   </head>
   <body>
     <div class="header">
@@ -19,10 +22,7 @@
     </div>
 
     <div class="pages-content">
-      <a class="primary-button" href="../index.html">
-        <img src="../assets/icons/arrow-back.svg" alt="icon back" />
-      </a>
-
+      <back-anchor></back-anchor>
       <div class="pages-content-container">
         <div class="pages-content-element">
           <p class="title">Marker-based</p>

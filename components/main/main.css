@@ -13,7 +13,7 @@
 
 .pages-content {
   font-family: Source Sans Pro;
-  padding: 10%;
+  padding: 4em 6em;
 }
 
 .content .radio-container {
@@ -27,7 +27,7 @@
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 1.25em;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -104,7 +104,7 @@
   font-family: Source Sans Pro;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 0.75em;
   line-height: 150%;
 }
 
