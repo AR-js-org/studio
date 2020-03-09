@@ -7,8 +7,8 @@
 
 .content {
   font-family: Source Sans Pro;
-  padding: 10%;
-  padding-right: 30%;
+  padding: 6em;
+  padding-right: 18em;
 }
 
 .pages-content {
@@ -17,15 +17,15 @@
 }
 
 .content .radio-container {
-  margin: 20px 0px;
+  margin: 1.25em 0;
 }
 
 /* Custom radio buttons */
 .radio-container {
   display: block;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
+  padding-left: 3em;
+  margin-bottom: 0.8em;
   cursor: pointer;
   font-size: 1.25em;
   -webkit-user-select: none;
@@ -46,8 +46,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
+  height: 1.6em;
+  width: 1.6em;
   background: #eee;
   border-radius: 50%;
 }
@@ -76,10 +76,10 @@
 
 /* Style the indicator (dot/circle) */
 .radio-container .checkmark:after {
-  top: 9px;
-  left: 9px;
-  width: 8px;
-  height: 8px;
+  top: 0.6em;
+  left: 0.6em;
+  width: 0.5em;
+  height: 0.5em;
   border-radius: 50%;
   background: white;
 }
@@ -90,14 +90,14 @@
   border: 1px solid var(--passive-color-dark);
   box-sizing: border-box;
   border-radius: 5px;
-  height: 50px;
-  padding: 15px 20px;
+  height: 3.5em;
+  padding: 1em 1.25em;
   -webkit-appearance: none;
   -moz-appearance: none;
   background: transparent;
   background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
   background-repeat: no-repeat;
-  background-position: top 12px right 4px;
+  background-position: top 0.8em right 0.25em;
 }
 
 .dropdown option {
@@ -111,7 +111,7 @@
 /* Responsive */
 @media screen and (max-width: 900px) {
   .title {
-    font-size: 40px;
+    font-size: 2.5em;
   }
 
   .background {
