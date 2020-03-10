@@ -50,6 +50,10 @@
   width: 1.6em;
   background: #eee;
   border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* On mouse-over, add a grey background color */
@@ -65,7 +69,7 @@
 /* Create the indicator (the dot/circle - hidden when not checked) */
 .checkmark:after {
   content: "";
-  position: absolute;
+  position: relative;
   display: none;
 }
 
@@ -76,8 +80,6 @@
 
 /* Style the indicator (dot/circle) */
 .radio-container .checkmark:after {
-  top: 0.6em;
-  left: 0.6em;
   width: 0.5em;
   height: 0.5em;
   border-radius: 50%;
@@ -87,7 +89,7 @@
 /* Custom dropdown */
 .dropdown {
   display: block;
-  border: 1px solid var(--passive-color-dark);
+  border: 1.5px solid black;
   box-sizing: border-box;
   border-radius: 5px;
   height: 3.5em;
@@ -98,14 +100,6 @@
   background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
   background-repeat: no-repeat;
   background-position: top 0.8em right 0.25em;
-}
-
-.dropdown option {
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 0.75em;
-  line-height: 150%;
 }
 
 /* Responsive */
