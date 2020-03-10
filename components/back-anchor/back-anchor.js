@@ -1,16 +1,15 @@
-fetch('./back-anchor.html')
-  .then(stream => stream.text())
-  .then(text => define(text));
+const template = `
+    <a href="javascript:history.back()">
+        <img src="../assets/icons/arrow-back.svg" alt="go back" />
+    </a>`;
 
-function define(html) {
-  class BackAnchor extends HTMLAnchorElement {
+class BackAnchor extends HTMLElement {
     constructor() {
-      super();
+        super();
 
-      var shadow = this.attachShadow({ mode: 'open' });
-      shadow.innerHTML = html;
+        var shadow = this.attachShadow({ mode: 'open' });
+        shadow.innerHTML = template;
     }
-  }
-
-  customElements.define('back-anchor', BackAnchor, { extends: 'a' });
 }
+
+customElements.define('back-anchor', BackAnchor);
