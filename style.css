@@ -210,6 +210,10 @@ body {
   margin-bottom: 2.25em;
 }
 
+.back-anchor {
+    padding: 1em 0em;
+}
+
 /* Responsive */
 @media screen and (max-width: 900px) {
   .pages-content-container {
