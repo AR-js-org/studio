@@ -8,13 +8,64 @@
 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../components/main/main.css" />
+
+    <!-- import web components -->
+    <script src="../components/back-anchor/back-anchor.js"></script>
   </head>
   <body>
     <div class="header">
       <a href="../index.html">
-        <img src="img/logo.png" alt="logo" />
+        <img src="../assets/img/logo.png" alt="logo" />
         <p>AR.js Studio</p>
       </a>
+    </div>
+
+    <div class="pages-content">
+      <back-anchor></back-anchor>
+      <div class="pages-content-container">
+        <div class="pages-content-element">
+          <p class="title">Location-based</p>
+          <p class="paragraph">
+            A location-based AR experience uses GPS coordinates to place your AR content.
+            Feel free to read the documentation, or follow the steps below to get started now
+          </p>
+        </div>
+      </div>
+
+      <div class="pages-content-container">
+        <div class="pages-content-element">
+          <p class="lead">1. Pick the location</p>
+          <p class="paragraph">
+            Click to drop a pin on the map below or enter exact GPS coordinates.
+          </p>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="pages-content-container">
+        <div class="pages-content-element">
+          <p class="lead">2. Choose the content type </p>
+          <p class="paragraph">
+            Select supported content type from the list below and upload the file from your computer.
+          </p>
+          <select class="dropdown" name="content-type">
+            <option value="">--Please select an option--</option>
+            <option value="3D">3D Object (.gltf, .glb; max size 50MB)</option>
+            <option value="Image">Image (.jpg, .png, .gif; max size 15MB)</option>
+            <option value="Audio">Audio (.mp3; max size 10MB)</option>
+            <option value="Video">Video (.mp4; max size 25MB)</option>
+          </select>
+          <a class="passive-button">Upload file</a>
+        </div>
+        <div class="pages-content-element">
+          <div class="image-placeholder">
+            Click to upload
+          </div>
+        </div>
+      </div>
+
     </div>
   </body>
 </html>
