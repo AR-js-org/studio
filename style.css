@@ -211,7 +211,8 @@ body {
 }
 
 .back-anchor {
-    padding: 1em 0em;
+    padding: 1em;
+    font-size: 1em;
 }
 
 /* Responsive */

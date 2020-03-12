@@ -1,5 +1,5 @@
 const template = `
-    <a style="padding: 1em 1.25em;" href="javascript:history.back()">
+    <a href="javascript:history.back()">
         <img src="../assets/icons/arrow-back.svg" alt="go back" />
     </a>`;
 
