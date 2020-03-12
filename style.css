@@ -214,6 +214,35 @@ body {
     padding: 1em 0em;
 }
 
+.coordinates-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: 2.5rem;
+}
+
+.input-container label {
+  font-family: Source Sans Pro;
+  font-size: 0.875rem;
+}
+
+.text-input {
+  border: 1px solid var(--passive-color-dark);
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 15rem;
+  height: 3.125rem;
+  padding: 1rem 1.25rem;
+  font-family: Source Sans Pro;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+input:focus {
+  outline: none;
+}
+
 /* Responsive */
 @media screen and (max-width: 900px) {
   .pages-content-container {
