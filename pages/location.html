@@ -12,7 +12,8 @@
 
     <!-- import web components -->
     <script src="../components/back-anchor/back-anchor.js"></script>
-    <script src="../components/file-input/file-input.js"></script>
+    <script src="../components/file-holder/file-holder.js"></script>
+    <script src="../components/file-select/file-select.js"></script>
   </head>
   <body>
     <div class="header">
@@ -60,7 +61,17 @@
 
       <hr class="divider">
 
-      <file-input></file-input>
+      <div class="pages-content-container">
+        <div class="pages-content-element">
+          <p class="lead">2. Choose the content type </p>
+          <p class="paragraph">
+            Select supported content type from the list below and upload the file from your computer.
+          </p>
+          <file-select></file-select>
+          <a class="passive-button">Upload file</a>
+        </div>
+        <file-holder></file-holder>
+      </div>
 
     </div>
   </body>
