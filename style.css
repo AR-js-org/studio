@@ -224,6 +224,11 @@ input:focus {
   outline: none;
 }
 
+.back-anchor {
+  padding: 1em;
+  font-size: 1em;
+}
+
 /* Responsive */
 @media screen and (max-width: 900px) {
   .pages-content-container {
