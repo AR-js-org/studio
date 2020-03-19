@@ -1,3 +1,7 @@
+window.onload = () => {
+    [...document.querySelectorAll('input')].forEach((input) => input.checked = false);
+};
+
 /* Update start building anchor href location based on radioState */
 function radioOnclick(self) {
     const radioState = self.getAttribute('id')
