@@ -4,7 +4,7 @@ class PageHeader extends HTMLElement {
 
         // handling github pages
         let logoUrl = `${window.location.href} + /../../assets/img/logo.png`;
-        if (logoUrl.indexOf('/studio') > -1) {
+        if (logoUrl.indexOf('/studio/') > -1) {
             logoUrl = `${window.location.href} + /../../studio/assets/img/logo.png`;
         }
 
@@ -41,7 +41,7 @@ class PageHeader extends HTMLElement {
             </style>
 
             <a href="/">
-                <img src="${window.location.href} + /../../assets/img/logo.png" alt="logo" />
+                <img src="${logoUrl}" alt="logo" />
                 <p>AR.js Studio</p>
             </a>
         `;
