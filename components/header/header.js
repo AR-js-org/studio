@@ -34,7 +34,7 @@ class PageHeader extends HTMLElement {
                 }
             </style>
 
-            <a href="/">
+            <a href="/studio">
                 <img class="logo-img" alt="logo" />
                 <p>AR.js Studio</p>
             </a>
