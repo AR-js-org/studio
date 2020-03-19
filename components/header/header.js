@@ -2,12 +2,6 @@ class PageHeader extends HTMLElement {
     constructor() {
         super();
 
-        // handling github pages
-        let logoUrl = `${window.location.href} + /../../assets/img/logo.png`;
-        if (logoUrl.indexOf('/studio/') > -1) {
-            logoUrl = `${window.location.href} + /../../studio/assets/img/logo.png`;
-        }
-
         const template = `
             <style>
                 a {
@@ -41,7 +35,7 @@ class PageHeader extends HTMLElement {
             </style>
 
             <a href="/">
-                <img src="${logoUrl}" alt="logo" />
+                <img class="logo-img" alt="logo" />
                 <p>AR.js Studio</p>
             </a>
         `;
@@ -52,6 +46,7 @@ class PageHeader extends HTMLElement {
 
     connectedCallback() {
         this.classList.add('page-header');
+        this.shadowRoot.querySelector('.logo-img').src = this.getAttribute('logoUrl');
     }
 }
 
