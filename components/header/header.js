@@ -2,6 +2,7 @@ class PageHeader extends HTMLElement {
     constructor() {
         super();
 
+
         const template = `
             <style>
                 a {
@@ -35,7 +36,7 @@ class PageHeader extends HTMLElement {
             </style>
 
             <a href="/">
-                <img src="/assets/img/logo.png" alt="logo" />
+                <img src="${window.location.href} + /../../assets/img/logo.png" alt="logo" />
                 <p>AR.js Studio</p>
             </a>
         `;
