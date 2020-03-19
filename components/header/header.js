@@ -46,7 +46,7 @@ class PageHeader extends HTMLElement {
 
     connectedCallback() {
         this.classList.add('page-header');
-        this.shadowRoot.querySelector('.logo-img').src = this.getAttribute('logoUrl');
+        this.shadowRoot.querySelector('.logo-img').src = `${this.getAttribute('assetsUrl')}/img/logo.png`;
     }
 }
 
