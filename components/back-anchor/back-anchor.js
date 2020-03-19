@@ -1,6 +1,6 @@
 const template = `
     <a href="javascript:history.back()">
-        <img src="/assets/icons/arrow-back.svg" alt="go back" />
+        <img class="img-back" src="studio/assets/icons/arrow-back.svg" alt="go back" />
     </a>`;
 
 class BackAnchor extends HTMLElement {
@@ -14,6 +14,7 @@ class BackAnchor extends HTMLElement {
     connectedCallback() {
         this.classList.add('primary-button');
         this.classList.add('back-anchor');
+        this.shadowRoot.querySelector('.img-back').src = `${this.getAttribute('assetsUrl')}/icons/arrow-back.svg`;
     }
 }
 

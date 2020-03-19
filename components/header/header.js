@@ -34,8 +34,8 @@ class PageHeader extends HTMLElement {
                 }
             </style>
 
-            <a href="/">
-                <img src="/assets/img/logo.png" alt="logo" />
+            <a href="/studio">
+                <img class="logo-img" alt="logo" />
                 <p>AR.js Studio</p>
             </a>
         `;
@@ -46,6 +46,7 @@ class PageHeader extends HTMLElement {
 
     connectedCallback() {
         this.classList.add('page-header');
+        this.shadowRoot.querySelector('.logo-img').src = `${this.getAttribute('assetsUrl')}/img/logo.png`;
     }
 }
 
