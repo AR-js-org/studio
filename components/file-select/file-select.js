@@ -2,10 +2,11 @@ const fileSelectTemplate = `
   <style>
     .dropdown {
       display: block;
-      border: 1.5px solid black;
+      border: 1px solid var(--passive-color-dark);
       box-sizing: border-box;
       border-radius: 5px;
       height: 3.5em;
+      font-size: 0.875em;
       padding: 1em 1.25em;
       -webkit-appearance: none;
       -moz-appearance: none;
