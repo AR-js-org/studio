@@ -154,32 +154,46 @@ page-header {
   margin-top: 0;
 }
 
-.image-placeholder {
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 23.75em;
-  height: 23.75em;
-  background: var(--passive-color);
-  border: 1px solid var(--passive-color-dark);
-  box-sizing: border-box;
-  border-radius: 5px;
-  font-family: Chakra Petch;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.25em;
-  line-height: 25px;
-  color: var(--passive-color-dark);
-}
-
 .pages-content-container:first-of-type {
   margin-bottom: 2.25em;
 }
 
 .back-anchor {
-    padding: 1em;
-    font-size: 1em;
+    padding: 1em 0em;
+}
+
+.coordinates-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: 2.5rem;
+}
+
+.input-container label {
+  font-family: Source Sans Pro;
+  font-size: 0.875rem;
+}
+
+.text-input {
+  border: 1px solid var(--passive-color-dark);
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 15rem;
+  height: 3.125rem;
+  padding: 1rem 1.25rem;
+  font-family: Source Sans Pro;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+input:focus {
+  outline: none;
+}
+
+.back-anchor {
+  padding: 1em;
+  font-size: 1em;
 }
 
 /* Responsive */

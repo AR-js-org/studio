@@ -8,11 +8,70 @@
 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../components/main/main.css" />
 
     <!-- import web components -->
+    <script src="../components/back-anchor/back-anchor.js"></script>
+    <script src="../components/file-holder/file-holder.js"></script>
+    <script src="../components/file-select/file-select.js"></script>
     <script src="../components/header/header.js"></script>
   </head>
   <body>
     <page-header assetsUrl="../assets"></page-header>
+
+    <div class="pages-content">
+      <back-anchor assetsUrl="../assets"></back-anchor>
+      <div class="pages-content-container">
+        <div class="pages-content-element">
+          <p class="title">Location-based</p>
+          <p class="paragraph">
+            A location-based AR experience uses GPS coordinates to place your AR content.
+            Feel free to read the documentation, or follow the steps below to get started now
+          </p>
+        </div>
+      </div>
+
+      <div class="pages-content-container">
+        <div class="pages-content-element">
+          <p class="lead">1. Pick the location</p>
+          <p class="paragraph">
+            Click to drop a pin on the map below or enter exact GPS coordinates.
+          </p>
+          <div class="coordinates-input-container">
+            <div class="input-container">
+              <label for="latitude">Latitude:</label>
+              <input class="text-input" type="text" id="latitude" name="latitude" />
+            </div>
+            <div class="input-container">
+              <label for="longitude">Longitude:</label>
+              <input class="text-input" type="text" id="longitude" name="longitude" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="pages-content-container">
+        Here will be the map :)
+      </div>
+
+      <hr class="divider">
+
+      <div class="pages-content-container">
+        <div class="pages-content-element">
+          <p class="lead">2. Choose the content type </p>
+          <p class="paragraph">
+            Select supported content type from the list below and upload the file from your computer.
+          </p>
+          <file-select></file-select>
+          <label class="passive-button">
+            <input type="file" hidden />
+            Upload file
+          </label>
+        </div>
+        <file-holder></file-holder>
+      </div>
+
+    </div>
   </body>
 </html>
