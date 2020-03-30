@@ -18,14 +18,14 @@
   font-family: Chakra Petch;
   font-style: normal;
   font-weight: bold;
-  font-size: 4em;
+  font-size: 3em;
 }
 
 .lead {
   font-family: Chakra Petch;
   font-style: normal;
   font-weight: bold;
-  font-size: 2.25em;
+  font-size: 1.75em;
   line-height: 140%;
 }
 
@@ -36,11 +36,11 @@
   font-family: Source Sans Pro;
   font-style: normal;
   font-weight: normal;
-  line-height: 150%;
+  line-height: 140%;
 }
 
 .paragraph {
-  font-size: 1.125em;
+  font-size: 1em;
 }
 
 .small {
@@ -48,13 +48,13 @@
 }
 
 .link {
-  font-size: 1.125em;
+  font-size: 1em;
   color: #0000FF;
 }
 
 .error {
   font-style: italic;
-  font-size: 1.125em;
+  font-size: 1em;
   color: #DF0000;
 }
 
@@ -66,8 +66,8 @@
   font-family: Chakra Petch;
   font-style: normal;
   font-weight: 600;
-  font-size: 1.25em;
-  line-height: 1.5em;
+  font-size: 1em;
+  line-height: 1.25em;
   height: 3.5em;
   border: none;
   border: 1.5px solid black;
@@ -111,6 +111,10 @@
   background: var(--passive-color-dark);
 }
 
+.file-input {
+    cursor: pointer;
+}
+
 /* body */
 body {
   margin: 0;
@@ -133,11 +137,11 @@ page-header {
 }
 
 .splashscreen {
-  top: 20%;
+  top: 12%;
   position: absolute;
   right: 0;
-  margin-right: -17em;
-  height: 75%;
+  margin-right: -15em;
+  height: 90%;
 }
 
 .pages-content-container {
@@ -159,7 +163,8 @@ page-header {
 }
 
 .back-anchor {
-    padding: 1em 0em;
+  padding: 1em 0em;
+  height: 3rem;
 }
 
 .coordinates-input-container {
@@ -179,7 +184,6 @@ page-header {
   border: 1px solid var(--passive-color-dark);
   box-sizing: border-box;
   border-radius: 5px;
-  width: 15rem;
   height: 3.125rem;
   padding: 1rem 1.25rem;
   font-family: Source Sans Pro;
