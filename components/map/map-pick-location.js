@@ -3,8 +3,8 @@
 //  This is requires stylesheet css for leaflet can be re-used on different pages
 // src: https://leafletjs.com/examples/quick-start/
 const leaflet_stylesheet_link = `<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-   crossorigin=""/>`;
+integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin=""/>`;
 
 // tile url most likely not to change
 const tile_url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -17,75 +17,80 @@ const openStreetMaps_attribution = "<a href=&quot;http://osm.org/copyright&quot;
 // styles to hold classnames for the main map and additional maps
 const map_styles = `
 <style>
-  .map-pick-location{
-      height: 380px;
-      width: 800px;
-  }
-  .map-foo-bar {
-      height: 100px;
-      width: 200px;
-  }
-  .set-location-button {
-    display: inline-block;
-    font-family: Chakra Petch;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1em;
-    line-height: 1.5em;
-    height: 3.5em;
-    border: none;
-    border: 1.5px solid black;
-    box-sizing: border-box;
-    box-shadow: 10px 10px 0px black;
-    border-radius: 10px;
-    padding: 1em 1.25em;
-    margin-top: 1.875em;
-    text-decoration: none;
-    color: black;
-  }
-  .location-set-display {
-    padding-top: 0;
-  }
+.map-pick-location{
+  height: 380px;
+  width: 800px;
+}
+.map-foo-bar {
+  height: 100px;
+  width: 200px;
+}
+.set-location-button {
+  display: inline-block;
+  font-family: Chakra Petch;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1em;
+  line-height: 1.5em;
+  height: 3.5em;
+  border: none;
+  border: 1.5px solid black;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 0px black;
+  border-radius: 10px;
+  padding: 1em 1.25em;
+  margin-top: 1.875em;
+  text-decoration: none;
+  color: black;
+}
+.location-set-display {
+  visibility: hidden;
+  padding-top: 0;
+}
 </style>
 `;
 
 
 
 const config = [
-  {
-    id: "001",
-    path: "location.html",
-    className: ".map-pick-location",
-    elem: `<div id="map-container">
-            <div class="map-pick-location"></div> 
-            <button class="set-location-button">Set Location</button>
-            <p id="location-set-display" class="location-set-display">Location is set to:</p>
-          </div>`,
-    center: [21.2901808, -157.8299651],
-    onLoad_zoom: 18,
-    attribution_opts: { 
-      attribution: openStreetMaps_attribution,
-      maxZoom: 18, 
-      minZoom: 10 
-    }  
-  },
-  {
-    id: "002",
-    path: "foobar.html",
-    className: ".map-foo-bar",
-    elem: `<div id="map-container">
-            <div class="map-pick-location"></div> 
-            <button class="set-location-button">Set Location</button>
-            <p id="location-set-display" class="location-set-display">Location is set to:</p>
-          </div>`,
-    center: [21.2901808, -157.8299651],
-    onLoad_zoom: 18,
-    attribution_opts: { 
-      attribution: openStreetMaps_attribution,
-      maxZoom: 18, 
-      minZoom: 10 
-    }  
-  }
+{
+  id: "001",
+  path: "location.html",
+  className: ".map-pick-location",
+  elem: `<div id="map-container">
+  <div class="map-pick-location"></div> 
+  <button class="set-location-button">Set Location</button>
+  <p id="location-set-display" class="location-set-display">
+  User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
+  </p>
+  </div>`,
+  center: [21.2901808, -157.8299651],
+  onLoad_zoom: 18,
+  attribution_opts: { 
+    attribution: openStreetMaps_attribution,
+    maxZoom: 18, 
+    minZoom: 10 
+  }  
+},
+{
+  id: "002",
+  path: "foobar.html",
+  className: ".map-foo-bar",
+  elem: `<div id="map-container">
+  <div class="map-pick-location"></div> 
+  <button class="set-location-button">Set Location</button>
+  <p id="location-set-display" class="location-set-display">
+  User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
+  </p>
+  </div>`,
+  center: [21.2901808, -157.8299651],
+  onLoad_zoom: 18,
+  attribution_opts: { 
+    attribution: openStreetMaps_attribution,
+    maxZoom: 18, 
+    minZoom: 10 
+  }  
+}
 ]
 
 
@@ -116,6 +121,8 @@ function reUseMapComponent(path){
 
 
 function invokeMapConfig(shadow, path) {
+  let lat;
+  let lng; 
   // shadow is the html dom element
   // path = location.html
   let mapConfig = returnPageConfig(path); // => {} with configurations for location.html
@@ -128,13 +135,45 @@ function invokeMapConfig(shadow, path) {
   // add a layergroup so each time user clicks a 
   // new spot it will clear the previous marker
   map.on('click', function(e) { // => {} that contains the coordinates
-    layerGroup.clearLayers();
-    let lat = e.latlng.lat;
-    let lng = e.latlng.lng;
-    let marker = L.marker([lat, lng]).addTo(layerGroup); // adds marker to the map
+    lat = e.latlng.lat;
+    lng = e.latlng.lng;
+    updateMarker(map, lat, lng, layerGroup); // updates the marker if done by map click
     updateLatLngValue(lat,lng); // updates the input fields above the map to reflect the chosen coordinates
     updateLatLngInnerHtml(shadow,lat,lng);
   })
+
+  // implementing button to set location
+  let setLocationButton = shadow.querySelector(".set-location-button");
+  setLocationButton.addEventListener("click", function(e) {
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position){ // => {} two keys {coords: {}, timestamp: string}
+        updateLatLngInnerHtml(shadow, "Locating", "...."); // if geo api response is slow - placeholder
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        updateMarker(map, lat, lng, layerGroup); // update the marker if button 'Set Location' clicked
+        updateLatLngValue(lat,lng); // updates the input fields above the map to reflect the chosen coordinates
+        updateLatLngInnerHtml(shadow,lat,lng);
+      },
+      function(error){
+        if(error.code == error.PERMISSION_DENIED){ 
+          updateLatLngInnerHtmlDenied(shadow, error.message);
+          // if permission on browser has been set to default deny of position - will provide basic steps to adjust for this url
+        }
+      });
+    }
+    else{
+      updateLatLngInnerHtmlDenied(shadow, "Geolocation is not supported by this browser.");
+      // this seems to be an unlikely problem according to MDN - all browser support this: 
+      // src: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+    }
+  })
+}
+
+
+function updateMarker(map, lat, lng, layerGroup){
+  map.panTo(new L.LatLng(lat, lng)); // will pan map to make the center of map the newly located coords
+  layerGroup.clearLayers(); // if updated again - clear previous markers from layergroup
+  let marker = L.marker([lat, lng]).addTo(layerGroup); // adds marker to the map
 }
 
 
@@ -146,27 +185,34 @@ function updateLatLngValue(lat,lng){
 
 function updateLatLngInnerHtml(shadow,lat,lng){
   let x = shadow.querySelector(".location-set-display");
+  x.style.visibility = "visible"
   x.innerHTML = `Location is set to: ${lat.toString()}, ${lng.toString()}!`;
+}
+
+function updateLatLngInnerHtmlDenied(shadow, msg){
+  let x = shadow.querySelector(".location-set-display");
+  x.style.visibility = "visible"
+  x.innerHTML = `${msg}: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url`;
 }
 
 
 
+
+
 class MapPickLocation extends HTMLElement {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.path = "location.html";
+    this.path = "location.html";
 
-        let shadow = this.attachShadow({ mode: 'open' });
-        shadow.innerHTML = reUseMapComponent(this.path);
+    let shadow = this.attachShadow({ mode: 'open' });
+    shadow.innerHTML = reUseMapComponent(this.path);
 
-    }
+  }
 
-    connectedCallback() {
-      invokeMapConfig(this.shadowRoot,this.path);
-
-  
-    }
+  connectedCallback() {
+    invokeMapConfig(this.shadowRoot,this.path);
+  }
 }
 
 
