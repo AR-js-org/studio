@@ -25,6 +25,27 @@ const map_styles = `
       height: 100px;
       width: 200px;
   }
+  .set-location-button {
+    display: inline-block;
+    font-family: Chakra Petch;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1em;
+    line-height: 1.5em;
+    height: 3.5em;
+    border: none;
+    border: 1.5px solid black;
+    box-sizing: border-box;
+    box-shadow: 10px 10px 0px black;
+    border-radius: 10px;
+    padding: 1em 1.25em;
+    margin-top: 1.875em;
+    text-decoration: none;
+    color: black;
+  }
+  .location-set-display {
+    padding-top: 0;
+  }
 </style>
 `;
 
@@ -35,7 +56,11 @@ const config = [
     id: "001",
     path: "location.html",
     className: ".map-pick-location",
-    div: '<div class="map-pick-location"></div>',
+    elem: `<div id="map-container">
+            <div class="map-pick-location"></div> 
+            <button class="set-location-button">Set Location</button>
+            <p id="location-set-display" class="location-set-display">Location is set to:</p>
+          </div>`,
     center: [21.2901808, -157.8299651],
     onLoad_zoom: 18,
     attribution_opts: { 
@@ -48,7 +73,11 @@ const config = [
     id: "002",
     path: "foobar.html",
     className: ".map-foo-bar",
-    div: '<div class="map-foo-bar"></div>',
+    elem: `<div id="map-container">
+            <div class="map-pick-location"></div> 
+            <button class="set-location-button">Set Location</button>
+            <p id="location-set-display" class="location-set-display">Location is set to:</p>
+          </div>`,
     center: [21.2901808, -157.8299651],
     onLoad_zoom: 18,
     attribution_opts: { 
@@ -79,7 +108,7 @@ function reUseMapComponent(path){
   const MapTemplate = `
   ${map_styles}
   ${leaflet_stylesheet_link}
-  ${templateConfig.div} `;
+  ${templateConfig.elem} `;
 
   return MapTemplate;
 }
@@ -103,16 +132,21 @@ function invokeMapConfig(shadow, path) {
     let lat = e.latlng.lat;
     let lng = e.latlng.lng;
     let marker = L.marker([lat, lng]).addTo(layerGroup); // adds marker to the map
-    updateLatLngInput(lat,lng); // updates the input fields above the map to reflect the chosen coordinates
+    updateLatLngValue(lat,lng); // updates the input fields above the map to reflect the chosen coordinates
+    updateLatLngInnerHtml(shadow,lat,lng);
   })
 }
 
 
 
-function updateLatLngInput(lat,lng){
+function updateLatLngValue(lat,lng){
   document.getElementById("latitude").value = lat.toString();
   document.getElementById("longitude").value = lng.toString();
+}
 
+function updateLatLngInnerHtml(shadow,lat,lng){
+  let x = shadow.querySelector(".location-set-display");
+  x.innerHTML = `Location is set to: ${lat.toString()}, ${lng.toString()}!`;
 }
 
 
@@ -125,10 +159,13 @@ class MapPickLocation extends HTMLElement {
 
         let shadow = this.attachShadow({ mode: 'open' });
         shadow.innerHTML = reUseMapComponent(this.path);
+
     }
 
     connectedCallback() {
       invokeMapConfig(this.shadowRoot,this.path);
+
+  
     }
 }
 
