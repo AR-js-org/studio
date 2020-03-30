@@ -111,6 +111,10 @@
   background: var(--passive-color-dark);
 }
 
+.file-input {
+    cursor: pointer;
+}
+
 /* body */
 body {
   margin: 0;
@@ -180,7 +184,6 @@ page-header {
   border: 1px solid var(--passive-color-dark);
   box-sizing: border-box;
   border-radius: 5px;
-  width: 15rem;
   height: 3.125rem;
   padding: 1rem 1.25rem;
   font-family: Source Sans Pro;
