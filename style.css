@@ -127,6 +127,12 @@ page-header {
   z-index: var(--max-z-index);
 }
 
+page-footer {
+  position: absolute;
+  background: var(--secondary-color);
+  width: 100%;
+}
+
 .content {
   position: relative;
 }
