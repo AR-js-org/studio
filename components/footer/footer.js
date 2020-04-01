@@ -3,7 +3,7 @@ const FooterContent = `
     #footer{
       padding: 2em 6em;
     }
-    
+
     .lead {
       font-family: Chakra Petch;
       font-style: normal;
@@ -11,7 +11,16 @@ const FooterContent = `
       font-size: 1.75em;
       line-height: 140%;
     }
-    
+
+    .buttons > button {
+        margin-right: 3.125em;
+    }
+
+    .paragraph {
+        font-family: Source Sans Pro;
+        max-width: 31.25em;
+    }
+
     .primary-button,
     .passive-button {
       display: inline-block;
@@ -69,7 +78,7 @@ const FooterContent = `
       <button class="primary-button">
         Export to Github
       </button>
-    
+
       <button class="passive-button">
         Download package
       </button>
@@ -80,11 +89,10 @@ const FooterContent = `
 class PageFooter extends HTMLElement {
   constructor() {
     super();
-    
+
     let shadow = this.attachShadow({ mode: 'open' });
-    shadow.innerHTML = FooterContent    
+    shadow.innerHTML = FooterContent
   }
 }
 
 customElements.define('page-footer', PageFooter);
-
