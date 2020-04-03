@@ -15,11 +15,12 @@
     <script src="../components/file-holder/file-holder.js"></script>
     <script src="../components/file-select/file-select.js"></script>
     <script src="../components/header/header.js"></script>
+    <script src="../components/footer/footer.js"></script>
     <script src="./marker.js"></script>
   </head>
   <body>
     <page-header assetsUrl="../assets"></page-header>
-    
+
     <div class="pages-content">
       <back-anchor assetsUrl="../assets" ></back-anchor>
       <div class="pages-content-container">
@@ -57,14 +58,14 @@
             Select supported content type from the list below and upload the file from your computer.
           </p>
           <file-select></file-select>
-          <label class="passive-button">
+          <label class="passive-button file-input">
             <input type="file" hidden />
             Upload file
           </label>
         </div>
         <file-holder></file-holder>
       </div>
-
     </div>
+    <page-footer></page-footer>
   </body>
 </html>

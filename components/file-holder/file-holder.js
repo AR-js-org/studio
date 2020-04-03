@@ -17,6 +17,7 @@ const fileHolderTemplate = `
       font-size: 1.25em;
       line-height: 25px;
       color: var(--passive-color-dark);
+      cursor: pointer;
     }
   </style>
 
