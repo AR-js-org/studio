@@ -16,6 +16,8 @@
     <script src="../components/file-select/file-select.js"></script>
     <script src="../components/header/header.js"></script>
     <script src="../components/footer/footer.js"></script>
+    <script src="./marker.js"></script>
+
   </head>
   <body>
     <page-header assetsUrl="../assets"></page-header>
@@ -39,11 +41,13 @@
             Explain some constraints so people are not failing by uploading wrong images.
           </p>
           <label class="passive-button">
-            <input type="file" accept="image/png, image/jpeg" hidden />
+            <input type="file" accept="image/png, image/jpeg" hidden onchange="handleImageUpload(event)"/>
             Upload image
           </label>
         </div>
-        <file-holder></file-holder>
+        <div id="image-preview">
+          <file-holder></file-holder>
+        </div>
       </div>
 
       <hr class="divider">
