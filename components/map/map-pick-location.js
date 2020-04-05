@@ -12,6 +12,9 @@ const tile_url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const openStreetMaps_attribution = "<a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a>";
 
 
+const defineLocationSvg = `
+  <?xml version="1.0" ?><svg class="svg-define-location" height="15" viewBox="0 0 48 48" width="15" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48h-48z" fill="none"/><path d="M24 16c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm17.88 6c-.92-8.34-7.54-14.96-15.88-15.88v-4.12h-4v4.12c-8.34.92-14.96 7.54-15.88 15.88h-4.12v4h4.12c.92 8.34 7.54 14.96 15.88 15.88v4.12h4v-4.12c8.34-.92 14.96-7.54 15.88-15.88h4.12v-4h-4.12zm-17.88 16c-7.73 0-14-6.27-14-14s6.27-14 14-14 14 6.27 14 14-6.27 14-14 14z"/></svg>`
+
 
 
 // styles to hold classnames for the main map and additional maps
@@ -29,19 +32,16 @@ const map_styles = `
   display: inline-block;
   font-family: Chakra Petch;
   font-style: normal;
-  font-weight: 600;
-  font-size: 1em;
-  line-height: 1.5em;
-  height: 3.5em;
+  height: 2.5em;
   border: none;
-  border: 1.5px solid black;
+  border: 1px solid grey;
   box-sizing: border-box;
-  box-shadow: 10px 10px 0px black;
-  border-radius: 10px;
-  padding: 1em 1.25em;
-  margin-top: 1.875em;
   text-decoration: none;
   color: black;
+}
+.svg-define-location {
+  padding-top: 0.3em;
+
 }
 .location-set-display {
   visibility: hidden;
@@ -59,7 +59,9 @@ const config = [
   className: ".map-pick-location",
   elem: `<div id="map-container">
   <div class="map-pick-location"></div> 
-  <button class="use-my-location-button">Set Location</button>
+  <button class="use-my-location-button">
+  ${defineLocationSvg}
+  Use my location</button>
   <p id="location-set-display" class="location-set-display">
   User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
   </p>
@@ -78,7 +80,9 @@ const config = [
   className: ".map-foo-bar",
   elem: `<div id="map-container">
   <div class="map-pick-location"></div> 
-  <button class="use-my-location-button">Set Location</button>
+  <button class="use-my-location-button">
+  ${defineLocationSvg}
+  Use my location</button>
   <p id="location-set-display" class="location-set-display">
   User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
   </p>
@@ -142,9 +146,9 @@ function invokeMapConfig(shadow, path) {
     updateLatLngInnerHtml(shadow,lat,lng);
   })
 
-  // implementing button to set location
-  let setLocationButton = shadow.querySelector(".use-my-location-button");
-  setLocationButton.addEventListener("click", function(e) {
+  // implementing button to use my location
+  let useMyLocationButton = shadow.querySelector(".use-my-location-button");
+  useMyLocationButton.addEventListener("click", function(e) {
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition(function(position){ // => {} two keys {coords: {}, timestamp: string}
         updateLatLngInnerHtml(shadow, "Locating", "...."); // if geo api response is slow - placeholder
