@@ -69,7 +69,7 @@ const config = [
   attribution_opts: { 
     attribution: openStreetMaps_attribution,
     maxZoom: 18, 
-    minZoom: 10 
+    // minZoom: 10 removed due to comment in issue by @kalwalt - this is what was restricting zoom out capability
   }  
 },
 {
