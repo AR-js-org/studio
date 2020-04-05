@@ -25,7 +25,7 @@ const map_styles = `
   height: 100px;
   width: 200px;
 }
-.set-location-button {
+.use-my-location-button {
   display: inline-block;
   font-family: Chakra Petch;
   font-style: normal;
@@ -59,7 +59,7 @@ const config = [
   className: ".map-pick-location",
   elem: `<div id="map-container">
   <div class="map-pick-location"></div> 
-  <button class="set-location-button">Set Location</button>
+  <button class="use-my-location-button">Set Location</button>
   <p id="location-set-display" class="location-set-display">
   User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
   </p>
@@ -78,7 +78,7 @@ const config = [
   className: ".map-foo-bar",
   elem: `<div id="map-container">
   <div class="map-pick-location"></div> 
-  <button class="set-location-button">Set Location</button>
+  <button class="use-my-location-button">Set Location</button>
   <p id="location-set-display" class="location-set-display">
   User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
   </p>
@@ -143,7 +143,7 @@ function invokeMapConfig(shadow, path) {
   })
 
   // implementing button to set location
-  let setLocationButton = shadow.querySelector(".set-location-button");
+  let setLocationButton = shadow.querySelector(".use-my-location-button");
   setLocationButton.addEventListener("click", function(e) {
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition(function(position){ // => {} two keys {coords: {}, timestamp: string}
