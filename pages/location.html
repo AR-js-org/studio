@@ -24,6 +24,7 @@
     <script src="../components/file-select/file-select.js"></script>
     <script src="../components/map/map-pick-location.js"></script>
     <script src="../components/header/header.js"></script>
+    <script src="../components/footer/footer.js"></script>
   </head>
   <body>
     <page-header assetsUrl="../assets"></page-header>
@@ -73,7 +74,7 @@
             Select supported content type from the list below and upload the file from your computer.
           </p>
           <file-select></file-select>
-          <label class="passive-button">
+          <label class="passive-button file-input">
             <input type="file" hidden />
             Upload file
           </label>
@@ -82,5 +83,6 @@
       </div>
 
     </div>
+    <page-footer></page-footer>
   </body>
 </html>
