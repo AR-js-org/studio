@@ -3,11 +3,7 @@ const handleImageUnload = () => {
     preview.innerHTML = "<file-holder></file-holder>";
 };
 
-const handleImageUpload = (event) => {
-    const fileName = event.target.files[0].name;
-    const fileURL = URL.createObjectURL(event.target.files[0]);
-    let preview = document.getElementById("image-preview");
-    const previewTemplate = `
+const previewTemplate = (fileURL, fileName) =>  `
         <style>
             img {
                 object-fit: contain;
@@ -32,5 +28,46 @@ const handleImageUpload = (event) => {
         </div>
         `;
 
-    preview.innerHTML = previewTemplate;
+const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    const fileName = file.name;
+    const fileURL = URL.createObjectURL(file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = function () {
+        //for backend api asset needs only base64 part
+        window.assetImage = reader.result.split(',')[1];
+    };
+    let preview = document.getElementById("image-preview");
+    preview.innerHTML = previewTemplate(fileURL, fileName);
+};
+
+const handleMarkerUpload = (event) => {
+    const file = event.target.files[0];
+    const fileName = file.name;
+    let fileURL = null;
+    if (window.detail === 'Image') {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function () {
+            const base64Data = reader.result;
+            new ARjsStudioBackend.MarkerModule.getFullMarkerImage(base64Data, 0.5, 512, 'black').then(fullMarkerImage => {
+                window.markerImage = base64Data;
+                var blob = dataURItoBlob(fullMarkerImage);
+                fileURL = URL.createObjectURL(blob);
+                let preview = document.getElementById("marker-preview");
+                preview.innerHTML = previewTemplate(fileURL, fileName);
+            });
+        };
+    }
+
+    function dataURItoBlob(dataURI) {
+        var mime = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        var binary = atob(dataURI.split(',')[1]);
+        var array = [];
+        for (var i = 0; i < binary.length; i++) {
+            array.push(binary.charCodeAt(i));
+        }
+        return new Blob([new Uint8Array(array)], {type: mime});
+    }
 };

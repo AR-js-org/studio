@@ -79,7 +79,7 @@ const FooterContent = `
         Export to Github
       </button>
 
-      <button class="passive-button">
+      <button id="zip-button" class="passive-button">
         Download package
       </button>
     </div>
@@ -87,12 +87,19 @@ const FooterContent = `
   </div>`;
 
 class PageFooter extends HTMLElement {
-  constructor() {
-    super();
+    shadow = null;
+    constructor() {
+        super();
+        this.shadow = this.attachShadow({ mode: 'open' });
+        this.shadow.innerHTML = FooterContent
+    }
 
-    let shadow = this.attachShadow({ mode: 'open' });
-    shadow.innerHTML = FooterContent
-  }
+    connectedCallback() {
+        const button = this.shadow.querySelector("#zip-button");
+        button.onclick =  () => {
+            this.dispatchEvent(new CustomEvent("onClick"));
+        }
+    }
 }
 
 customElements.define('page-footer', PageFooter);
