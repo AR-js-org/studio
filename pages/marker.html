@@ -10,15 +10,16 @@
     <link rel="stylesheet" href="../style.css"/>
     <link rel="stylesheet" href="../components/main/main.css"/>
 
+    <!-- import studio-backend api -->
+    <script src="https://rawcdn.githack.com/AR-js-org/studio-backend/master/dist/arjs-studio-backend.min.js"></script>
+
     <!-- import web components -->
     <script src="../components/back-anchor/back-anchor.js"></script>
     <script src="../components/file-holder/file-holder.js"></script>
     <script src="../components/file-select/file-select.js"></script>
     <script src="../components/header/header.js"></script>
     <script src="../components/footer/footer.js"></script>
-    <script src="./marker.js"></script>
-    <!-- import studio-backend api -->
-    <script src="./arjs-studio-backend.min.js"></script>
+    <script src="./marker.js" defer></script>
 
 </head>
 <body>
@@ -72,33 +73,5 @@
     </div>
 </div>
 <page-footer></page-footer>
-<script>
-    const fileSelect = document.querySelector("file-select");
-    fileSelect.addEventListener("onSelect", () => {
-        window.detail = event.detail.selectedValue
-    });
-
-    const element = document.querySelector("page-footer");
-    element.addEventListener("onClick", () => zip());
-
-    const zip = () => {
-        new ARjsStudioBackend.MarkerModule.getMarkerPattern(window.markerImage)
-            .then(markerPattern => {
-                const package = new ARjsStudioBackend.Package({
-                        arType: 'pattern',
-                        assetType: 'image',
-                        markerPatt: markerPattern,
-                        assetFile: window.assetImage,
-                        assetName: 'asset.jpg'
-                    }
-                );
-                f();
-                async function f() {
-                    const base64 = await package.serve({packageType: 'zip'});
-                    window.location = `data:application/zip;base64,${base64}`
-                }
-            });
-    };
-</script>
 </body>
 </html>
