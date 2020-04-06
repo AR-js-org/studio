@@ -22,12 +22,12 @@ const previewTemplate = (fileURL, fileName, id) => `
             
         <img src=${fileURL} alt="${fileName}">
         <div>
-            <span class="crossmark" onclick="handleImageUnload('${id}')">&times;</span>
+            <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
             <span class="filename">${fileName}</span>
         </div>
         `;
         
-const handleImageUnload = (id) => {
+const handleUnload = (id) => {
     let preview = document.getElementById(id);
     preview.innerHTML = "<file-holder></file-holder>";
 };
