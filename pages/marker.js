@@ -35,7 +35,6 @@ const previewImageTemplate = (fileURL, fileName, id) => `
             <span class="filename">${fileName}</span>
         </div>
         `;
-
 const previewAudioTemplate = (fileURL, fileName, id) => `
         <style>
             .audioFrame {
@@ -71,8 +70,44 @@ const previewAudioTemplate = (fileURL, fileName, id) => `
                     <span class="filename">${fileName}</span>
                 </div>
             </div>
-       
         `;
+const previewVideoTemplate = (fileURL, fileName, id) => `
+        <style>
+            .videoFrame {
+                object-fit: contain;
+                width: 23.75em;
+                height: 23.75em;
+                font-size: 1.25em;
+            }
+            video {
+                width: 18em;
+                height: auto;
+                margin-left: 3em;
+                margin-top: 5em;
+            }
+            .option {
+                text-align: center;
+            }
+            .crossmark {
+                vertical-align: middle;
+                font-size: 2.25em;
+            }
+            .filename {
+                vertical-align: middle;
+                font-style: italic;
+                font-weight: bold;
+                font-size: 18px;
+            }
+        </style>
+            <div class="videoFrame">
+                <video controls src=${fileURL} alt="${fileName}"></video>
+                <div class="option">
+                    <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
+                    <span class="filename">${fileName}</span>
+                </div>
+            </div>
+        `;
+
 const handleUnload = (id) => {
     let preview = document.getElementById(id);
     preview.innerHTML = "<file-holder></file-holder>";
@@ -172,8 +207,6 @@ const handleImageUpload = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = function () {
-        //for backend api asset needs only base64 part
-        // window.assetImage = reader.result.split(",")[1];
         thePackage.assetFile = reader.result.split(",")[1];
         thePackage.assetName = file.type.replace('image/', 'asset.');
     };
@@ -187,7 +220,6 @@ const handleAudioUpload = (file) => {
     reader.readAsDataURL(file);
     reader.onloadend = function () {
         //for backend api asset needs only base64 part
-        // window.assetImage = reader.result.split(",")[1];
         thePackage.assetFile = reader.result.split(",")[1];
         thePackage.assetName = file.type.replace('audio/', 'asset.');
     };
@@ -228,7 +260,7 @@ const handleContentUpload = (event) => {
             break;
         }
         case 'video': {
-            alert('no support yet');
+            handleVideoUpload(file);
             break;
         }
         case '3d': {
@@ -248,19 +280,10 @@ const zip = () => {
 
 
     MarkerModule.getMarkerPattern(window.markerImage)
-        .then(
-            (markerPattern) => {
-                // new Package({
-                //     arType: "pattern",
-                //     assetType: "image",
-                //     markerPatt: markerPattern,
-                //     assetFile: window.assetImage,
-                //     assetName: "asset.jpg",
-                // })
-                thePackage.markerPatt = markerPattern;
-                return new Package(thePackage)
-            }
-        )
+        .then((markerPattern) => {
+            thePackage.markerPatt = markerPattern;
+            return new Package(thePackage)
+        })
         .then((package) => package.serve({ packageType: "zip" }))
         .then((base64) => {
             window.location = `data:application/zip;base64,${base64}`;
