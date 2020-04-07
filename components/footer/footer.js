@@ -77,7 +77,7 @@ const FooterContent = `
 
     <div class="buttons">
       <button class="primary-button">
-        Export to Github
+        Publish on Github
       </button>
 
       <button class="passive-button">
