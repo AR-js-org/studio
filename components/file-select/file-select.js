@@ -20,25 +20,25 @@ const fileSelectTemplate = `
   <select class="dropdown" name="content-type" id="selected-marker-type">
     <option value="">Please select an option</option>
     <option value="3D">3D Object (.gltf, .glb; max size 50MB)</option>
-    <option value="Image">Image (.jpg, .png, .gif; max size 15MB)</option>
-    <option value="Audio">Audio (.mp3; max size 10MB)</option>
-    <option value="Video">Video (.mp4; max size 25MB)</option>
+    <option value="image">Image (.jpg, .png, .gif; max size 15MB)</option>
+    <option value="audio">Audio (.mp3; max size 10MB)</option>
+    <option value="video">Video (.mp4; max size 25MB)</option>
   </select>`;
 
 class FileSelect extends HTMLElement {
-    shadow = null;
-    constructor() {
-        super();
-        this.shadow = this.attachShadow({ mode: 'open' });
-        this.shadow.innerHTML = fileSelectTemplate;
-    }
+  shadow = null;
+  constructor() {
+    super();
+    this.shadow = this.attachShadow({ mode: 'open' });
+    this.shadow.innerHTML = fileSelectTemplate;
+  }
 
-    connectedCallback() {
-        const select = this.shadow.querySelector("#selected-marker-type");
-        select.onchange =  () => {
-            this.dispatchEvent(new CustomEvent("onSelect", {detail : {selectedValue: select.options[select.selectedIndex].value}}));
-        }
+  connectedCallback() {
+    const select = this.shadow.querySelector("#selected-marker-type");
+    select.onchange = () => {
+      this.dispatchEvent(new CustomEvent("onSelect", { detail: { selectedValue: select.options[select.selectedIndex].value } }));
     }
+  }
 }
 
 customElements.define('file-select', FileSelect);

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>AR.js Studio</title>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="../style.css"/>
-    <link rel="stylesheet" href="../components/main/main.css"/>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../components/main/main.css" />
 
     <!-- import studio-backend api -->
     <script src="https://rawcdn.githack.com/AR-js-org/studio-backend/master/dist/arjs-studio-backend.min.js"></script>
@@ -22,56 +23,58 @@
     <script src="./marker.js" defer></script>
 
 </head>
+
 <body>
-<page-header assetsUrl="../assets"></page-header>
+    <page-header assetsUrl="../assets"></page-header>
 
-<div class="pages-content">
-    <back-anchor assetsUrl="../assets"></back-anchor>
-    <div class="pages-content-container">
-        <div class="pages-content-element">
-            <p class="title">Marker-based</p>
-            <p class="paragraph">
-                A marker-based AR experience uses an image to anchor the AR content.
-                Feel free to read the documentation, or follow the steps below to get started now.
-            </p>
+    <div class="pages-content">
+        <back-anchor assetsUrl="../assets"></back-anchor>
+        <div class="pages-content-container">
+            <div class="pages-content-element">
+                <p class="title">Marker-based</p>
+                <p class="paragraph">
+                    A marker-based AR experience uses an image to anchor the AR content.
+                    Feel free to read the documentation, or follow the steps below to get started now.
+                </p>
+            </div>
+        </div>
+
+        <div class="pages-content-container">
+            <div class="pages-content-element">
+                <p class="lead">1. Upload an image to act as your marker</p>
+                <p class="paragraph">
+                    Explain some constraints so people are not failing by uploading wrong images.
+                </p>
+                <label class="passive-button">
+                    <input type="file" accept="image/png, image/jpeg" hidden onchange="handleMarkerUpload(event)" />
+                    Upload image
+                </label>
+            </div>
+            <div id="marker-preview">
+                <file-holder></file-holder>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="pages-content-container">
+            <div class="pages-content-element">
+                <p class="lead">2. Choose the content type </p>
+                <p class="paragraph">
+                    Select supported content type from the list below and upload the file from your computer.
+                </p>
+                <file-select></file-select>
+                <label class="passive-button file-input">
+                    <input type="file" hidden onchange="handleContentUpload(event)" />
+                    Upload file
+                </label>
+            </div>
+            <div id="content-preview">
+                <file-holder></file-holder>
+            </div>
         </div>
     </div>
-
-    <div class="pages-content-container">
-        <div class="pages-content-element">
-            <p class="lead">1. Upload an image to act as your marker</p>
-            <p class="paragraph">
-                Explain some constraints so people are not failing by uploading wrong images.
-            </p>
-            <label class="passive-button">
-                <input type="file" accept="image/png, image/jpeg" hidden onchange="handleImageUpload(event)"/>
-                Upload image
-            </label>
-        </div>
-        <div id="image-preview">
-            <file-holder></file-holder>
-        </div>
-    </div>
-
-    <hr class="divider">
-
-    <div class="pages-content-container">
-        <div class="pages-content-element">
-            <p class="lead">2. Choose the content type </p>
-            <p class="paragraph">
-                Select supported content type from the list below and upload the file from your computer.
-            </p>
-            <file-select></file-select>
-            <label class="passive-button file-input">
-                <input type="file" hidden onchange="handleMarkerUpload(event)"/>
-                Upload file
-            </label>
-        </div>
-        <div id="marker-preview">
-            <file-holder></file-holder>
-        </div>
-    </div>
-</div>
-<page-footer></page-footer>
+    <page-footer></page-footer>
 </body>
+
 </html>
