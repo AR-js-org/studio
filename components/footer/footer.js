@@ -14,6 +14,7 @@ const FooterContent = `
 
     .buttons > button {
         margin-right: 3.125em;
+        cursor: pointer;
     }
 
     .paragraph {
