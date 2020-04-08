@@ -78,14 +78,6 @@ const previewVideoTemplate = (fileURL, fileName, id) => `
                 width: 23.75em;
                 height: 23.75em;
                 font-size: 1.25em;
-            }
-            video {
-                width: 18em;
-                height: auto;
-                margin-left: 3em;
-                margin-top: 5em;
-            }
-            .option {
                 text-align: center;
             }
             .crossmark {
@@ -100,7 +92,7 @@ const previewVideoTemplate = (fileURL, fileName, id) => `
             }
         </style>
             <div class="videoFrame">
-                <video controls src=${fileURL} alt="${fileName}"></video>
+                <video id="video" controls src=${fileURL} alt="${fileName}"></video>
                 <div class="option">
                     <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
                     <span class="filename">${fileName}</span>
@@ -123,7 +115,7 @@ const handleUnload = (id) => {
 // 2. all supported file information
 const supportedFileMap = {
     '3D': {
-        types: ['image/gltf', 'image/glb'],
+        types: ['gltf', 'glb'],
         maxSize: 50 * 1024 * 1024,
         maxSizeText: '50MB',
     },
@@ -147,13 +139,20 @@ const supportedFileMap = {
 // 2.1 check whether the file is a supported content type, and whether it is in the limited size;
 const isSupportedFileAndSize = (type, file) => {
     let errorMessage = '';
-    var supportedFile = supportedFileMap[type];
+    let supportedFile = supportedFileMap[type];
     if (supportedFile) {
-        if (supportedFile.types.indexOf(file.type) < 0) errorMessage = 'error content type';
-        else if (file.size > supportedFile.maxSize) errorMessage = 'exceed max size ' + supportedFile.maxSizeText;
-        else return true; // pass
-    } else errorMessage = 'not support file type';
-    return alert(errorMessage);
+        if (file.size > supportedFile.maxSize) errorMessage = 'exceed max size ' + supportedFile.maxSizeText;
+        else if (type === '3D') { // cannot get the file.type
+            let fileName = file.name.split('.');
+            let ext = fileName[fileName.length - 1];
+            if (supportedFile.types.indexOf(ext) < 0) errorMessage = 'error content type';
+        } else {
+            if (supportedFile.types.indexOf(file.type) < 0) errorMessage = 'error content type';
+        }
+    } else errorMessage = 'please select a supported file type';
+
+    if (errorMessage) return alert(errorMessage);
+    return true;
 };
 
 // 3:for step 1: marker upload
@@ -193,12 +192,18 @@ const handleMarkerUpload = (event) => {
 };
 
 // for step 2: content upload
-
+// object-fit: contain;
 // step2.1: select file type
 const fileSelect = document.querySelector("file-select");
 fileSelect.addEventListener("onSelect", () => {
     thePackage.assetType = event.detail.selectedValue;
-    // window.detail = event.detail.selectedValue;
+    let accept = '*';
+    let supportedFile = supportedFileMap[thePackage.assetType];
+    if (supportedFile) {
+        accept = (thePackage.assetType === '3D') ? '*' : supportedFile.types.join(',');
+    }
+    console.log(accept);
+    document.querySelector('#contentFile').setAttribute('accept', accept); // so that we can select to correct one
 });
 
 const handleImageUpload = (file) => {
@@ -225,25 +230,36 @@ const handleAudioUpload = (file) => {
     };
     let preview = document.getElementById("content-preview");
     preview.innerHTML = previewAudioTemplate(fileURL, fileName, "content-preview");
-
-    // previewAudioTemplate
-    // let preview = document.getElementById("marker-preview");
-    // preview.innerHTML = previewImageTemplate(fileURL, fileName, "marker-preview");
-
-    // function handleFiles(event) {
-    //     var files = event.target.files;
-    //     $("#rlly").attr("src", URL.createObjectURL(files[0]));
-    //     document.getElementById("rllly").load();
-    // }
-
-    // document.getElementById("rll").addEventListener("change", handleFiles, false);
-    // <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    // <input type="file" id="rll" />
-    // <audio id="rllly" controls>
-    //   <source src="" id="rlly" />
-    // </audio>
 };
+const handleVideoUpload = (file) => {
+    const fileName = file.name;
+    const fileURL = URL.createObjectURL(file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = function () {
+        //for backend api asset needs only base64 part
+        thePackage.assetFile = reader.result.split(",")[1];
+        thePackage.assetName = file.type.replace('video/', 'asset.');
+    };
+    let preview = document.getElementById("content-preview");
+    preview.innerHTML = previewVideoTemplate(fileURL, fileName, "content-preview");
 
+    var video = document.querySelector('#video');
+    video.addEventListener('canplay', function () { // dynamic to caculate the size
+        var width, height;
+        if (video.videoWidth > video.videoHeight) { // it is landscape
+            width = video.parentNode.clientWidth - 50;
+            height = width * video.videoHeight / video.videoWidth;
+        } else {
+            height = video.parentNode.videoHeight - 60;
+            width = height * video.videoWidth / video.videoHeight;
+        }
+
+        video.style.width = width + 'px';
+        video.style.height = height + 'px';
+        video.style['margin-top'] = ((video.parentNode.clientHeight - height) * 0.5) + 'px';
+    });
+};
 
 const handleContentUpload = (event) => {
     const file = event.target.files[0];
@@ -264,6 +280,8 @@ const handleContentUpload = (event) => {
             break;
         }
         case '3d': {
+            //             var box = new THREE.Box3().setFromObject( colladaModel );
+            // console.log( box.min, box.max, box.getSize() );
             alert('no support yet');
             break;
         }
