@@ -32,6 +32,10 @@ class PageHeader extends HTMLElement {
                     font-size: 1.25em;
                     color: black;
                 }
+
+                .minor-text {
+                    font-size: 1em;
+                }
             </style>
 
             <a href="/studio">
