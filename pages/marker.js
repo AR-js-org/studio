@@ -260,10 +260,10 @@ const handleAudioUpload = (file) => {
     const fileName = file.name;
     const fileURL = URL.createObjectURL(file);
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsArrayBuffer(file);
     reader.onloadend = function () {
         //for backend api asset needs only base64 part
-        thePackage.assetFile = reader.result.split(",")[1];
+        thePackage.assetFile = reader.result;
         thePackage.assetName = file.type.replace('audio/', 'asset.');
     };
     let preview = document.getElementById("content-preview");
@@ -273,10 +273,10 @@ const handleVideoUpload = (file) => {
     const fileName = file.name;
     const fileURL = URL.createObjectURL(file);
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsArrayBuffer(file);
     reader.onloadend = function () {
         //for backend api asset needs only base64 part
-        thePackage.assetFile = reader.result.split(",")[1];
+        thePackage.assetFile = reader.result;
         thePackage.assetName = file.type.replace('video/', 'asset.');
     };
     let preview = document.getElementById("content-preview");
