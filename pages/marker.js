@@ -292,13 +292,14 @@ const handleVideoUpload = (file) => {
             width = video.parentNode.clientWidth - 50;
             height = width * video.videoHeight / video.videoWidth;
         } else {
-            height = video.parentNode.videoHeight - 60;
+            height = video.parentNode.clientHeight - 100;
             width = height * video.videoWidth / video.videoHeight;
         }
 
         video.style.width = width + 'px';
         video.style.height = height + 'px';
         video.style['margin-top'] = ((video.parentNode.clientHeight - height) * 0.5) + 'px';
+        video.style['border'] = '1px solid #aaa';
         document.querySelector('#videoFrame').style.opacity = 1;
     });
 };
