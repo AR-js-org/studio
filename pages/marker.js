@@ -42,15 +42,13 @@ const previewAudioTemplate = (fileURL, fileName, id) => `
                 width: 23.75em;
                 height: 23.75em;
                 font-size: 1.25em;
+                text-align: center;
             }
             audio {
                 width: 18em;
                 height: 3em;
                 margin-left: 3em;
                 margin-top: 8em;
-            }
-            .option {
-                text-align: center;
             }
             .crossmark {
                 vertical-align: middle;
@@ -65,7 +63,7 @@ const previewAudioTemplate = (fileURL, fileName, id) => `
         </style>
             <div class="audioFrame">
                 <audio controls src=${fileURL} alt="${fileName}"></audio>
-                <div class="option">
+                <div>
                     <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
                     <span class="filename">${fileName}</span>
                 </div>
@@ -93,10 +91,50 @@ const previewVideoTemplate = (fileURL, fileName, id) => `
         </style>
             <div class="videoFrame">
                 <video id="video" controls src=${fileURL} alt="${fileName}"></video>
-                <div class="option">
+                <div>
                     <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
                     <span class="filename">${fileName}</span>
                 </div>
+            </div>
+        `;
+const previewModelTemplate = (fileURL, fileName, id) => `
+        <style>
+            .modelFrame {
+                object-fit: contain;
+                width: 23.75em;
+                height: 23.75em;
+                font-size: 1.25em;
+                text-align: center;
+            }
+            .crossmark {
+                vertical-align: middle;
+                font-size: 2.25em;
+            }
+            .filename {
+                vertical-align: middle;
+                font-style: italic;
+                font-weight: bold;
+                font-size: 18px;
+            }
+        </style>
+            <div class="modelFrame" id="modelFrame">
+                <a-scene embedded vr-mode-ui="enabled: false">
+                    <a-assets>
+                        <a-asset-item id="model" src="${fileURL}"></a-asset-item>
+                    </a-assets>
+
+                    <a-entity position="0 0.9 -2">
+                        <a-entity model-controller="target:#modelFrame" position="0 0 0" gltf-model="#model"></a-entity>
+                    </a-entity>
+
+                    <a-sky color="#ECECEC"></a-sky>
+                    <a-entity camera position="0 1 0">
+                    </a-entity>
+                </a-scene>
+            </div>
+            <div>
+                <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
+                <span class="filename">${fileName}</span>
             </div>
         `;
 
@@ -261,6 +299,21 @@ const handleVideoUpload = (file) => {
     });
 };
 
+const handleModelUpload = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = function () {
+        //for backend api asset needs only base64 part
+        thePackage.assetFile = reader.result.split(",")[1];
+        let fileName = file.name.split('.');
+        thePackage.assetName = 'asset.' + fileName[fileName.length - 1];
+
+        let preview = document.getElementById("content-preview");
+        preview.innerHTML = previewModelTemplate(reader.result, fileName, "content-preview");
+    };
+
+};
+
 const handleContentUpload = (event) => {
     const file = event.target.files[0];
     if (!isSupportedFileAndSize(thePackage.assetType, file)) return;
@@ -279,10 +332,8 @@ const handleContentUpload = (event) => {
             handleVideoUpload(file);
             break;
         }
-        case '3d': {
-            //             var box = new THREE.Box3().setFromObject( colladaModel );
-            // console.log( box.min, box.max, box.getSize() );
-            alert('no support yet');
+        case '3D': {
+            handleModelUpload(file);
             break;
         }
     }
