@@ -27,24 +27,12 @@ AFRAME.registerComponent('model-controller', {
                         var max = Math.max(size.x, size.y, size.z);
 
                         if (!isNaN(max) && max !== Infinity && max > 0.1) {
-                            console.log('entro qua?')
                             this.currScale = 2 / max; // 2 is according the experience, need to be confirmed;
                             this.minScale = 0.1 * this.currScale;
                             this.maxScale = 3 * this.currScale;
                             this.scaleStep = this.minScale;
 
-                            // const modelFrameWidth = this.target.getBoundingClientRect().width;
-                            // if (modelFrameWidth < size.x) {
-                            //     // scale down to integrate it on modelFrame box
-                            //     console.log('ci entro??')
-                            //     const factor = (size.x * 100) / modelFrameWidth;
-                            //     const deltaPercentage = factor - 100;
-                            //     this.currScale = deltaPercentage/1000;
-                            // }
-
                             this.el.setAttribute('scale', `${this.currScale} ${this.currScale} ${this.currScale}`);
-                            console.log(this.el.getAttribute('scale'))
-
                             this.enableAction = true;
                         }
                     } catch (error) {
