@@ -4,7 +4,7 @@ AFRAME.registerComponent('model-controller', {
     schema: {
         target: { default: '' },
     },
-    init: function () {
+    init: function() {
         this.enableAction = false;
         if (this.data.target) {
             var target = document.querySelector(this.data.target);
@@ -16,19 +16,34 @@ AFRAME.registerComponent('model-controller', {
                 this.target.addEventListener('wheel', this.wheel.bind(this));
 
 
-                this.el.addEventListener('model-loaded', function () {
+                this.el.addEventListener('model-loaded', function() {
                     this.el.removeEventListener('model-loaded', arguments.callee);
                     try {
                         let size = new THREE.Vector3();;
                         let box = this.getSizeFromObj(this.el.object3D);
                         box.getSize(size);
+
+
                         var max = Math.max(size.x, size.y, size.z);
+
                         if (!isNaN(max) && max !== Infinity && max > 0.1) {
+                            console.log('entro qua?')
                             this.currScale = 2 / max; // 2 is according the experience, need to be confirmed;
                             this.minScale = 0.1 * this.currScale;
                             this.maxScale = 3 * this.currScale;
                             this.scaleStep = this.minScale;
-                            this.el.object3D.scale.set(this.currScale, this.currScale, this.currScale);
+
+                            // const modelFrameWidth = this.target.getBoundingClientRect().width;
+                            // if (modelFrameWidth < size.x) {
+                            //     // scale down to integrate it on modelFrame box
+                            //     console.log('ci entro??')
+                            //     const factor = (size.x * 100) / modelFrameWidth;
+                            //     const deltaPercentage = factor - 100;
+                            //     this.currScale = deltaPercentage/1000;
+                            // }
+
+                            this.el.setAttribute('scale', `${this.currScale} ${this.currScale} ${this.currScale}`);
+                            console.log(this.el.getAttribute('scale'))
 
                             this.enableAction = true;
                         }
@@ -40,7 +55,7 @@ AFRAME.registerComponent('model-controller', {
             }
         }
     },
-    mousedown: function (evt) {
+    mousedown: function(evt) {
         if (this.isDown) return;
         if (this.enableAction && event.button == 0) {
             this.isDown = true;
@@ -48,7 +63,7 @@ AFRAME.registerComponent('model-controller', {
             this.y = evt.y;
         }
     },
-    mousemove: function (evt) {
+    mousemove: function(evt) {
         if (this.isDown) {
             let deltaX = evt.x - this.x;
             this.x += deltaX;
@@ -58,12 +73,12 @@ AFRAME.registerComponent('model-controller', {
             this.el.object3D.rotation.x += deltaY * 0.01;
         }
     },
-    mouseup: function (evt) {
+    mouseup: function(evt) {
         if (this.isDown) {
             this.isDown = false;
         }
     },
-    wheel: function (evt) {
+    wheel: function(evt) {
         if (this.enableAction) {
             evt.stopPropagation();
             evt.preventDefault();
@@ -76,7 +91,7 @@ AFRAME.registerComponent('model-controller', {
         }
         return false;
     },
-    getSizeFromObj: function (object) {
+    getSizeFromObj: function(object) {
         var box3 = new THREE.Box3();
         var v1 = new THREE.Vector3();
         var i, l;
@@ -114,7 +129,7 @@ AFRAME.registerComponent('model-controller', {
         object.traverse(traverse);
         return box3;
     },
-    remove: function () {
+    remove: function() {
         if (this.target) {
             this.target.removeEventListener('mousedown', this.mousedown.bind(this));
             this.target.removeEventListener('mousemove', this.mousemove.bind(this));
