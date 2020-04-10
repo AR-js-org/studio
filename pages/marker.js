@@ -43,6 +43,7 @@ const previewAudioTemplate = (fileURL, fileName, id) => `
                 height: 23.75em;
                 font-size: 1.25em;
                 text-align: center;
+                border: 1px solid var(--passive-color-dark);
             }
             audio {
                 width: 18em;
@@ -77,6 +78,7 @@ const previewVideoTemplate = (fileURL, fileName, id) => `
                 height: 23.75em;
                 font-size: 1.25em;
                 text-align: center;
+                border: 1px solid var(--passive-color-dark);
             }
             .crossmark {
                 vertical-align: middle;
@@ -89,9 +91,9 @@ const previewVideoTemplate = (fileURL, fileName, id) => `
                 font-size: 18px;
             }
         </style>
-            <div class="videoFrame">
+            <div id="videoFrame" class="videoFrame" style="opacity:0">
                 <video id="video" controls src=${fileURL} alt="${fileName}"></video>
-                <div>
+                <div >
                     <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
                     <span class="filename">${fileName}</span>
                 </div>
@@ -240,7 +242,6 @@ fileSelect.addEventListener("onSelect", () => {
     if (supportedFile) {
         accept = (thePackage.assetType === '3D') ? '*' : supportedFile.types.join(',');
     }
-    console.log(accept);
     document.querySelector('#contentFile').setAttribute('accept', accept); // so that we can select to correct one
 });
 
@@ -296,6 +297,7 @@ const handleVideoUpload = (file) => {
         video.style.width = width + 'px';
         video.style.height = height + 'px';
         video.style['margin-top'] = ((video.parentNode.clientHeight - height) * 0.5) + 'px';
+        document.querySelector('#videoFrame').style.opacity = 1;
     });
 };
 
@@ -309,7 +311,7 @@ const handleModelUpload = (file) => {
         thePackage.assetName = 'asset.' + fileName[fileName.length - 1];
 
         let preview = document.getElementById("content-preview");
-        preview.innerHTML = previewModelTemplate(reader.result, fileName, "content-preview");
+        preview.innerHTML = previewModelTemplate(reader.result, file.name, "content-preview");
     };
 
 };

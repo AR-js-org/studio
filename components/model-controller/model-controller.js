@@ -3,9 +3,9 @@ AFRAME.registerComponent('model-controller', {
     dependencies: ['gltf-model'],
     schema: {
         target: { default: '' },
-        scaleStep: { type: 'number', default: 0.1 }
     },
     init: function () {
+        this.enableAction = false;
         if (this.data.target) {
             var target = document.querySelector(this.data.target);
             if (target) {
@@ -25,8 +25,12 @@ AFRAME.registerComponent('model-controller', {
                         var max = Math.max(size.x, size.y, size.z);
                         if (!isNaN(max) && max !== Infinity && max > 0.1) {
                             this.currScale = 2 / max; // 2 is according the experience, need to be confirmed;
-
+                            this.minScale = 0.1 * this.currScale;
+                            this.maxScale = 3 * this.currScale;
+                            this.scaleStep = this.minScale;
                             this.el.object3D.scale.set(this.currScale, this.currScale, this.currScale);
+
+                            this.enableAction = true;
                         }
                     } catch (error) {
                         console.log('cannot get the size of the model, just let it be');
@@ -38,7 +42,7 @@ AFRAME.registerComponent('model-controller', {
     },
     mousedown: function (evt) {
         if (this.isDown) return;
-        if (event.button == 0) {
+        if (this.enableAction && event.button == 0) {
             this.isDown = true;
             this.x = evt.x;
             this.y = evt.y;
@@ -60,14 +64,16 @@ AFRAME.registerComponent('model-controller', {
         }
     },
     wheel: function (evt) {
-        evt.stopPropagation();
-        evt.preventDefault();
-        if (evt.deltaY > 0) { // bigger
-            this.currScale += this.data.scaleStep;
-        } else {
-            if (this.currScale - this.data.scaleStep > 0) this.currScale -= this.data.scaleStep;
+        if (this.enableAction) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            if (evt.deltaY > 0) { // bigger
+                if (this.currScale + this.scaleStep < this.maxScale) this.currScale += this.scaleStep;
+            } else {
+                if (this.currScale - this.scaleStep > this.minScale) this.currScale -= this.scaleStep;
+            }
+            this.el.object3D.scale.set(this.currScale, this.currScale, this.currScale);
         }
-        this.el.object3D.scale.set(this.currScale, this.currScale, this.currScale);
         return false;
     },
     getSizeFromObj: function (object) {
