@@ -28,7 +28,7 @@ const previewImageTemplate = (fileURL, fileName, id) => `
                 font-size: 18px;
             }
         </style>
-            
+
         <img src=${fileURL} alt="${fileName}">
         <div>
             <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
@@ -120,17 +120,19 @@ const previewModelTemplate = (fileURL, fileName, id) => `
             }
         </style>
             <div class="modelFrame" id="modelFrame">
-                <a-scene embedded vr-mode-ui="enabled: false">
+                <a-scene
+                    renderer="logarithmicDepthBuffer: true;"
+                    embedded
+                    loading-screen="enabled: false;"
+                    vr-mode-ui="enabled: false">
                     <a-assets>
                         <a-asset-item id="model" src="${fileURL}"></a-asset-item>
                     </a-assets>
 
-                    <a-entity position="0 0.9 -2">
-                        <a-entity model-controller="target:#modelFrame" position="0 0 0" gltf-model="#model"></a-entity>
-                    </a-entity>
+                    <a-entity animation-mixer="loop: repeat" model-controller="target:#modelFrame" gltf-model="#model"></a-entity>
 
                     <a-sky color="#ECECEC"></a-sky>
-                    <a-entity camera position="0 1 0">
+                    <a-entity camera="far: 1000000; near: 0.0000001;">
                     </a-entity>
                 </a-scene>
             </div>
@@ -342,7 +344,7 @@ const handleContentUpload = (event) => {
 
 };
 
-// for step 3: upload 
+// for step 3: upload
 const zip = () => {
     // check thePackage whether it is valid
     if (!window.markerImage) return alert('please select a marker image');
