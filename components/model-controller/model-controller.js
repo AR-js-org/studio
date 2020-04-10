@@ -22,7 +22,6 @@ AFRAME.registerComponent('model-controller', {
                         let size = new THREE.Vector3();;
                         let box = this.getSizeFromObj(this.el.object3D);
                         box.getSize(size);
-                        console.log(size);
                         var max = Math.max(size.x, size.y, size.z);
                         if (!isNaN(max) && max !== Infinity && max > 0.1) {
                             this.currScale = 2 / max; // 2 is according the experience, need to be confirmed;
@@ -41,7 +40,6 @@ AFRAME.registerComponent('model-controller', {
         if (this.isDown) return;
         if (event.button == 0) {
             this.isDown = true;
-            console.log(evt);
             this.x = evt.x;
             this.y = evt.y;
         }
@@ -64,7 +62,6 @@ AFRAME.registerComponent('model-controller', {
     wheel: function (evt) {
         evt.stopPropagation();
         evt.preventDefault();
-        // console.log(evt.deltaY);
         if (evt.deltaY > 0) { // bigger
             this.currScale += this.data.scaleStep;
         } else {
