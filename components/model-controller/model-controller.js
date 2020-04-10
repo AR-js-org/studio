@@ -4,7 +4,7 @@ AFRAME.registerComponent('model-controller', {
     schema: {
         target: { default: '' },
     },
-    init: function() {
+    init: function () {
         this.enableAction = false;
         if (this.data.target) {
             var target = document.querySelector(this.data.target);
@@ -16,7 +16,7 @@ AFRAME.registerComponent('model-controller', {
                 this.target.addEventListener('wheel', this.wheel.bind(this));
 
 
-                this.el.addEventListener('model-loaded', function() {
+                this.el.addEventListener('model-loaded', function () {
                     this.el.removeEventListener('model-loaded', arguments.callee);
                     try {
                         let size = new THREE.Vector3();;
@@ -43,7 +43,7 @@ AFRAME.registerComponent('model-controller', {
             }
         }
     },
-    mousedown: function(evt) {
+    mousedown: function (evt) {
         if (this.isDown) return;
         if (this.enableAction && event.button == 0) {
             this.isDown = true;
@@ -51,7 +51,7 @@ AFRAME.registerComponent('model-controller', {
             this.y = evt.y;
         }
     },
-    mousemove: function(evt) {
+    mousemove: function (evt) {
         if (this.isDown) {
             let deltaX = evt.x - this.x;
             this.x += deltaX;
@@ -61,16 +61,16 @@ AFRAME.registerComponent('model-controller', {
             this.el.object3D.rotation.x += deltaY * 0.01;
         }
     },
-    mouseup: function(evt) {
+    mouseup: function (evt) {
         if (this.isDown) {
             this.isDown = false;
         }
     },
-    wheel: function(evt) {
+    wheel: function (evt) {
         if (this.enableAction) {
             evt.stopPropagation();
             evt.preventDefault();
-            if (evt.deltaY > 0) { // bigger
+            if (evt.deltaY < 0) { // bigger
                 if (this.currScale + this.scaleStep < this.maxScale) this.currScale += this.scaleStep;
             } else {
                 if (this.currScale - this.scaleStep > this.minScale) this.currScale -= this.scaleStep;
@@ -79,7 +79,7 @@ AFRAME.registerComponent('model-controller', {
         }
         return false;
     },
-    getSizeFromObj: function(object) {
+    getSizeFromObj: function (object) {
         var box3 = new THREE.Box3();
         var v1 = new THREE.Vector3();
         var i, l;
@@ -117,7 +117,7 @@ AFRAME.registerComponent('model-controller', {
         object.traverse(traverse);
         return box3;
     },
-    remove: function() {
+    remove: function () {
         if (this.target) {
             this.target.removeEventListener('mousedown', this.mousedown.bind(this));
             this.target.removeEventListener('mousemove', this.mousemove.bind(this));
