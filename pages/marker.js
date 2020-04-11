@@ -17,6 +17,12 @@ const previewImageTemplate = (fileURL, fileName, id) => `
             height: 23.75em;
             font-size: 1.25em;
         }
+        .filename-container {
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            cursor: pointer;
+        }
         .crossmark {
             vertical-align: middle;
             font-size: 2.25em;
@@ -30,7 +36,7 @@ const previewImageTemplate = (fileURL, fileName, id) => `
     </style>
 
     <img src=${fileURL} alt="${fileName}">
-    <div>
+    <div class="filename-container">
         <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
         <span class="filename">${fileName}</span>
     </div>
@@ -51,6 +57,12 @@ const previewAudioTemplate = (fileURL, fileName, id) => `
             margin-left: 3em;
             margin-top: 8em;
         }
+        .filename-container {
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            cursor: pointer;
+        }
         .crossmark {
             vertical-align: middle;
             font-size: 2.25em;
@@ -64,21 +76,30 @@ const previewAudioTemplate = (fileURL, fileName, id) => `
     </style>
         <div class="audioFrame">
             <audio controls src=${fileURL} alt="${fileName}"></audio>
-            <div>
-                <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
-                <span class="filename">${fileName}</span>
-            </div>
+        </div>
+        <div classe="filename-container">
+            <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
+            <span class="filename">${fileName}</span>
         </div>
     `;
 const previewVideoTemplate = (fileURL, fileName, id) => `
     <style>
         .videoFrame {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             object-fit: contain;
             width: 23.75em;
             height: 23.75em;
             font-size: 1.25em;
             text-align: center;
             border: 1px solid var(--passive-color-dark);
+        }
+        .filename-container {
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            cursor: pointer;
         }
         .crossmark {
             vertical-align: middle;
@@ -90,13 +111,16 @@ const previewVideoTemplate = (fileURL, fileName, id) => `
             font-weight: bold;
             font-size: 18px;
         }
+        video {
+            object-fit: cover;
+        }
     </style>
         <div id="videoFrame" class="videoFrame" style="opacity:0">
             <video id="video" controls src=${fileURL} alt="${fileName}"></video>
-            <div >
-                <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
-                <span class="filename">${fileName}</span>
-            </div>
+        </div>
+        <div class="filename-container">
+            <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
+            <span class="filename">${fileName}</span>
         </div>
     `;
 const previewModelTemplate = (fileURL, fileName, id) => `
@@ -107,6 +131,12 @@ const previewModelTemplate = (fileURL, fileName, id) => `
             height: 23.75em;
             font-size: 1.25em;
             text-align: center;
+        }
+        .filename-container {
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            cursor: pointer;
         }
         .crossmark {
             vertical-align: middle;
@@ -138,7 +168,7 @@ const previewModelTemplate = (fileURL, fileName, id) => `
                 </a-entity>
             </a-scene>
         </div>
-        <div>
+        <div class="filename-container">
             <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
             <span class="filename">${fileName}</span>
         </div>
@@ -197,7 +227,7 @@ const isSupportedFileAndSize = (type, file, id) => {
             isSupported = true
         }
     } else {
-        previewError.innerHTML = '*Please select an option or upload a file.'
+        previewError.innerHTML = '*Please select an option before uploading a file.'
     }
     return isSupported
 };
@@ -210,11 +240,11 @@ const handleMarkerUpload = (event) => {
 
     if (!isSupportedFileAndSize('image', file, "marker-error")) return;
 
-    event.target.value = ''; // incase onchange will not be called when the same file is loaded.
+    event.target.value = ''; // in case 'onchange' will not be called when the same file is loaded.
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = function () {
+    reader.onloadend = function() {
         const base64Data = reader.result;
         MarkerModule.getFullMarkerImage(base64Data, 0.5, 512, "black")
             .then((fullMarkerImage) => {
@@ -224,7 +254,7 @@ const handleMarkerUpload = (event) => {
                 let preview = document.getElementById("marker-preview");
                 preview.innerHTML = previewImageTemplate(fileURL, fileName, "marker-preview");
             }
-        );
+            );
     };
 
     function dataURItoBlob(dataURI) {
@@ -257,7 +287,7 @@ const handleImageUpload = (file) => {
     const fileURL = URL.createObjectURL(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = function () {
+    reader.onloadend = function() {
         thePackage.assetFile = reader.result.split(",")[1];
         thePackage.assetName = file.type.replace('image/', 'asset.');
     };
@@ -269,7 +299,7 @@ const handleAudioUpload = (file) => {
     const fileURL = URL.createObjectURL(file);
     const reader = new FileReader();
     reader.readAsArrayBuffer(file);
-    reader.onloadend = function () {
+    reader.onloadend = function() {
         //for backend api asset needs only base64 part
         thePackage.assetFile = reader.result;
         thePackage.assetName = file.type.replace('audio/', 'asset.');
@@ -282,7 +312,7 @@ const handleVideoUpload = (file) => {
     const fileURL = URL.createObjectURL(file);
     const reader = new FileReader();
     reader.readAsArrayBuffer(file);
-    reader.onloadend = function () {
+    reader.onloadend = function() {
         //for backend api asset needs only base64 part
         thePackage.assetFile = reader.result;
         thePackage.assetName = file.type.replace('video/', 'asset.');
@@ -291,20 +321,14 @@ const handleVideoUpload = (file) => {
     preview.innerHTML = previewVideoTemplate(fileURL, fileName, "content-preview");
 
     var video = document.querySelector('#video');
-    video.addEventListener('canplay', function () { // dynamic to caculate the size
-        var width, height;
-        if (video.videoWidth > video.videoHeight) { // it is landscape
-            width = video.parentNode.clientWidth - 50;
-            height = width * video.videoHeight / video.videoWidth;
+    video.addEventListener('canplay', () => {
+        if (video.videoWidth > video.videoHeight) {
+            video.style.width = '100%';
         } else {
-            height = video.parentNode.clientHeight - 100;
-            width = height * video.videoWidth / video.videoHeight;
+            video.style.height = '100%';
         }
 
-        video.style.width = width + 'px';
-        video.style.height = height + 'px';
-        video.style['margin-top'] = ((video.parentNode.clientHeight - height) * 0.5) + 'px';
-        video.style['border'] = '1px solid #aaa';
+        video.parentElement.style.backgroundColor = 'black';
         document.querySelector('#videoFrame').style.opacity = 1;
     });
 };
@@ -312,7 +336,7 @@ const handleVideoUpload = (file) => {
 const handleModelUpload = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = function () {
+    reader.onloadend = function() {
         //for backend api asset needs only base64 part
         thePackage.assetFile = reader.result.split(",")[1];
         let fileName = file.name.split('.');

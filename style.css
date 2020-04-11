@@ -78,6 +78,7 @@
   margin: 1.875em 0;
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 
 .primary-button:active,
@@ -158,6 +159,7 @@ page-footer {
 
 .pages-content-element {
   width: 50%;
+  padding: 1em;
 }
 
 .pages-content-element .lead {
