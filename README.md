@@ -1,10 +1,10 @@
 # AR.js Studio
 
-<img src="https://i.ibb.co/nz1ydkR/Schermata-2020-04-11-alle-13-48-16.png"/>
-
 AR.js Studio is an authoring platform to build Web Augmented Reality experiences, without coding knowledge.
 
 [Learn more](https://medium.com/@nicolcarpignoli/ar-js-studio-a-call-to-arms-for-the-first-open-source-web-ar-authoring-platform-a031069518f9)
+
+<img src="https://i.ibb.co/nz1ydkR/Schermata-2020-04-11-alle-13-48-16.png"/>
 
 ## Try now!
 
@@ -24,5 +24,6 @@ For maintaining a consistent code style while developing, please use
 
 # Authors
 
-Idea by [Nicolò Carpignoli](https://twitter.com/nicolocarp)
+Idea by [Nicolò Carpignoli](https://twitter.com/nicolocarp)  
+
 Development from: [AR.js Organisation](https://github.com/AR-js-org)
