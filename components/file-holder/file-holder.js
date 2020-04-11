@@ -5,8 +5,8 @@ const fileHolderTemplate = `
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 23.75em;
       height: 23.75em;
+      width: 23.75em;
       background: var(--passive-color);
       border: 1px solid var(--passive-color-dark);
       box-sizing: border-box;

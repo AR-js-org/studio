@@ -154,12 +154,14 @@ page-footer {
 .pages-content-container {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .pages-content-element {
   width: 50%;
   padding: 1em;
+  max-width: 30em;
+  margin-right: 1em;
 }
 
 .pages-content-element .lead {
@@ -206,6 +208,16 @@ input:focus {
 .back-anchor {
   padding: 1em;
   font-size: 1em;
+}
+
+#marker-preview, #content-preview {
+    flex: 1;
+    width: 50%;
+}
+
+#marker-preview > .file-holder {
+    width: 100%;
+    height: 100%;
 }
 
 /* Responsive */

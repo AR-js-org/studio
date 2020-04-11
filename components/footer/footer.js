@@ -1,7 +1,7 @@
 const FooterContent = `
   <style>
     #footer{
-      padding: 2em 6em;
+      padding: 2em 12vw;
     }
 
     .lead {

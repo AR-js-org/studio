@@ -13,8 +13,6 @@ const previewImageTemplate = (fileURL, fileName, id) => `
     <style>
         img {
             object-fit: contain;
-            width: 23.75em;
-            height: 23.75em;
             font-size: 1.25em;
         }
         .filename-container {
@@ -45,8 +43,6 @@ const previewAudioTemplate = (fileURL, fileName, id) => `
     <style>
         .audioFrame {
             object-fit: contain;
-            width: 23.75em;
-            height: 23.75em;
             font-size: 1.25em;
             text-align: center;
             border: 1px solid var(--passive-color-dark);
@@ -89,8 +85,6 @@ const previewVideoTemplate = (fileURL, fileName, id) => `
             flex-direction: column;
             justify-content: center;
             object-fit: contain;
-            width: 23.75em;
-            height: 23.75em;
             font-size: 1.25em;
             text-align: center;
             border: 1px solid var(--passive-color-dark);
@@ -127,8 +121,6 @@ const previewModelTemplate = (fileURL, fileName, id) => `
     <style>
         .modelFrame {
             object-fit: contain;
-            width: 23.75em;
-            height: 23.75em;
             font-size: 1.25em;
             text-align: center;
         }
