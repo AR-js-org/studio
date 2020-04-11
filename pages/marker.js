@@ -158,7 +158,7 @@ const handleUnload = (id) => {
 
 // 2. all supported file information
 const supportedFileMap = {
-    '3D': {
+    '3d': {
         types: ['gltf', 'glb'],
         maxSize: 50 * 1024 * 1024,
         maxSizeText: '50MB',
@@ -186,7 +186,7 @@ const isSupportedFileAndSize = (type, file) => {
     let supportedFile = supportedFileMap[type];
     if (supportedFile) {
         if (file.size > supportedFile.maxSize) errorMessage = 'exceed max size ' + supportedFile.maxSizeText;
-        else if (type === '3D') { // cannot get the file.type
+        else if (type === '3d') { // cannot get the file.type
             let fileName = file.name.split('.');
             let ext = fileName[fileName.length - 1];
             if (supportedFile.types.indexOf(ext) < 0) errorMessage = 'error content type';
@@ -244,7 +244,7 @@ fileSelect.addEventListener("onSelect", () => {
     let accept = '*';
     let supportedFile = supportedFileMap[thePackage.assetType];
     if (supportedFile) {
-        accept = (thePackage.assetType === '3D') ? '*' : supportedFile.types.join(',');
+        accept = (thePackage.assetType === '3d') ? '*' : supportedFile.types.join(',');
     }
     document.querySelector('#contentFile').setAttribute('accept', accept); // so that we can select to correct one
 });
@@ -339,7 +339,7 @@ const handleContentUpload = (event) => {
             handleVideoUpload(file);
             break;
         }
-        case '3D': {
+        case '3d': {
             handleModelUpload(file);
             break;
         }
