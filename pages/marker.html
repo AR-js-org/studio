@@ -54,6 +54,7 @@
                     <input type="file" accept="image/png, image/jpeg" hidden onchange="handleMarkerUpload(event)" />
                     Upload image
                 </label>
+                <p id="marker-error" class="error"></p>
             </div>
             <div id="marker-preview">
                 <file-holder></file-holder>
@@ -73,6 +74,7 @@
                     <input id="contentFile" accept="*" type="file" hidden onchange="handleContentUpload(event)" />
                     Upload file
                 </label>
+                <p id="content-error" class="error"></p>
             </div>
             <div id="content-preview">
                 <file-holder></file-holder>

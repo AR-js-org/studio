@@ -10,139 +10,139 @@ let thePackage = {
 
 // 1. all tempplates
 const previewImageTemplate = (fileURL, fileName, id) => `
-        <style>
-            img {
-                object-fit: contain;
-                width: 23.75em;
-                height: 23.75em;
-                font-size: 1.25em;
-            }
-            .crossmark {
-                vertical-align: middle;
-                font-size: 2.25em;
-            }
-            .filename {
-                vertical-align: middle;
-                font-style: italic;
-                font-weight: bold;
-                font-size: 18px;
-            }
-        </style>
+    <style>
+        img {
+            object-fit: contain;
+            width: 23.75em;
+            height: 23.75em;
+            font-size: 1.25em;
+        }
+        .crossmark {
+            vertical-align: middle;
+            font-size: 2.25em;
+        }
+        .filename {
+            vertical-align: middle;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
 
-        <img src=${fileURL} alt="${fileName}">
-        <div>
-            <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
-            <span class="filename">${fileName}</span>
-        </div>
-        `;
+    <img src=${fileURL} alt="${fileName}">
+    <div>
+        <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
+        <span class="filename">${fileName}</span>
+    </div>
+    `;
 const previewAudioTemplate = (fileURL, fileName, id) => `
-        <style>
-            .audioFrame {
-                object-fit: contain;
-                width: 23.75em;
-                height: 23.75em;
-                font-size: 1.25em;
-                text-align: center;
-                border: 1px solid var(--passive-color-dark);
-            }
-            audio {
-                width: 18em;
-                height: 3em;
-                margin-left: 3em;
-                margin-top: 8em;
-            }
-            .crossmark {
-                vertical-align: middle;
-                font-size: 2.25em;
-            }
-            .filename {
-                vertical-align: middle;
-                font-style: italic;
-                font-weight: bold;
-                font-size: 18px;
-            }
-        </style>
-            <div class="audioFrame">
-                <audio controls src=${fileURL} alt="${fileName}"></audio>
-                <div>
-                    <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
-                    <span class="filename">${fileName}</span>
-                </div>
-            </div>
-        `;
-const previewVideoTemplate = (fileURL, fileName, id) => `
-        <style>
-            .videoFrame {
-                object-fit: contain;
-                width: 23.75em;
-                height: 23.75em;
-                font-size: 1.25em;
-                text-align: center;
-                border: 1px solid var(--passive-color-dark);
-            }
-            .crossmark {
-                vertical-align: middle;
-                font-size: 2.25em;
-            }
-            .filename {
-                vertical-align: middle;
-                font-style: italic;
-                font-weight: bold;
-                font-size: 18px;
-            }
-        </style>
-            <div id="videoFrame" class="videoFrame" style="opacity:0">
-                <video id="video" controls src=${fileURL} alt="${fileName}"></video>
-                <div >
-                    <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
-                    <span class="filename">${fileName}</span>
-                </div>
-            </div>
-        `;
-const previewModelTemplate = (fileURL, fileName, id) => `
-        <style>
-            .modelFrame {
-                object-fit: contain;
-                width: 23.75em;
-                height: 23.75em;
-                font-size: 1.25em;
-                text-align: center;
-            }
-            .crossmark {
-                vertical-align: middle;
-                font-size: 2.25em;
-            }
-            .filename {
-                vertical-align: middle;
-                font-style: italic;
-                font-weight: bold;
-                font-size: 18px;
-            }
-        </style>
-            <div class="modelFrame" id="modelFrame">
-                <a-scene
-                    renderer="logarithmicDepthBuffer: true;"
-                    embedded
-                    loading-screen="enabled: false;"
-                    vr-mode-ui="enabled: false">
-                    <a-assets>
-                        <a-asset-item id="model" src="${fileURL}"></a-asset-item>
-                    </a-assets>
-
-                    <a-entity position="0 0.9 -2">
-                        <a-entity animation-mixer="loop: repeat" model-controller="target:#modelFrame" gltf-model="#model"></a-entity>
-                    </a-entity>
-
-                    <a-sky color="#ECECEC"></a-sky>
-                    <a-entity camera position="0 1 0">
-                    </a-entity>
-                </a-scene>
-            </div>
+    <style>
+        .audioFrame {
+            object-fit: contain;
+            width: 23.75em;
+            height: 23.75em;
+            font-size: 1.25em;
+            text-align: center;
+            border: 1px solid var(--passive-color-dark);
+        }
+        audio {
+            width: 18em;
+            height: 3em;
+            margin-left: 3em;
+            margin-top: 8em;
+        }
+        .crossmark {
+            vertical-align: middle;
+            font-size: 2.25em;
+        }
+        .filename {
+            vertical-align: middle;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+        <div class="audioFrame">
+            <audio controls src=${fileURL} alt="${fileName}"></audio>
             <div>
                 <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
                 <span class="filename">${fileName}</span>
             </div>
-        `;
+        </div>
+    `;
+const previewVideoTemplate = (fileURL, fileName, id) => `
+    <style>
+        .videoFrame {
+            object-fit: contain;
+            width: 23.75em;
+            height: 23.75em;
+            font-size: 1.25em;
+            text-align: center;
+            border: 1px solid var(--passive-color-dark);
+        }
+        .crossmark {
+            vertical-align: middle;
+            font-size: 2.25em;
+        }
+        .filename {
+            vertical-align: middle;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+        <div id="videoFrame" class="videoFrame" style="opacity:0">
+            <video id="video" controls src=${fileURL} alt="${fileName}"></video>
+            <div >
+                <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
+                <span class="filename">${fileName}</span>
+            </div>
+        </div>
+    `;
+const previewModelTemplate = (fileURL, fileName, id) => `
+    <style>
+        .modelFrame {
+            object-fit: contain;
+            width: 23.75em;
+            height: 23.75em;
+            font-size: 1.25em;
+            text-align: center;
+        }
+        .crossmark {
+            vertical-align: middle;
+            font-size: 2.25em;
+        }
+        .filename {
+            vertical-align: middle;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+        <div class="modelFrame" id="modelFrame">
+            <a-scene
+                renderer="logarithmicDepthBuffer: true;"
+                embedded
+                loading-screen="enabled: false;"
+                vr-mode-ui="enabled: false">
+                <a-assets>
+                    <a-asset-item id="model" src="${fileURL}"></a-asset-item>
+                </a-assets>
+
+                <a-entity position="0 0.9 -2">
+                    <a-entity animation-mixer="loop: repeat" model-controller="target:#modelFrame" gltf-model="#model"></a-entity>
+                </a-entity>
+
+                <a-sky color="#ECECEC"></a-sky>
+                <a-entity camera position="0 1 0">
+                </a-entity>
+            </a-scene>
+        </div>
+        <div>
+            <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
+            <span class="filename">${fileName}</span>
+        </div>
+    `;
 
 const handleUnload = (id) => {
     let preview = document.getElementById(id);
@@ -181,22 +181,25 @@ const supportedFileMap = {
 };
 
 // 2.1 check whether the file is a supported content type, and whether it is in the limited size;
-const isSupportedFileAndSize = (type, file) => {
-    let errorMessage = '';
-    let supportedFile = supportedFileMap[type];
-    if (supportedFile) {
-        if (file.size > supportedFile.maxSize) errorMessage = 'exceed max size ' + supportedFile.maxSizeText;
-        else if (type === '3d') { // cannot get the file.type
-            let fileName = file.name.split('.');
-            let ext = fileName[fileName.length - 1];
-            if (supportedFile.types.indexOf(ext) < 0) errorMessage = 'error content type';
-        } else {
-            if (supportedFile.types.indexOf(file.type) < 0) errorMessage = 'error content type';
-        }
-    } else errorMessage = 'please select a supported file type';
+const isSupportedFileAndSize = (type, file, id) => {
+    const supportedFile = supportedFileMap[type];
+    const previewError = document.getElementById(id)
+    previewError.innerHTML = ""
 
-    if (errorMessage) return alert(errorMessage);
-    return true;
+    let isSupported = false;
+    if (supportedFile && file) {
+        let fileType = type === '3d' ? file.name.split('.').slice(-1)[0] : file.type
+        if (file.size > supportedFile.maxSize) {
+            previewError.innerHTML = `*The file is too large. Max size is ${supportedFile.maxSizeText}.`
+        } else if (!supportedFile.types.includes(fileType)) {
+            previewError.innerHTML = `*The file is not supported. Supported file types are ${supportedFile.types.join(', ')}.`
+        } else {
+            isSupported = true
+        }
+    } else {
+        previewError.innerHTML = '*Please select an option or upload a file.'
+    }
+    return isSupported
 };
 
 // 3:for step 1: marker upload
@@ -205,7 +208,7 @@ const handleMarkerUpload = (event) => {
     const fileName = file.name;
     let fileURL = null;
 
-    if (!isSupportedFileAndSize('image', file)) return;
+    if (!isSupportedFileAndSize('image', file, "marker-error")) return;
 
     event.target.value = ''; // incase onchange will not be called when the same file is loaded.
 
@@ -213,10 +216,10 @@ const handleMarkerUpload = (event) => {
     reader.readAsDataURL(file);
     reader.onloadend = function () {
         const base64Data = reader.result;
-        MarkerModule.getFullMarkerImage(base64Data, 0.5, 512, "black").then(
-            (fullMarkerImage) => {
+        MarkerModule.getFullMarkerImage(base64Data, 0.5, 512, "black")
+            .then((fullMarkerImage) => {
                 window.markerImage = base64Data;
-                var blob = dataURItoBlob(fullMarkerImage);
+                let blob = dataURItoBlob(fullMarkerImage);
                 fileURL = URL.createObjectURL(blob);
                 let preview = document.getElementById("marker-preview");
                 preview.innerHTML = previewImageTemplate(fileURL, fileName, "marker-preview");
@@ -225,9 +228,9 @@ const handleMarkerUpload = (event) => {
     };
 
     function dataURItoBlob(dataURI) {
-        var mime = dataURI.split(",")[0].split(":")[1].split(";")[0];
-        var binary = atob(dataURI.split(",")[1]);
-        var array = [];
+        let mime = dataURI.split(",")[0].split(":")[1].split(";")[0];
+        let binary = atob(dataURI.split(",")[1]);
+        let array = [];
         for (var i = 0; i < binary.length; i++) {
             array.push(binary.charCodeAt(i));
         }
@@ -323,7 +326,7 @@ const handleModelUpload = (file) => {
 
 const handleContentUpload = (event) => {
     const file = event.target.files[0];
-    if (!isSupportedFileAndSize(thePackage.assetType, file)) return;
+    if (!isSupportedFileAndSize(thePackage.assetType, file, "content-error")) return;
 
     event.target.value = ''; // incase onchange will not be called when the same file is loaded.
     switch (thePackage.assetType) {
@@ -353,7 +356,6 @@ const zip = () => {
     if (!window.markerImage) return alert('please select a marker image');
     if (!thePackage.assetType) return alert('please select the corret content type');
     if (!thePackage.assetFile || !thePackage.assetName) return alert('please upload a content');
-
 
     MarkerModule.getMarkerPattern(window.markerImage)
         .then((markerPattern) => {
