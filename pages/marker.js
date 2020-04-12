@@ -42,6 +42,8 @@ const previewImageTemplate = (fileURL, fileName, id) => `
 const previewAudioTemplate = (fileURL, fileName, id) => `
     <style>
         .audioFrame {
+            width: 23.75em;
+            height: 23.75em;
             object-fit: contain;
             font-size: 1.25em;
             text-align: center;
@@ -81,6 +83,8 @@ const previewAudioTemplate = (fileURL, fileName, id) => `
 const previewVideoTemplate = (fileURL, fileName, id) => `
     <style>
         .videoFrame {
+            width: 23.75em;
+            height: 23.75em;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -120,6 +124,8 @@ const previewVideoTemplate = (fileURL, fileName, id) => `
 const previewModelTemplate = (fileURL, fileName, id) => `
     <style>
         .modelFrame {
+            width: 23.75em;
+            height: 23.75em;
             object-fit: contain;
             font-size: 1.25em;
             text-align: center;
@@ -236,7 +242,7 @@ const handleMarkerUpload = (event) => {
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = function() {
+    reader.onloadend = function () {
         const base64Data = reader.result;
         MarkerModule.getFullMarkerImage(base64Data, 0.5, 512, "black")
             .then((fullMarkerImage) => {
@@ -279,7 +285,7 @@ const handleImageUpload = (file) => {
     const fileURL = URL.createObjectURL(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = function() {
+    reader.onloadend = function () {
         thePackage.assetFile = reader.result.split(",")[1];
         thePackage.assetName = file.type.replace('image/', 'asset.');
     };
@@ -291,7 +297,7 @@ const handleAudioUpload = (file) => {
     const fileURL = URL.createObjectURL(file);
     const reader = new FileReader();
     reader.readAsArrayBuffer(file);
-    reader.onloadend = function() {
+    reader.onloadend = function () {
         //for backend api asset needs only base64 part
         thePackage.assetFile = reader.result;
         thePackage.assetName = file.type.replace('audio/', 'asset.');
@@ -304,7 +310,7 @@ const handleVideoUpload = (file) => {
     const fileURL = URL.createObjectURL(file);
     const reader = new FileReader();
     reader.readAsArrayBuffer(file);
-    reader.onloadend = function() {
+    reader.onloadend = function () {
         //for backend api asset needs only base64 part
         thePackage.assetFile = reader.result;
         thePackage.assetName = file.type.replace('video/', 'asset.');
@@ -328,7 +334,7 @@ const handleVideoUpload = (file) => {
 const handleModelUpload = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onloadend = function() {
+    reader.onloadend = function () {
         //for backend api asset needs only base64 part
         thePackage.assetFile = reader.result.split(",")[1];
         let fileName = file.name.split('.');
