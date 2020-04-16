@@ -8,7 +8,10 @@ const handleZip = (file, cb) => {
             for (let i in zip.files) console.log(i);
             for (let i in zip.files) {
                 if (/.gltf$/.test(i)) {
-
+                    let prePath = '';
+                    let file = i.split('/');
+                    file.pop();
+                    if (file.length > 0) prePath = file.join('/') + '/';
                     zip.file(i).async('string').then(text => {
                         try {
                             let gltf = JSON.parse(text);
@@ -22,12 +25,14 @@ const handleZip = (file, cb) => {
                             for (let i = 0; i < buffers.length; i++) {
                                 uri = buffers[i].uri;
                                 if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                                    buffers[i].uri = prePath + uri;
                                     targets.push(buffers[i])
                                 }
                             }
                             for (let i = 0; i < images.length; i++) {
                                 uri = images[i].uri;
                                 if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                                    images[i].uri = prePath + uri;
                                     targets.push(images[i])
                                 }
                             }
