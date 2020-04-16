@@ -187,7 +187,7 @@ const handleUnload = (id) => {
 // 2. all supported file information
 const supportedFileMap = {
     '3d': {
-        types: ['gltf', 'glb'],
+        types: ['gltf', 'glb', 'zip'],
         maxSize: 50 * 1024 * 1024,
         maxSizeText: '50MB',
     },
@@ -332,18 +332,64 @@ const handleVideoUpload = (file) => {
 };
 
 const handleModelUpload = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = function () {
-        //for backend api asset needs only base64 part
-        thePackage.assetFile = reader.result.split(",")[1];
-        let fileName = file.name.split('.');
-        thePackage.assetName = 'asset.' + fileName[fileName.length - 1];
+    let fileType = file.name.split('.').slice(-1)[0];
+    if (fileType === 'glb') {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function () {
+            //for backend api asset needs only base64 part
+            thePackage.assetFile = reader.result.split(",")[1];
+            let fileName = file.name.split('.');
+            thePackage.assetName = 'asset.' + fileName[fileName.length - 1];
 
-        let preview = document.getElementById("content-preview");
-        preview.innerHTML = previewModelTemplate(reader.result, file.name, "content-preview");
-    };
+            let preview = document.getElementById("content-preview");
+            preview.innerHTML = previewModelTemplate(reader.result, file.name, "content-preview");
+        };
+    } else if (fileType === 'gltf') {
+        const reader = new FileReader();
+        reader.readAsText(file);
+        reader.onloadend = function () {
+            try {
+                let gltf = JSON.parse(reader.result);
+                let buffers = gltf.buffers || [];
+                let images = gltf.images || [];
+                let uri;
+                const previewError = document.getElementById("content-error");
 
+                console.log(gltf.buffers);
+                console.log(gltf.images);
+                for (let i = 0; i < buffers.length; i++) {
+                    uri = buffers[i].uri;
+                    if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                        previewError.innerHTML = '*Please pack all related files to zip file and try again.'
+
+                        return;
+                    }
+                }
+                for (let i = 0; i < images.length; i++) {
+                    uri = images[i].uri;
+                    if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                        previewError.innerHTML = '*Please pack all related files to zip file and try again.'
+                        return;
+                    }
+                }
+
+            } catch (error) {
+
+            }
+            // console.log(reader.result);
+        };
+    } else if (fileType == 'zip') {
+        handleZip(file, (err, result) => {
+            thePackage.assetFile = result.split(",")[1];
+            let fileName = file.name.split('.');
+            thePackage.assetName = 'asset.gltf';
+
+            let preview = document.getElementById("content-preview");
+            preview.innerHTML = previewModelTemplate(result, file.name, "content-preview");
+        })
+
+    }
 };
 
 const handleContentUpload = (event) => {
