@@ -4,12 +4,12 @@
 
 /* Color Variables */
 :root {
-  --primary-color: #FFF700;
-  --primary-color-dark: #E6DE00;
-  --secondary-color: #00DBA0;
-  --secondary-color-dark: #00C28E;
-  --passive-color: #F2F2F2;
-  --passive-color-dark: #D9D9D9;
+  --primary-color: #fff700;
+  --primary-color-dark: #e6de00;
+  --secondary-color: #00dba0;
+  --secondary-color-dark: #00c28e;
+  --passive-color: #f2f2f2;
+  --passive-color-dark: #d9d9d9;
   --max-z-index: 99999;
 }
 
@@ -49,13 +49,13 @@
 
 .link {
   font-size: 1em;
-  color: #0000FF;
+  color: #0000ff;
 }
 
 .error {
   font-style: italic;
   font-size: 1em;
-  color: #DF0000;
+  color: #df0000;
 }
 
 /* Buttons */
@@ -113,7 +113,7 @@
 }
 
 .file-input {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* body */
@@ -122,6 +122,8 @@ body {
 }
 
 page-header {
+  display: flex;
+  align-items: center;
   position: fixed;
   width: 100%;
   background: var(--passive-color);

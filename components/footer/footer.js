@@ -14,6 +14,7 @@ const FooterContent = `
 
     .buttons > button {
         margin-right: 3.125em;
+        cursor: pointer;
     }
 
     .paragraph {
@@ -76,7 +77,7 @@ const FooterContent = `
 
     <div class="buttons">
       <button class="primary-button">
-        Export to Github
+        Publish on Github
       </button>
 
       <button id="zip-button" class="passive-button">

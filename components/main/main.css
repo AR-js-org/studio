@@ -86,6 +86,10 @@
   background: white;
 }
 
+.error {
+    visibility: hidden;
+}
+
 /* Responsive */
 @media screen and (max-width: 900px) {
   .title {
