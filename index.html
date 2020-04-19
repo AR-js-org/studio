@@ -25,11 +25,18 @@
       <div class="content">
         <p class="title">Web-enabled AR experiences</p>
         <p class="paragraph">
-          AR.js studio is an open-source AR development environment for creating
-          augmented web experiences. You can create location or marker-based AR
-          applications and deploy them straight to web. Working with AR.js
-          studio doesn’t require any knowledge of coding. You can start working
-          on your project now.
+
+            <!-- to be removed on release -->
+            <h1 style="font-size: 1.25em; font-weight: bold;">
+                This is a Work in Progress, alpha version. It's like our playground for now.
+                You may find missing features or bugs.
+            </h1>
+
+            AR.js studio is an open-source AR development environment for creating
+            augmented web experiences. You can create location or marker-based AR
+            applications and deploy them straight to web. Working with AR.js
+            studio doesn’t require any knowledge of coding. You can start working
+            on your project now.
         </p>
         <img class="splashscreen" src="assets/img/splashscreen.png"/>
 
@@ -56,7 +63,8 @@
             />
             <span class="checkmark"></span>
           </label>
-          <a id="start-building" class="primary-button" href="">Start building</a>
+          <a onclick="anchorOnclick(this)" id="start-building" class="primary-button">Start building</a>
+          <div class="error missing-href">Please, select a project type.</div>
         </div>
       </div>
     </div>
