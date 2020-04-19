@@ -59,9 +59,6 @@ const config = [
   className: ".map-pick-location",
   elem: `<div id="map-container">
   <div class="map-pick-location"></div> 
-  <button class="use-my-location-button">
-  ${defineLocationSvg}
-  Use my location</button>
   <p id="location-set-display" class="location-set-display">
   User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
   </p>
@@ -80,9 +77,6 @@ const config = [
   className: ".map-foo-bar",
   elem: `<div id="map-container">
   <div class="map-pick-location"></div> 
-  <button class="use-my-location-button">
-  ${defineLocationSvg}
-  Use my location</button>
   <p id="location-set-display" class="location-set-display">
   User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
   </p>
@@ -146,9 +140,18 @@ function invokeMapConfig(shadow, path) {
     updateLatLngInnerHtml(shadow,lat,lng);
   })
 
+  let x = shadow.querySelector(".leaflet-control-attribution");
+  let buttonUseMyLocation = document.createElement('button');
+  buttonUseMyLocation.innerHTML = `${defineLocationSvg} Use my location`;
+  buttonUseMyLocation.className = "use-my-location-button";
+  buttonUseMyLocation.style = `
+    background-color: white;  
+    color: black;
+    margin-left: 2px`
+  x.appendChild(buttonUseMyLocation);
+
   // implementing button to use my location
-  let useMyLocationButton = shadow.querySelector(".use-my-location-button");
-  useMyLocationButton.addEventListener("click", function(e) {
+  buttonUseMyLocation.addEventListener("click", function(e) {
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition(function(position){ // => {} two keys {coords: {}, timestamp: string}
         updateLatLngInnerHtml(shadow, "Locating", "...."); // if geo api response is slow - placeholder
