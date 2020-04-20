@@ -39,6 +39,24 @@ const map_styles = `
   text-decoration: none;
   color: black;
 }
+.set-location-button {
+  display: inline-block;
+  font-family: Chakra Petch;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1em;
+  line-height: 1.5em;
+  height: 3.5em;
+  border: none;
+  border: 1.5px solid black;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 0px black;
+  border-radius: 10px;
+  padding: 1em 1.25em;
+  margin-top: 1.875em;
+  text-decoration: none;
+  color: black;
+}
 .svg-define-location {
   padding-top: 0.3em;
 
@@ -59,6 +77,7 @@ const config = [
   className: ".map-pick-location",
   elem: `<div id="map-container">
   <div class="map-pick-location"></div> 
+  <button class="set-location-button" disabled>Set Location</button>
   <p id="location-set-display" class="location-set-display">
   User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
   </p>
@@ -74,9 +93,10 @@ const config = [
 {
   id: "002",
   path: "foobar.html",
-  className: ".map-foo-bar",
+  className: ".map-pick-location",
   elem: `<div id="map-container">
   <div class="map-pick-location"></div> 
+  <button class="set-location-button" disabled>Set Location</button>
   <p id="location-set-display" class="location-set-display">
   User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
   </p>
@@ -86,9 +106,9 @@ const config = [
   attribution_opts: { 
     attribution: openStreetMaps_attribution,
     maxZoom: 18, 
-    minZoom: 10 
+    // minZoom: 10 removed due to comment in issue by @kalwalt - this is what was restricting zoom out capability
   }  
-}
+},
 ]
 
 
@@ -191,9 +211,10 @@ function updateLatLngValue(lat,lng){
 }
 
 function updateLatLngInnerHtml(shadow,lat,lng){
+  shadow.querySelector('.set-location-button').disabled = false;
   let x = shadow.querySelector(".location-set-display");
   x.style.visibility = "visible"
-  x.innerHTML = `Location is set to: ${lat.toString()}, ${lng.toString()}!`;
+  x.innerHTML = `Location is set to: <b>${lat.toString()}, ${lng.toString()}!</b>`;
 }
 
 function updateLatLngInnerHtmlDenied(shadow, msg){
@@ -219,6 +240,10 @@ class MapPickLocation extends HTMLElement {
 
   connectedCallback() {
     invokeMapConfig(this.shadowRoot,this.path);
+    let setLocationButton = this.shadowRoot.querySelector('.set-location-button');
+    setLocationButton.addEventListener("click", (e) => {
+      alert('progress to next screen');
+    })
   }
 }
 
