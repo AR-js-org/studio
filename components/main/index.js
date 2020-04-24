@@ -17,11 +17,10 @@ function radioOnclick(self) {
 }
 
 function anchorOnclick(self) {
-    const href = self.getAttribute('href')
+    const href = self.target.getAttribute('href')
     if (!href) {
-        document.querySelector('.missing-href').style.visibility = 'visible';
-        return false;
+        const error = document.getElementById("error")
+        error.style.visibility = "visible"
     }
-
 }
 
