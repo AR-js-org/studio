@@ -187,27 +187,7 @@ const handleUnload = (id) => {
 // 2. all supported file information
 
 
-// 2.1 check whether the file is a supported content type, and whether it is in the limited size;
-const isSupportedFileAndSize = (type, file, id) => {
-    const supportedFile = supportedFileMap[type];
-    const previewError = document.getElementById(id)
-    previewError.innerHTML = ""
 
-    let isSupported = false;
-    if (supportedFile && file) {
-        let fileType = type === '3d' ? file.name.split('.').slice(-1)[0] : file.type
-        if (file.size > supportedFile.maxSize) {
-            previewError.innerHTML = `*The file is too large. Max size is ${supportedFile.maxSizeText}.`
-        } else if (!supportedFile.types.includes(fileType)) {
-            previewError.innerHTML = `*The file is not supported. Supported file types are ${supportedFile.types.join(', ')}.`
-        } else {
-            isSupported = true
-        }
-    } else {
-        previewError.innerHTML = '*Please select an option before uploading a file.'
-    }
-    return isSupported
-};
 
 // 3:for step 1: marker upload
 const handleMarkerUpload = (event) => {
@@ -215,7 +195,7 @@ const handleMarkerUpload = (event) => {
     const fileName = file.name;
     let fileURL = null;
 
-    if (!isSupportedFileAndSize('image', file, "marker-error")) return;
+    if (!isValidFile('image', file, "marker-error")) return;
 
     event.target.value = ''; // in case 'onchange' will not be called when the same file is loaded.
 
@@ -359,10 +339,11 @@ const handleModelUpload = (file) => {
 
 const handleContentUpload = (event) => {
     const file = event.target.files[0];
-    if (!isSupportedFileAndSize(thePackage.assetType, file, "content-error")) return;
+
+    if (!isValidFile(window.assetType, file, "content-error")) return;
 
     event.target.value = ''; // incase onchange will not be called when the same file is loaded.
-    switch (thePackage.assetType) {
+    switch (window.assetType) {
         case 'image': {
             handleImageUpload(file);
             break;
@@ -387,8 +368,10 @@ const handleContentUpload = (event) => {
 const zip = () => {
     // check thePackage whether it is valid
     if (!window.markerImage) return alert('please select a marker image');
-    if (!thePackage.assetType) return alert('please select the corret content type');
+    if (!window.assetType) return alert('please select the corret content type');
     if (!thePackage.assetFile || !thePackage.assetName) return alert('please upload a content');
+
+    thePackage.assetType = window.assetType
 
     MarkerModule.getMarkerPattern(window.markerImage)
         .then((markerPattern) => {
