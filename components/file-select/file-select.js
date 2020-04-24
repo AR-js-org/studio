@@ -19,7 +19,7 @@ const fileSelectTemplate = `
 
   <select class="dropdown" name="content-type" id="selected-marker-type">
     <option value="">Please select an option</option>
-    <option value="3d">3D Object (.gltf, .glb; max size 50MB)</option>
+    <option value="3d">3D Object (.gltf, .glb .zip; max size 50MB)</option>
     <option value="image">Image (.jpg, .png, .gif; max size 15MB)</option>
     <option value="audio">Audio (.mp3; max size 10MB)</option>
     <option value="video">Video (.mp4; max size 25MB)</option>
