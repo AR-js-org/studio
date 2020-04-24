@@ -17,7 +17,7 @@ const fileSelectTemplate = `
     }
   </style>
 
-  <select class="dropdown" name="content-type" id="selected-marker-type">
+  <select id="file-select" class="dropdown" name="content-type" >
     <option value="">Please select an option</option>
     <option value="3d">3D Object (.gltf, .glb .zip; max size 50MB)</option>
     <option value="image">Image (.jpg, .png, .gif; max size 15MB)</option>
@@ -34,9 +34,11 @@ class FileSelect extends HTMLElement {
   }
 
   connectedCallback() {
-    const select = this.shadow.querySelector("#selected-marker-type");
+    const select = this.shadow.querySelector("#file-select");
     select.onchange = () => {
-      this.dispatchEvent(new CustomEvent("onSelect", { detail: { selectedValue: select.options[select.selectedIndex].value } }));
+      const supportedFile = supportedFileMap[select.value];
+      const accept = (select.value === '3d') ? '*' : supportedFile.types.join(',');
+      document.querySelector('#content-file').setAttribute('accept', accept);
     }
   }
 }

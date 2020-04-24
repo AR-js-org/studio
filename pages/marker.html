@@ -28,6 +28,9 @@
     <script src="../components/header/header.js"></script>
     <script src="../components/footer/footer.js"></script>
     <script src="../components/model-controller/model-controller.js"></script>
+
+    <!-- import utils -->
+    <script src="../utils/supportedFileMap.js"></script>
     <script src="../utils/handleZip.js"></script>
     <script src="./marker.js" defer></script>
 
@@ -80,7 +83,7 @@
                 </p>
                 <file-select></file-select>
                 <label class="passive-button file-input">
-                    <input id="contentFile" accept="*" type="file" hidden onchange="handleContentUpload(event)" />
+                    <input id="content-file" accept="*" type="file" hidden onchange="handleContentUpload(event)" />
                     Upload file
                 </label>
                 <p id="content-error" class="error"></p>

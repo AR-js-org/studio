@@ -169,7 +169,7 @@ const previewModelTemplate = (fileURL, fileName, id) => `
         <div class="filename-container">
             <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
             <span class="filename">${fileName}</span>
-        </div>
+        </div>   
     `;
 
 const handleUnload = (id) => {
@@ -185,28 +185,7 @@ const handleUnload = (id) => {
 };
 
 // 2. all supported file information
-const supportedFileMap = {
-    '3d': {
-        types: ['gltf', 'glb', 'zip'],
-        maxSize: 50 * 1024 * 1024,
-        maxSizeText: '50MB',
-    },
-    image: {
-        types: ['image/png', 'image/jpeg', 'image/gif'],
-        maxSize: 15 * 1024 * 1024,
-        maxSizeText: '15MB',
-    },
-    audio: {
-        types: ['audio/wav', 'audio/mp3'],
-        maxSize: 10 * 1024 * 1024,
-        maxSizeText: '10MB',
-    },
-    video: {
-        types: ['video/mp4'],
-        maxSize: 25 * 1024 * 1024,
-        maxSizeText: '25MB',
-    }
-};
+
 
 // 2.1 check whether the file is a supported content type, and whether it is in the limited size;
 const isSupportedFileAndSize = (type, file, id) => {
@@ -265,20 +244,6 @@ const handleMarkerUpload = (event) => {
         return new Blob([new Uint8Array(array)], { type: mime });
     }
 };
-
-// for step 2: content upload
-// object-fit: contain;
-// step2.1: select file type
-const fileSelect = document.querySelector("file-select");
-fileSelect.addEventListener("onSelect", () => {
-    thePackage.assetType = event.detail.selectedValue;
-    let accept = '*';
-    let supportedFile = supportedFileMap[thePackage.assetType];
-    if (supportedFile) {
-        accept = (thePackage.assetType === '3d') ? '*' : supportedFile.types.join(',');
-    }
-    document.querySelector('#contentFile').setAttribute('accept', accept); // so that we can select to correct one
-});
 
 const handleImageUpload = (file) => {
     const fileName = file.name;
