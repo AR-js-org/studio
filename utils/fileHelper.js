@@ -29,11 +29,11 @@ function isValidFile (type, file, errorId) {
         previewError.innerHTML = '*Please select an option before uploading a file.';
         return false;
     }
-    if (isValidFileSize(type, file)) {
+    if (!isValidFileSize(type, file)) {
         previewError.innerHTML = `*The file is too large. Max size is ${supportedFile.maxSizeText}.`;
         return false;
     }
-    if (isValidFileType(type, file)) {
+    if (!isValidFileExt(type, file)) {
         previewError.innerHTML = `*The file is not supported. Supported file types are ${supportedFile.types.join(', ')}.`;
         return false;
     }
@@ -48,15 +48,15 @@ function isValidFileType(type, file) {
     return supportedFile && file;
 }
 
+/** Checks whether file size is correct based on its type. */
+function isValidFileSize(type, file) {
+    const supportedFile = supportedFileMap[type];
+    return file.size < supportedFile.maxSize;
+}
+
 /** Checks whether file extention is correct based on its type. */
 function isValidFileExt(type, file) {
     const supportedFile = supportedFileMap[type];
     const fileType = type === '3d' ? file.name.split('.').slice(-1)[0] : file.type
     return supportedFile.types.includes(fileType)
-}
-
-/** Checks whether file size is correct based on its type. */
-function isValidFileSize(type, file) {
-    const supportedFile = supportedFileMap[type];
-    return file.size > supportedFile.maxSize;
 }
