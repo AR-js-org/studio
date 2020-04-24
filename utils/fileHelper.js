@@ -25,7 +25,7 @@ function isValidFile (type, file, errorId) {
     const supportedFile = supportedFileMap[type];
     const previewError = document.getElementById(errorId)
 
-    if (!isValidFileType(type, file)) {
+    if (!type || !isValidFileType(type, file)) {
         previewError.innerHTML = '*Please select an option before uploading a file.';
         return false;
     }
@@ -59,4 +59,14 @@ function isValidFileExt(type, file) {
     const supportedFile = supportedFileMap[type];
     const fileType = type === '3d' ? file.name.split('.').slice(-1)[0] : file.type
     return supportedFile.types.includes(fileType)
+}
+
+function dataURItoBlob(dataURI) {
+    const mime = dataURI.split(",")[0].split(":")[1].split(";")[0];
+    const binary = atob(dataURI.split(",")[1]);
+    let array = [];
+    for (var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+    }
+    return new Blob([new Uint8Array(array)], { type: mime });
 }

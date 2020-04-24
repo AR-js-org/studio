@@ -11,14 +11,10 @@ function handleUnload(self) {
     }
 };
 
-function handleMarkerUpload(event) {
-    const file = event.target.files[0];
-    const fileName = file.name;
-    let fileURL = null;
+function handleMarkerUpload(self) {
+    const file = self.files[0];
 
     if (!isValidFile('image', file, "marker-error")) return;
-
-    event.target.value = ''; // in case 'onchange' will not be called when the same file is loaded.
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -27,31 +23,22 @@ function handleMarkerUpload(event) {
         MarkerModule.getFullMarkerImage(base64Data, 0.5, 512, "black")
             .then((fullMarkerImage) => {
                 window.markerImage = base64Data;
-                let blob = dataURItoBlob(fullMarkerImage);
-                fileURL = URL.createObjectURL(blob);
-                let preview = document.getElementById("marker-preview");
-                preview.innerHTML = previewImageTemplate(fileURL, fileName);
-            }
-            );
-    };
+                const blob = dataURItoBlob(fullMarkerImage);
+                const fileURL = URL.createObjectURL(blob);
 
-    function dataURItoBlob(dataURI) {
-        let mime = dataURI.split(",")[0].split(":")[1].split(";")[0];
-        let binary = atob(dataURI.split(",")[1]);
-        let array = [];
-        for (var i = 0; i < binary.length; i++) {
-            array.push(binary.charCodeAt(i));
-        }
-        return new Blob([new Uint8Array(array)], { type: mime });
-    }
+                const preview = document.getElementById("marker-preview");
+                preview.innerHTML = previewImageTemplate(fileURL, file.name);
+            }
+        );
+    };
+    self.value = ''; // Reset required for re-upload
 };
 
-function handleContentUpload(event) {
-    const file = event.target.files[0];
+function handleContentUpload(self) {
+    const file = self.files[0];
 
     if (!isValidFile(window.assetType, file, "content-error")) return;
 
-    event.target.value = ''; // incase onchange will not be called when the same file is loaded.
     switch (window.assetType) {
         case 'image': {
             handleImageUpload(file);
@@ -70,18 +57,20 @@ function handleContentUpload(event) {
             break;
         }
     }
-
+    self.value = ''; // Reset required for re-upload
 };
 
 function handleImageUpload(file) {
     const fileName = file.name;
     const fileURL = URL.createObjectURL(file);
     const reader = new FileReader();
+
     reader.readAsDataURL(file);
     reader.onloadend = function () {
         window.assetFile = reader.result.split(",")[1];
         window.assetName = file.type.replace('image/', 'asset.');
     };
+
     let preview = document.getElementById("content-preview");
     preview.innerHTML = previewImageTemplate(fileURL, fileName);
 };
@@ -90,12 +79,14 @@ function handleAudioUpload(file) {
     const fileName = file.name;
     const fileURL = URL.createObjectURL(file);
     const reader = new FileReader();
+
     reader.readAsArrayBuffer(file);
     reader.onloadend = function () {
         //for backend api asset needs only base64 part
         window.assetFile = reader.result;
         window.assetName = file.type.replace('audio/', 'asset.');
     };
+
     let preview = document.getElementById("content-preview");
     preview.innerHTML = previewAudioTemplate(fileURL, fileName);
 };
@@ -177,7 +168,6 @@ function handleModelUpload(file) {
     } else if (fileType == 'zip') {
         handleZip(file, (err, result) => {
             window.assetFile = result.split(",")[1];
-            let fileName = file.name.split('.');
             window.assetName = 'asset.gltf';
 
             let preview = document.getElementById("content-preview");

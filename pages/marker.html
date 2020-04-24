@@ -64,7 +64,7 @@
                     Explain some constraints so people are not failing by uploading wrong images.
                 </p>
                 <label class="passive-button">
-                    <input type="file" accept="image/png, image/jpeg" hidden onchange="handleMarkerUpload(event)" />
+                    <input type="file" accept="image/png, image/jpeg" hidden onchange="handleMarkerUpload(this)" />
                     Upload image
                 </label>
                 <p id="marker-error" class="error"></p>
@@ -84,7 +84,7 @@
                 </p>
                 <file-select></file-select>
                 <label class="passive-button file-input">
-                    <input id="content-file" accept="*" type="file" hidden onchange="handleContentUpload(event)" />
+                    <input id="content-file" accept="*" type="file" hidden onchange="handleContentUpload(this)" />
                     Upload file
                 </label>
                 <p id="content-error" class="error"></p>
