@@ -1,11 +1,12 @@
-function handleUnload(id) {
-    let preview = document.getElementById(id);
+function handleUnload(self) {
+    const preview = self.parentElement.parentElement;
+    const previewId = preview.getAttribute("id");
     preview.innerHTML = "<file-holder></file-holder>";
 
-    if (id === 'content-preview') {
+    if (previewId === 'content-preview') {
         window.assetFile = null;
         window.assetName = '';
-    } else if (id === 'marker-preview') {
+    } else if (previewId === 'marker-preview') {
         window.markerImage = null;
     }
 };
@@ -29,7 +30,7 @@ function handleMarkerUpload(event) {
                 let blob = dataURItoBlob(fullMarkerImage);
                 fileURL = URL.createObjectURL(blob);
                 let preview = document.getElementById("marker-preview");
-                preview.innerHTML = previewImageTemplate(fileURL, fileName, "marker-preview");
+                preview.innerHTML = previewImageTemplate(fileURL, fileName);
             }
             );
     };
@@ -82,7 +83,7 @@ function handleImageUpload(file) {
         window.assetName = file.type.replace('image/', 'asset.');
     };
     let preview = document.getElementById("content-preview");
-    preview.innerHTML = previewImageTemplate(fileURL, fileName, "content-preview");
+    preview.innerHTML = previewImageTemplate(fileURL, fileName);
 };
 
 function handleAudioUpload(file) {
@@ -96,7 +97,7 @@ function handleAudioUpload(file) {
         window.assetName = file.type.replace('audio/', 'asset.');
     };
     let preview = document.getElementById("content-preview");
-    preview.innerHTML = previewAudioTemplate(fileURL, fileName, "content-preview");
+    preview.innerHTML = previewAudioTemplate(fileURL, fileName);
 };
 
 function handleVideoUpload(file) {
@@ -110,7 +111,7 @@ function handleVideoUpload(file) {
         window.assetName = file.type.replace('video/', 'asset.');
     };
     let preview = document.getElementById("content-preview");
-    preview.innerHTML = previewVideoTemplate(fileURL, fileName, "content-preview");
+    preview.innerHTML = previewVideoTemplate(fileURL, fileName);
 
     var video = document.querySelector('#video');
     video.addEventListener('canplay', () => {
@@ -137,7 +138,7 @@ function handleModelUpload(file) {
             window.assetName = 'asset.' + fileName[fileName.length - 1];
 
             let preview = document.getElementById("content-preview");
-            preview.innerHTML = previewModelTemplate(reader.result, file.name, "content-preview");
+            preview.innerHTML = previewModelTemplate(reader.result, file.name);
         };
     } else if (fileType === 'gltf') {
         const reader = new FileReader();
@@ -180,7 +181,7 @@ function handleModelUpload(file) {
             window.assetName = 'asset.gltf';
 
             let preview = document.getElementById("content-preview");
-            preview.innerHTML = previewModelTemplate(result, file.name, "content-preview");
+            preview.innerHTML = previewModelTemplate(result, file.name);
         })
 
     }

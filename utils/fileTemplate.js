@@ -81,20 +81,22 @@ const previewModelStyle = `
         cursor: pointer;
     }`;
 
-const previewImageTemplate = (fileURL, fileName, id) => `
+const unloadFileTemplate = (fileName) => `
+    <div class="filename-container">
+        <span class="crossmark" onclick="handleUnload(this)">&times;</span>
+        <span class="filename">${fileName}</span>
+    </div>`;
+
+const previewImageTemplate = (fileURL, fileName) => `
     <style>
         ${previewImageStyle}
         ${unloadFileStyle}
     </style>
 
     <img src=${fileURL} alt="${fileName}">
-    <div class="filename-container">
-        <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
-        <span class="filename">${fileName}</span>
-    </div>
-`;
+    ${unloadFileTemplate(fileName)}`;
 
-const previewAudioTemplate = (fileURL, fileName, id) => `
+const previewAudioTemplate = (fileURL, fileName) => `
     <style>
         ${previewAudioStyle}
         ${unloadFileStyle}
@@ -102,13 +104,9 @@ const previewAudioTemplate = (fileURL, fileName, id) => `
     <div class="audioFrame">
         <audio controls src=${fileURL} alt="${fileName}"></audio>
     </div>
-    <div classe="filename-container">
-        <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
-        <span class="filename">${fileName}</span>
-    </div>
-`;
+    ${unloadFileTemplate(fileName)}`;
 
-const previewVideoTemplate = (fileURL, fileName, id) => `
+const previewVideoTemplate = (fileURL, fileName) => `
     <style>
         ${previewVideoStyle}
         ${unloadFileStyle}
@@ -116,13 +114,9 @@ const previewVideoTemplate = (fileURL, fileName, id) => `
     <div id="videoFrame" class="videoFrame" style="opacity:0">
         <video id="video" controls src=${fileURL} alt="${fileName}"></video>
     </div>
-    <div class="filename-container">
-        <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
-        <span class="filename">${fileName}</span>
-    </div>
-`;
+    ${unloadFileTemplate(fileName)}`;
 
-const previewModelTemplate = (fileURL, fileName, id) => `
+const previewModelTemplate = (fileURL, fileName) => `
     <style>
         ${previewModelStyle}
         ${unloadFileStyle}
@@ -146,7 +140,4 @@ const previewModelTemplate = (fileURL, fileName, id) => `
             </a-entity>
         </a-scene>
     </div>
-    <div class="filename-container">
-        <span class="crossmark" onclick="handleUnload('${id}')">&times;</span>
-        <span class="filename">${fileName}</span>
-    </div>`;
+    ${unloadFileTemplate(fileName)}`;
