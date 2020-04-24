@@ -1,7 +1,7 @@
 const { MarkerModule, Package } = ARjsStudioBackend;
 
 const zip = () => {
-    // check thePackage whether it is valid
+    // TODO: replace alerts with HTML error messages.
     if (!window.markerImage) return alert('please select a marker image');
     if (!window.assetType) return alert('please select the corret content type');
     if (!window.assetFile || !window.assetName) return alert('please upload a content');
