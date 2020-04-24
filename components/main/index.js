@@ -17,7 +17,7 @@ function radioOnclick(self) {
 }
 
 function anchorOnclick(self) {
-    const href = self.target.getAttribute('href')
+    const href = self.getAttribute('href')
     if (!href) {
         const error = document.getElementById("error")
         error.style.visibility = "visible"
