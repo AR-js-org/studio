@@ -37,7 +37,7 @@ class FileSelect extends HTMLElement {
     const select = this.shadow.querySelector("select");
     select.onchange = () => {
       const supportedFile = supportedFileMap[select.value];
-      const accept = (select.value === '3d') ? '*' : supportedFile.types.join(',');
+      const accept = (!select.value || select.value === '3d') ? '*' : supportedFile.types.join(',');
       document.querySelector('#content-file').setAttribute('accept', accept);
       window.assetType = select.value;
     }
