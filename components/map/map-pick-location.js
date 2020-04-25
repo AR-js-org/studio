@@ -201,6 +201,7 @@ function updateLatLngInnerHtml(shadow, lat, lng) {
     let x = shadow.querySelector(".location-set-display");
     x.style.visibility = "visible"
     x.innerHTML = `Location is set to: <b>${lat.toString()}, ${lng.toString()}!</b>`;
+    L.marker([lat, lng]).addTo(layerGroup); // adds marker to the map
 }
 
 function updateLatLngInnerHtmlDenied(shadow, msg) {
