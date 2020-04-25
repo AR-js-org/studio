@@ -16,7 +16,16 @@ const zip = () => {
         })))
         .then((package) => package.serve({ packageType: "zip" }))
         .then((base64) => {
-            window.location = `data:application/zip;base64,${base64}`;
+            // window.location = `data:application/zip;base64,${base64}`;
+            // sometimes it doesn't work by use window.location directly, so change to this way
+            var link = document.createElement('a');
+            link.href = `data:application/zip;base64,${base64}`;
+            link.download = "ar.zip";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+
         });
 };
 
