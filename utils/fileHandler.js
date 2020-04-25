@@ -29,7 +29,7 @@ function handleMarkerUpload(self) {
                 const preview = document.getElementById("marker-preview");
                 preview.innerHTML = previewImageTemplate(fileURL, file.name);
             }
-        );
+            );
     };
     self.value = ''; // Reset required for re-upload
 };
@@ -142,8 +142,8 @@ function handleModelUpload(file) {
                 let uri;
                 const previewError = document.getElementById("content-error");
 
-                console.log(gltf.buffers);
-                console.log(gltf.images);
+                // console.log(gltf.buffers);
+                // console.log(gltf.images);
                 for (let i = 0; i < buffers.length; i++) {
                     uri = buffers[i].uri;
                     if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
@@ -161,12 +161,18 @@ function handleModelUpload(file) {
                 }
 
             } catch (error) {
-
+                previewError.innerHTML = '*The gltf file is corrupted.'
+                return;
             }
             // console.log(reader.result);
         };
     } else if (fileType == 'zip') {
         handleZip(file, (err, result) => {
+            if (err) {
+                const previewError = document.getElementById("content-error");
+                previewError.innerHTML = err === true ? '*Please check the zip file is correct' : err;
+                return;
+            }
             window.assetFile = result.split(",")[1];
             window.assetName = 'asset.gltf';
 
@@ -198,8 +204,8 @@ function handleZip(file, cb) {
                             let uri;
                             let targets = [];
 
-                            console.log(gltf.buffers);
-                            console.log(gltf.images);
+                            // console.log(gltf.buffers);
+                            // console.log(gltf.images);
                             for (let i = 0; i < buffers.length; i++) {
                                 uri = buffers[i].uri;
                                 if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
@@ -216,9 +222,12 @@ function handleZip(file, cb) {
                             }
                             extractTargets(gltf, targets, zip, cb);
                         } catch (error) {
-                            cb(error);
+                            cb(`*The file [${i}] is corrupted`);
                         }
-                    }).catch(error => { cb(error) });
+                    }).catch(error => {
+                        console.log(error)
+                        cb(true);
+                    });
                     return;
                 }
             }
@@ -232,11 +241,14 @@ function extractTargets(gltf, targets, zip, cb) {
         return cb(false, 'data:application/octet-stream;base64,' + btoa(JSON.stringify(gltf)));
     }
     let one = targets.shift();
-    console.log(one.uri);
-    zip.file(one.uri).async('base64').then(base64 => {
+    let zipFile = zip.file(one.uri);
+    if (!zipFile) return cb(`*Miss the file [${one.uri}] inside the zip file.`);
+    // console.log(one.uri);
+    zipFile.async('base64').then(base64 => {
         one.uri = 'data:application/octet-stream;base64,' + base64;
         extractTargets(gltf, targets, zip, cb);
     }).catch(err => {
         console.log(err);
+        cb(true);
     })
 };
