@@ -74,7 +74,7 @@ const config = [
         className: ".map-pick-location",
         elem: `<div id="map-container">
                 <div class="map-pick-location"></div>
-                <button class="set-location-button" disabled>Set Location</button>
+                <button id="baseem" class="set-location-button" disabled>Set Location</button>
                 <p id="location-set-display" class="location-set-display">
                 User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
                 </p>
@@ -106,6 +106,16 @@ const config = [
     },
 ]
 
+
+
+
+
+let map;
+let layerGroup;
+let shadow;
+
+
+
 // filter config array returning by uri path name for ex. location.html => {} config for this page
 // if you want to use the map on a different page for ex. differentpage.html => {} config for this page
 function returnPageConfig(path) {
@@ -126,64 +136,7 @@ function reUseMapComponent(path) {
     return MapTemplate;
 }
 
-function invokeMapConfig(shadow, path) {
-    let lat;
-    let lng;
-    // shadow is the html dom element
-    // path = location.html
-    let mapConfig = returnPageConfig(path); // => {} with configurations for location.html
-    const mapRoot = shadow.querySelector(mapConfig.className)
 
-    // most of this is from leaflet quickstart guide: https://leafletjs.com/examples/quick-start/
-    let map = L.map(mapRoot).setView(mapConfig.center, mapConfig.onLoad_zoom);
-    L.tileLayer(tile_url, mapConfig.attribution_opts).addTo(map);
-    let layerGroup = L.layerGroup().addTo(map);
-
-    // add a layergroup so each time user clicks a
-    // new spot it will clear the previous marker
-    map.on('click', function(e) { // => {} that contains the coordinates
-        lat = e.latlng.lat;
-        lng = e.latlng.lng;
-        updateMarker(map, lat, lng, layerGroup); // updates the marker if done by map click
-        updateLatLngValue(lat, lng); // updates the input fields above the map to reflect the chosen coordinates
-        updateLatLngInnerHtml(shadow, lat, lng);
-    })
-
-    let x = shadow.querySelector(".leaflet-control-attribution");
-    let buttonUseMyLocation = document.createElement('button');
-    buttonUseMyLocation.innerHTML = `${defineLocationSvg} Use my location`;
-    buttonUseMyLocation.className = "use-my-location-button";
-    buttonUseMyLocation.style = `
-    background-color: white;
-    color: black;
-    margin-left: 2px`
-    x.appendChild(buttonUseMyLocation);
-
-    // implementing button to use my location
-    buttonUseMyLocation.addEventListener("click", function(e) {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) { // => {} two keys {coords: {}, timestamp: string}
-                updateLatLngInnerHtml(shadow, "Locating", "...."); // if geo api response is slow - placeholder
-                lat = position.coords.latitude;
-                lng = position.coords.longitude;
-                updateMarker(map, lat, lng, layerGroup); // update the marker if button 'Set Location' clicked
-                updateLatLngValue(lat, lng); // updates the input fields above the map to reflect the chosen coordinates
-                updateLatLngInnerHtml(shadow, lat, lng);
-            },
-                function(error) {
-                    if (error.code == error.PERMISSION_DENIED) {
-                        updateLatLngInnerHtmlDenied(shadow, error.message);
-                        // if permission on browser has been set to default deny of position - will provide basic steps to adjust for this url
-                    }
-                });
-        }
-        else {
-            updateLatLngInnerHtmlDenied(shadow, "Geolocation is not supported by this browser.");
-            // this seems to be an unlikely problem according to MDN - all browser support this:
-            // src: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
-        }
-    })
-}
 
 
 function updateMarker(map, lat, lng, layerGroup) {
@@ -197,7 +150,29 @@ function updateLatLngValue(lat, lng) {
     document.getElementById("longitude").value = lng.toString();
 }
 
-function updateLatLngInnerHtml(shadow, lat, lng) {
+
+function check_lat_lon(){
+  let regex_lat = /^(-?[1-8]?\d(?:\.\d{1,18})?|90(?:\.0{1,18})?)$/;
+  let regex_lng = /^(-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,18})?|180(?:\.0{1,18})?)$/;
+  let lat = document.getElementById(`latitude`).value;
+  let lng = document.getElementById(`longitude`).value;
+  let validLat = regex_lat.test(lat); // 21.2908
+  let validLng = regex_lng.test(lng); // -157.8305
+
+  // only fire invalid coords if length on both is not 0
+  if(lat.length !== 0 && lng.length !==0){
+    if(validLat && validLng) {
+      updateMarker(map, lat, lng, layerGroup);
+      updateLatLngValue(lat, lng)
+      updateLatLngInnerHtml(lat, lng);
+    } 
+    else {
+      updateLatLngInnerHtmlInvalidCoords()
+    }
+  }
+}
+
+function updateLatLngInnerHtml(lat, lng) {
     shadow.querySelector('.set-location-button').disabled = false;
     let x = shadow.querySelector(".location-set-display");
     x.style.visibility = "visible"
@@ -205,10 +180,29 @@ function updateLatLngInnerHtml(shadow, lat, lng) {
 
 }
 
-function updateLatLngInnerHtmlDenied(shadow, msg) {
+function updateLatLngInnerHtmlDenied(msg) {
     let x = shadow.querySelector(".location-set-display");
     x.style.visibility = "visible"
     x.innerHTML = `${msg}: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url`;
+}
+
+function updateLatLngInnerHtmlInvalidCoords() {
+    let x = shadow.querySelector(".location-set-display");
+    x.style.visibility = "visible"
+    x.innerHTML = `Try to enter valid coordinates for example: 21.2908, -157.8305`;
+}
+
+
+
+function createButtonUseMyLocation(){
+    let buttonUseMyLocation = document.createElement('button');
+        buttonUseMyLocation.innerHTML = `${defineLocationSvg} Use my location`;
+        buttonUseMyLocation.className = "use-my-location-button";
+        buttonUseMyLocation.style = `
+        background-color: white;
+        color: black;
+        margin-left: 2px`;
+    return buttonUseMyLocation;
 }
 
 
@@ -216,19 +210,78 @@ class MapPickLocation extends HTMLElement {
     constructor() {
         super();
 
+        this.lat;
+        this.lng;
         this.path = "location.html";
+        this.mapConfig = returnPageConfig(this.path);
+        this.shadow = this.attachShadow({ mode: 'open' });
+        this.shadow.innerHTML = reUseMapComponent(this.path);
+        this.mapRoot = this.shadow.querySelector(this.mapConfig.className);
 
-        let shadow = this.attachShadow({ mode: 'open' });
-        shadow.innerHTML = reUseMapComponent(this.path);
+
+
+        
     }
-
     connectedCallback() {
-        invokeMapConfig(this.shadowRoot, this.path);
+        shadow = this.shadow;
+        this.createMap();
+
         let setLocationButton = this.shadowRoot.querySelector('.set-location-button');
         setLocationButton.addEventListener("click", (e) => {
-            alert('progress to next screen');
+            let lat = document.getElementById(`latitude`).value;
+            let lng = document.getElementById(`longitude`).value;
+            alert(`progress to next screen, ${lat}, ${lng}`);
+        })
+
+    }
+
+    createMap(){
+        map = L.map(this.mapRoot).setView(this.mapConfig.center, this.mapConfig.onLoad_zoom);
+        layerGroup = L.layerGroup().addTo(map);
+        L.tileLayer(tile_url, this.mapConfig.attribution_opts).addTo(map);
+        map.on('click', function(e) { // => {} that contains the coordinates
+     
+            updateMarker(map, e.latlng.lat, e.latlng.lng, layerGroup);
+            updateLatLngValue(e.latlng.lat, e.latlng.lng);
+            updateLatLngInnerHtml(e.latlng.lat, e.latlng.lng)
+        })
+
+        let leafletControlAttribution = shadow.querySelector(".leaflet-control-attribution");
+        let buttonUseMyLocation = createButtonUseMyLocation();
+        leafletControlAttribution.appendChild(buttonUseMyLocation);
+
+        buttonUseMyLocation.addEventListener("click", function(e) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) { 
+                    updateLatLngInnerHtml("Locating", "....");
+                    updateMarker(map, position.coords.latitude, position.coords.longitude, layerGroup);
+                    updateLatLngValue(position.coords.latitude, position.coords.longitude);
+                    updateLatLngInnerHtml(position.coords.latitude, position.coords.longitude)
+                },
+                    function(error) {
+                        if (error.code == error.PERMISSION_DENIED) {
+                            updateLatLngInnerHtmlDenied(error.message);
+                            // if permission on browser has been set to default deny of position - will provide basic steps to adjust for this url
+                        }
+                    });
+            }
+            else {
+                updateLatLngInnerHtmlDenied("Geolocation is not supported by this browser.");
+                // this seems to be an unlikely problem according to MDN - all browser support this:
+                // src: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+            }
         })
     }
+
+
+
+
+ 
+
+
+
+
+
 }
 
 
