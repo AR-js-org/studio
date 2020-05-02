@@ -189,6 +189,7 @@ function invokeMapConfig(shadow, path) {
 function updateMarker(map, lat, lng, layerGroup) {
     map.panTo(new L.LatLng(lat, lng)); // will pan map to make the center of map the newly located coords
     layerGroup.clearLayers(); // if updated again - clear previous markers from layergroup
+    L.marker([lat, lng]).addTo(layerGroup); // adds marker to the map
 }
 
 function updateLatLngValue(lat, lng) {
@@ -201,7 +202,7 @@ function updateLatLngInnerHtml(shadow, lat, lng) {
     let x = shadow.querySelector(".location-set-display");
     x.style.visibility = "visible"
     x.innerHTML = `Location is set to: <b>${lat.toString()}, ${lng.toString()}!</b>`;
-    L.marker([lat, lng]).addTo(layerGroup); // adds marker to the map
+
 }
 
 function updateLatLngInnerHtmlDenied(shadow, msg) {
