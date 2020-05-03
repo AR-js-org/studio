@@ -37,24 +37,24 @@ function handleMarkerUpload(self) {
 function handleContentUpload(self) {
     const file = self.files[0];
 
-    if (!isValidFile(window.assetType, file, "content-error")) return;
-
-    switch (window.assetType) {
-        case 'image': {
-            handleImageUpload(file);
-            break;
-        }
-        case 'audio': {
-            handleAudioUpload(file);
-            break;
-        }
-        case 'video': {
-            handleVideoUpload(file);
-            break;
-        }
-        case '3d': {
-            handleModelUpload(file);
-            break;
+    if (isValidFile(window.assetType, file, "content-error")) {
+        switch (window.assetType) {
+            case 'image': {
+                handleImageUpload(file);
+                break;
+            }
+            case 'audio': {
+                handleAudioUpload(file);
+                break;
+            }
+            case 'video': {
+                handleVideoUpload(file);
+                break;
+            }
+            case '3d': {
+                handleModelUpload(file);
+                break;
+            }
         }
     }
     self.value = ''; // Reset required for re-upload
