@@ -78,6 +78,7 @@
   margin: 1.875em 0;
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 
 .primary-button:active,
@@ -155,11 +156,13 @@ page-footer {
 .pages-content-container {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
 }
 
 .pages-content-element {
   width: 50%;
+  padding: 1em;
+  max-width: 30em;
+  margin-right: 1em;
 }
 
 .pages-content-element .lead {
@@ -206,6 +209,16 @@ input:focus {
 .back-anchor {
   padding: 1em;
   font-size: 1em;
+}
+
+#marker-preview, #content-preview {
+    display: flex;
+    flex-direction: column;
+}
+
+#marker-preview > .file-holder {
+    width: 100%;
+    height: 100%;
 }
 
 /* Responsive */

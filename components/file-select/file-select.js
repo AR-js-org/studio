@@ -17,21 +17,31 @@ const fileSelectTemplate = `
     }
   </style>
 
-  <select class="dropdown" name="content-type">
+  <select class="dropdown" name="content-type" >
     <option value="">Please select an option</option>
-    <option value="3D">3D Object (.gltf, .glb; max size 50MB)</option>
-    <option value="Image">Image (.jpg, .png, .gif; max size 15MB)</option>
-    <option value="Audio">Audio (.mp3; max size 10MB)</option>
-    <option value="Video">Video (.mp4; max size 25MB)</option>
+    <option value="3d">3D Object (.gltf, .glb .zip; max size 50MB)</option>
+    <option value="image">Image (.jpg, .png, .gif; max size 15MB)</option>
+    <option value="audio">Audio (.mp3; max size 10MB)</option>
+    <option value="video">Video (.mp4; max size 25MB)</option>
   </select>`;
 
 class FileSelect extends HTMLElement {
-    constructor() {
-        super();
+  shadow = null;
+  constructor() {
+    super();
+    this.shadow = this.attachShadow({ mode: 'open' });
+    this.shadow.innerHTML = fileSelectTemplate;
+  }
 
-        var shadow = this.attachShadow({ mode: 'open' });
-        shadow.innerHTML = fileSelectTemplate;
+  connectedCallback() {
+    const select = this.shadow.querySelector("select");
+    select.onchange = () => {
+      const supportedFile = supportedFileMap[select.value];
+      const accept = (!select.value || select.value === '3d') ? '*' : supportedFile.types.join(',');
+      document.querySelector('#content-file').setAttribute('accept', accept);
+      window.assetType = select.value;
     }
+  }
 }
 
 customElements.define('file-select', FileSelect);

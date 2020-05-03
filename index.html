@@ -11,9 +11,6 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="components/main/main.css" />
 
-    <!-- import studio-backend api -->
-    <script src="https://rawcdn.githack.com/AR-js-org/studio-backend/v0.3.0/dist/arjs-studio-backend.min.js"></script>
-
     <!-- import the webpage's javascript file -->
     <script src="components/header/header.js"></script>
     <script src="components/main/index.js"></script>
@@ -64,7 +61,7 @@
             <span class="checkmark"></span>
           </label>
           <a onclick="anchorOnclick(this)" id="start-building" class="primary-button">Start building</a>
-          <div class="error missing-href">Please, select a project type.</div>
+          <div id="error" class="error" style="visibility: hidden;">Please, select a project type.</div>
         </div>
       </div>
     </div>
