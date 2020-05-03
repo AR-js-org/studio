@@ -6,6 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- import the leaflet css and script -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../components/main/main.css" />
@@ -14,6 +22,7 @@
     <script src="../components/back-anchor/back-anchor.js"></script>
     <script src="../components/file-holder/file-holder.js"></script>
     <script src="../components/file-select/file-select.js"></script>
+    <script src="../components/map/map-pick-location.js"></script>
     <script src="../components/header/header.js"></script>
     <script src="../components/footer/footer.js"></script>
   </head>
@@ -41,11 +50,11 @@
           <div class="coordinates-input-container">
             <div class="input-container">
               <label for="latitude">Latitude:</label>
-              <input class="text-input" type="text" id="latitude" name="latitude" />
+              <input class="text-input" type="text" id="latitude" onblur="check_lat_lon()" name="latitude" />
             </div>
             <div class="input-container">
               <label for="longitude">Longitude:</label>
-              <input class="text-input" type="text" id="longitude" name="longitude" />
+              <input class="text-input" type="text" id="longitude" onblur="check_lat_lon()" name="longitude" />
             </div>
           </div>
         </div>
@@ -53,7 +62,7 @@
 
 
       <div class="pages-content-container">
-        Here will be the map :)
+        <map-pick-location></map-pick-location>
       </div>
 
       <hr class="divider">
@@ -77,3 +86,8 @@
     <page-footer></page-footer>
   </body>
 </html>
+
+<script type="text/javascript">
+  
+  
+</script>
