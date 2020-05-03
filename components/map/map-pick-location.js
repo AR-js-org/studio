@@ -19,53 +19,51 @@ const defineLocationSvg = `
 // styles to hold classnames for the main map and additional maps
 const map_styles = `
     <style>
-    .map-pick-location{
-    height: 380px;
-    width: 800px;
-    }
-    .map-foo-bar {
-    height: 100px;
-    width: 200px;
-    }
-    .use-my-location-button {
-    display: inline-block;
-    font-family: Chakra Petch;
-    font-style: normal;
-    height: 2.5em;
-    border: none;
-    border: 1px solid grey;
-    box-sizing: border-box;
-    text-decoration: none;
-    color: black;
-    }
-    .set-location-button {
-    display: inline-block;
-    font-family: Chakra Petch;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1em;
-    line-height: 1.5em;
-    height: 3.5em;
-    border: none;
-    border: 1.5px solid black;
-    box-sizing: border-box;
-    box-shadow: 10px 10px 0px black;
-    border-radius: 10px;
-    padding: 1em 1.25em;
-    margin-top: 1.875em;
-    text-decoration: none;
-    color: black;
-    }
-    .svg-define-location {
-    padding-top: 0.3em;
-
-    }
-    .location-set-display {
-    visibility: hidden;
-    padding-top: 0;
-    }
+        .map-pick-location{
+            height: 380px;
+            width: 800px;
+        }
+        .map-foo-bar {
+            height: 100px;
+            width: 200px;
+        }
+        .use-my-location-button {
+            display: inline-block;
+            font-family: Chakra Petch;
+            font-style: normal;
+            height: 2.5em;
+            border: none;
+            border: 1px solid grey;
+            box-sizing: border-box;
+            text-decoration: none;
+            color: black;
+        }
+        .set-location-button {
+            display: inline-block;
+            font-family: Chakra Petch;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 1em;
+            line-height: 1.5em;
+            height: 3.5em;
+            border: none;
+            border: 1.5px solid black;
+            box-sizing: border-box;
+            box-shadow: 10px 10px 0px black;
+            border-radius: 10px;
+            padding: 1em 1.25em;
+            margin-top: 1.875em;
+            text-decoration: none;
+            color: black;
+        }
+        .svg-define-location {
+            padding-top: 0.3em;
+        }
+        .location-set-display {
+            visibility: hidden;
+            padding-top: 0;
+        }
     </style>`;
-
 
 const config = [
     {
@@ -107,14 +105,9 @@ const config = [
 ]
 
 
-
-
-
 let map;
 let layerGroup;
 let shadow;
-
-
 
 // filter config array returning by uri path name for ex. location.html => {} config for this page
 // if you want to use the map on a different page for ex. differentpage.html => {} config for this page
@@ -136,9 +129,6 @@ function reUseMapComponent(path) {
     return MapTemplate;
 }
 
-
-
-
 function updateMarker(map, lat, lng, layerGroup) {
     map.panTo(new L.LatLng(lat, lng)); // will pan map to make the center of map the newly located coords
     layerGroup.clearLayers(); // if updated again - clear previous markers from layergroup
@@ -150,34 +140,35 @@ function updateLatLngValue(lat, lng) {
     document.getElementById("longitude").value = lng.toString();
 }
 
+function check_lat_lon() {
+    let regex_lat = /^(-?[1-8]?\d(?:\.\d{1,18})?|90(?:\.0{1,18})?)$/;
+    let regex_lng = /^(-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,18})?|180(?:\.0{1,18})?)$/;
+    let lat = document.getElementById(`latitude`).value;
+    let lng = document.getElementById(`longitude`).value;
+    let validLat = regex_lat.test(lat); // 21.2908
+    let validLng = regex_lng.test(lng); // -157.8305
 
-function check_lat_lon(){
-  let regex_lat = /^(-?[1-8]?\d(?:\.\d{1,18})?|90(?:\.0{1,18})?)$/;
-  let regex_lng = /^(-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,18})?|180(?:\.0{1,18})?)$/;
-  let lat = document.getElementById(`latitude`).value;
-  let lng = document.getElementById(`longitude`).value;
-  let validLat = regex_lat.test(lat); // 21.2908
-  let validLng = regex_lng.test(lng); // -157.8305
-
-  // only fire invalid coords if length on both is not 0
-  if(lat.length !== 0 && lng.length !==0){
-    if(validLat && validLng) {
-      updateMarker(map, lat, lng, layerGroup);
-      updateLatLngValue(lat, lng)
-      updateLatLngInnerHtml(lat, lng);
-    } 
-    else {
-      updateLatLngInnerHtmlInvalidCoords()
+    // only fire invalid coords if length on both is not 0
+    if (lat.length !== 0 && lng.length !== 0) {
+        if (validLat && validLng) {
+            updateMarker(map, lat, lng, layerGroup);
+            updateLatLngValue(lat, lng)
+            updateLatLngInnerHtml(lat, lng);
+        }
+        else {
+            updateLatLngInnerHtmlInvalidCoords()
+        }
     }
-  }
 }
 
 function updateLatLngInnerHtml(lat, lng) {
+    lat = lat.toFixed(7);
+    lng = lng.toFixed(7);
+
     shadow.querySelector('.set-location-button').disabled = false;
     let x = shadow.querySelector(".location-set-display");
     x.style.visibility = "visible"
-    x.innerHTML = `Location is set to: <b>${lat.toString()}, ${lng.toString()}!</b>`;
-
+    x.innerHTML = `Location is set to: <b>${lat.toString()}, ${lng.toString()}</b>`;
 }
 
 function updateLatLngInnerHtmlDenied(msg) {
@@ -192,13 +183,11 @@ function updateLatLngInnerHtmlInvalidCoords() {
     x.innerHTML = `Try to enter valid coordinates for example: 21.2908, -157.8305`;
 }
 
-
-
-function createButtonUseMyLocation(){
+function createButtonUseMyLocation() {
     let buttonUseMyLocation = document.createElement('button');
-        buttonUseMyLocation.innerHTML = `${defineLocationSvg} Use my location`;
-        buttonUseMyLocation.className = "use-my-location-button";
-        buttonUseMyLocation.style = `
+    buttonUseMyLocation.innerHTML = `${defineLocationSvg} Use my location`;
+    buttonUseMyLocation.className = "use-my-location-button";
+    buttonUseMyLocation.style = `
         background-color: white;
         color: black;
         margin-left: 2px`;
@@ -217,11 +206,8 @@ class MapPickLocation extends HTMLElement {
         this.shadow = this.attachShadow({ mode: 'open' });
         this.shadow.innerHTML = reUseMapComponent(this.path);
         this.mapRoot = this.shadow.querySelector(this.mapConfig.className);
-
-
-
-        
     }
+
     connectedCallback() {
         shadow = this.shadow;
         this.createMap();
@@ -235,12 +221,12 @@ class MapPickLocation extends HTMLElement {
 
     }
 
-    createMap(){
+    createMap() {
         map = L.map(this.mapRoot).setView(this.mapConfig.center, this.mapConfig.onLoad_zoom);
         layerGroup = L.layerGroup().addTo(map);
         L.tileLayer(tile_url, this.mapConfig.attribution_opts).addTo(map);
         map.on('click', function(e) { // => {} that contains the coordinates
-     
+
             updateMarker(map, e.latlng.lat, e.latlng.lng, layerGroup);
             updateLatLngValue(e.latlng.lat, e.latlng.lng);
             updateLatLngInnerHtml(e.latlng.lat, e.latlng.lng)
@@ -252,7 +238,7 @@ class MapPickLocation extends HTMLElement {
 
         buttonUseMyLocation.addEventListener("click", function(e) {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) { 
+                navigator.geolocation.getCurrentPosition(function(position) {
                     updateLatLngInnerHtml("Locating", "....");
                     updateMarker(map, position.coords.latitude, position.coords.longitude, layerGroup);
                     updateLatLngValue(position.coords.latitude, position.coords.longitude);
@@ -276,7 +262,7 @@ class MapPickLocation extends HTMLElement {
 
 
 
- 
+
 
 
 
