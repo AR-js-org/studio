@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="../components/main/main.css" />
 
     <!-- import studio-backend api -->
-    <script src="https://cdn.statically.io/gh/AR-js-org/studio-backend/50963278/dist/arjs-studio-backend.min.js"></script>
+    <script
+        src="https://cdn.statically.io/gh/AR-js-org/studio-backend/50963278/dist/arjs-studio-backend.min.js"></script>
 
     <!-- import aframe to support model preview -->
     <script src="https://aframe.io/releases/1.0.4/aframe.js"></script>
@@ -64,13 +65,14 @@
                     Explain some constraints so people are not failing by uploading wrong images.
                 </p>
                 <label class="passive-button">
-                    <input type="file" accept="image/png, image/jpeg" hidden onchange="handleMarkerUpload(this)" />
+                    <input id="marker-file" type="file" accept="image/png, image/jpeg" hidden
+                        onchange="handleMarkerUpload(this)" />
                     Upload image
                 </label>
                 <p id="marker-error" class="error"></p>
             </div>
             <div id="marker-preview">
-                <file-holder></file-holder>
+                <file-holder target="marker-file"></file-holder>
             </div>
         </div>
 
@@ -90,7 +92,7 @@
                 <p id="content-error" class="error"></p>
             </div>
             <div id="content-preview">
-                <file-holder></file-holder>
+                <file-holder target="content-file"></file-holder>
             </div>
         </div>
     </div>
