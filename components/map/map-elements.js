@@ -56,6 +56,50 @@ const map_styles = `
         color: black;
         margin-left: 2px;
     }
+    .coordinates-input-wrapper{
+      margin-bottom: 1rem;
+    }
+
+    .coordinates-input-container {
+      display: flex;
+
+    }
+
+    .coordinates-input-container>div {
+      padding: 1rem;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      text-align: justify;
+    }
+
+    .delete-coordinates-container>svg {
+      margin-top: 2.5rem;
+    }
+
+    .delete-icon-parent {
+      width: 20px;
+      height: 20px;
+      z-index: 1000;
+      margin-top: 2.5rem;
+    }
+
+    .hidden-delete-icon {
+      pointer-events: none;
+      z-index: 0;
+
+    }
+
+
+
+    .add-location-container {
+      display: flex;
+    }
+
+    .add-location-icon {
+      margin-right: 0.4rem;
+}
+
 </style>`;
 
 
