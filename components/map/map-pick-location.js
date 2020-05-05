@@ -20,8 +20,8 @@ const defineLocationSvg = `
 const map_styles = `
     <style>
         .map-pick-location{
-            height: 380px;
-            width: 800px;
+            height: 40em;
+            width: 100em;
         }
         .map-foo-bar {
             height: 100px;
@@ -60,6 +60,7 @@ const map_styles = `
             padding-top: 0.3em;
         }
         .location-set-display {
+            margin-top: 3em;
             visibility: hidden;
             padding-top: 0;
         }
