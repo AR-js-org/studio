@@ -1,3 +1,5 @@
+const reg4Base64 = /^data\:[\w-]+\/[\w-]+;base64,/; // check where the data is base64 format
+
 function handleUnload(self) {
     const preview = self.parentElement.parentElement;
     const previewId = preview.getAttribute("id");
@@ -125,8 +127,7 @@ function handleModelUpload(file) {
         reader.onloadend = function () {
             //for backend api asset needs only base64 part
             window.assetFile = reader.result.split(",")[1];
-            let fileName = file.name.split('.');
-            window.assetName = 'asset.' + fileName[fileName.length - 1];
+            window.assetName = 'asset.glb';
 
             let preview = document.getElementById("content-preview");
             preview.innerHTML = previewModelTemplate(reader.result, file.name);
@@ -135,18 +136,16 @@ function handleModelUpload(file) {
         const reader = new FileReader();
         reader.readAsText(file);
         reader.onloadend = function () {
+            const previewError = document.getElementById("content-error");
             try {
                 let gltf = JSON.parse(reader.result);
                 let buffers = gltf.buffers || [];
                 let images = gltf.images || [];
                 let uri;
-                const previewError = document.getElementById("content-error");
 
-                // console.log(gltf.buffers);
-                // console.log(gltf.images);
                 for (let i = 0; i < buffers.length; i++) {
                     uri = buffers[i].uri;
-                    if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                    if (!reg4Base64.test(uri)) { // need a related file: data:application/octet-stream;base64,
                         previewError.innerHTML = '*Please pack all related files to zip file and try again.'
 
                         return;
@@ -154,11 +153,22 @@ function handleModelUpload(file) {
                 }
                 for (let i = 0; i < images.length; i++) {
                     uri = images[i].uri;
-                    if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                    if (!reg4Base64.test(uri)) { // need a related file
                         previewError.innerHTML = '*Please pack all related files to zip file and try again.'
                         return;
                     }
                 }
+                // need to load again
+                const reader2 = new FileReader();
+                reader2.readAsDataURL(file);
+                reader2.onloadend = function () {
+                    //for backend api asset needs only base64 part
+                    window.assetFile = reader2.result.split(",")[1];
+                    window.assetName = 'asset.gltf';
+
+                    let preview = document.getElementById("content-preview");
+                    preview.innerHTML = previewModelTemplate(reader2.result, file.name);
+                };
 
             } catch (error) {
                 previewError.innerHTML = '*The gltf file is corrupted.'
@@ -208,14 +218,14 @@ function handleZip(file, cb) {
                             // console.log(gltf.images);
                             for (let i = 0; i < buffers.length; i++) {
                                 uri = buffers[i].uri;
-                                if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                                if (!reg4Base64.test(uri)) { // need a related file
                                     buffers[i].uri = prePath + uri;
                                     targets.push(buffers[i])
                                 }
                             }
                             for (let i = 0; i < images.length; i++) {
                                 uri = images[i].uri;
-                                if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                                if (!reg4Base64.test(uri)) { // need a related file
                                     images[i].uri = prePath + uri;
                                     targets.push(images[i])
                                 }
