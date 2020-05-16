@@ -60,7 +60,27 @@
 
         <div class="pages-content-container">
             <div class="pages-content-element">
-                <p class="lead">1. Upload an image to act as your marker</p>
+                <p class="lead">1. Choose the content type </p>
+                <p class="paragraph">
+                    Select supported content type from the list below and upload the file from your computer.
+                </p>
+                <file-select></file-select>
+                <label class="passive-button file-input">
+                    <input id="content-file" accept="*" type="file" hidden onchange="handleContentUpload(this)" />
+                    Upload file
+                </label>
+                <p id="content-error" class="error"></p>
+            </div>
+            <div id="content-preview">
+                <file-holder target="content-file"></file-holder>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="pages-content-container">
+            <div class="pages-content-element">
+                <p class="lead">2. Upload an image to act as your marker</p>
                 <p class="paragraph">
                     Explain some constraints so people are not failing by uploading wrong images.
                 </p>
@@ -76,25 +96,6 @@
             </div>
         </div>
 
-        <hr class="divider">
-
-        <div class="pages-content-container">
-            <div class="pages-content-element">
-                <p class="lead">2. Choose the content type </p>
-                <p class="paragraph">
-                    Select supported content type from the list below and upload the file from your computer.
-                </p>
-                <file-select></file-select>
-                <label class="passive-button file-input">
-                    <input id="content-file" accept="*" type="file" hidden onchange="handleContentUpload(this)" />
-                    Upload file
-                </label>
-                <p id="content-error" class="error"></p>
-            </div>
-            <div id="content-preview">
-                <file-holder target="content-file"></file-holder>
-            </div>
-        </div>
     </div>
     <page-footer></page-footer>
 </body>
