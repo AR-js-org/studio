@@ -23,6 +23,15 @@ AFRAME.registerComponent('model-controller', {
                         let box = this.getSizeFromObj(this.el.object3D);
                         box.getSize(size);
 
+                        // console.log(box);
+                        window.assetParam.isValid = true;
+                        window.assetParam.scale = 1;
+                        window.assetParam.size = {
+                            width: box.max.x - box.min.x,
+                            height: box.max.y - box.min.y,
+                            depth: box.max.z - box.min.z,
+                        };
+
 
                         var max = Math.max(size.x, size.y, size.z);
 
@@ -31,7 +40,7 @@ AFRAME.registerComponent('model-controller', {
                             this.minScale = 0.1 * this.currScale;
                             this.maxScale = 3 * this.currScale;
                             this.scaleStep = this.minScale;
-
+                            window.assetParam.scale = this.currScale;
                             this.el.setAttribute('scale', `${this.currScale} ${this.currScale} ${this.currScale}`);
                             this.enableAction = true;
                         }
@@ -75,6 +84,7 @@ AFRAME.registerComponent('model-controller', {
             } else {
                 if (this.currScale - this.scaleStep > this.minScale) this.currScale -= this.scaleStep;
             }
+            window.assetParam.scale = this.currScale;
             this.el.object3D.scale.set(this.currScale, this.currScale, this.currScale);
         }
         return false;

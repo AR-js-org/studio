@@ -12,6 +12,7 @@ const zip = () => {
             assetType: window.assetType, // image/audio/video/3d
             assetFile: window.assetFile,
             assetName: window.assetName,
+            assetParam: window.assetParam,
             markerPatt: markerPattern
         })))
         .then((package) => package.serve({ packageType: "zip" }))

@@ -38,7 +38,8 @@ function handleMarkerUpload(self) {
 
 function handleContentUpload(self) {
     const file = self.files[0];
-
+    window.assetType = getFileType(file); // set the assetType according to the file extension.
+    window.assetParam = { isValid: false }; // set to invalid first until the data is processed.
     if (isValidFile(window.assetType, file, "content-error")) {
         switch (window.assetType) {
             case 'image': {
@@ -102,6 +103,7 @@ function handleVideoUpload(file) {
         //for backend api asset needs only base64 part
         window.assetFile = reader.result;
         window.assetName = file.type.replace('video/', 'asset.');
+        window.assetParam.isValid = true;
     };
     let preview = document.getElementById("content-preview");
     preview.innerHTML = previewVideoTemplate(fileURL, fileName);
@@ -113,6 +115,8 @@ function handleVideoUpload(file) {
         } else {
             video.style.height = '100%';
         }
+
+        window.assetParam = { size: { width: video.videoWidth, height: video.videoHeight } };
 
         video.parentElement.style.backgroundColor = 'black';
         document.querySelector('#videoFrame').style.opacity = 1;
