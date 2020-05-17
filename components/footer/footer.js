@@ -77,7 +77,7 @@ const FooterContent = `
     </p>
 
     <div class="buttons">
-      <a class="primary-button" href="/pages/publish">
+      <a class="primary-button" href="../pages/publish.html">
         Publish on Github
       </a>
 
