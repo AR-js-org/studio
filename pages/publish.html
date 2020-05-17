@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AR.js Studio</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../components/main/main.css" />
+
+    <!-- import studio-backend api -->
+    <script
+        src="https://cdn.statically.io/gh/AR-js-org/studio-backend/50963278/dist/arjs-studio-backend.min.js"></script>
+
+    <!-- import web components -->
+    <script src="../components/back-anchor/back-anchor.js"></script>
+    <script src="../components/header/header.js"></script>
+    <script src="../components/footer/footer.js"></script>
+
+</head>
+
+<body>
+    <page-header assetsUrl="../assets"></page-header>
+
+    <div class="pages-content">
+        <back-anchor assetsUrl="../assets"></back-anchor>
+        <div class="pages-content-container">
+            <div class="pages-content-element">
+                <p class="title">Publish the project</p>
+                <p class="paragraph">
+                    Ready to go live? Follow these steps to access your project on the web.
+                </p>
+            </div>
+        </div>
+
+        <div class="pages-content-container">
+            <div class="pages-content-element">
+                <p class="lead">Publish to a repository  </p>
+                <p class="paragraph">
+                    Save the project to an existing repository or create a new one.
+                    Publish your repository to see what you’ve built!
+                </p>
+                <div class="coordinates-input-container">
+                    <div class="project-input-container">
+                        <label for="project-name">Name your repository:</label>
+                        <input class="text-input" type="text" id="project-name" name="project-name" />
+                        <a id="publish-project" class="primary-button">Publish</a>
+                    </div>
+                </div>
+        </div>
+
+</body>
+
+</html>

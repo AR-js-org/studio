@@ -12,15 +12,11 @@
     <link rel="stylesheet" href="../components/main/main.css" />
 
     <!-- import studio-backend api -->
-    <script
-        src="https://cdn.statically.io/gh/AR-js-org/studio-backend/50963278/dist/arjs-studio-backend.min.js"></script>
+    <script src="https://cdn.statically.io/gh/AR-js-org/studio-backend/50963278/dist/arjs-studio-backend.min.js"></script>
 
     <!-- import aframe to support model preview -->
     <script src="https://aframe.io/releases/1.0.4/aframe.js"></script>
     <script src="https://cdn.statically.io/gh/donmccurdy/aframe-extras/fe293f78/dist/aframe-extras.loaders.js"></script>
-
-    <!-- import JsZip -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.3.0/jszip.min.js"></script>
 
     <!-- import web components -->
     <script src="../components/back-anchor/back-anchor.js"></script>
@@ -29,11 +25,6 @@
     <script src="../components/header/header.js"></script>
     <script src="../components/footer/footer.js"></script>
     <script src="../components/model-controller/model-controller.js"></script>
-
-    <!-- import utils -->
-    <script src="../utils/fileHelper.js"></script>
-    <script src="../utils/fileTemplate.js"></script>
-    <script src="../utils/fileHandler.js"></script>
     <script src="./marker.js" defer></script>
 
 </head>
@@ -52,30 +43,24 @@
                     and then upload the content you want to show when marker is recognised by the camera.
                 </p>
                 <p class="paragraph">
-                    Once you have created it, you will obtain a marker image that you have to give to the users, either
-                    on print paper or shown on screen.
+                    Once you have created it, you will obtain a marker image that you have to give to the users, either on print paper or shown on screen.
                 </p>
             </div>
         </div>
 
         <div class="pages-content-container">
             <div class="pages-content-element">
-                <p class="lead">1. Choose the content </p>
+                <p class="lead">1. Upload an image to act as your marker</p>
                 <p class="paragraph">
-                    Select supported content with the type listed below:<br />
-                    &nbsp;&nbsp;- 3D Object (.gltf, .glb .zip; max size 50MB)<br />
-                    &nbsp;&nbsp;- Image (.jpg, .png, .gif; max size 15MB)<br />
-                    &nbsp;&nbsp;- Audio (.mp3; max size 10MB)<br />
-                    &nbsp;&nbsp;- Video (.mp4; max size 25MB)
+                    Explain some constraints so people are not failing by uploading wrong images.
                 </p>
-                <!-- <file-select></file-select> -->
-                <label class="passive-button file-input">
-                    <input id="content-file" accept="*" type="file" hidden onchange="handleContentUpload(this)" />
-                    Upload file
+                <label class="passive-button">
+                    <input type="file" accept="image/png, image/jpeg" hidden onchange="handleMarkerUpload(event)" />
+                    Upload image
                 </label>
-                <p id="content-error" class="error"></p>
+                <p id="marker-error" class="error"></p>
             </div>
-            <div id="content-preview" target="content-file">
+            <div id="marker-preview">
                 <file-holder></file-holder>
             </div>
         </div>
@@ -84,22 +69,21 @@
 
         <div class="pages-content-container">
             <div class="pages-content-element">
-                <p class="lead">2. Upload an image to act as your marker</p>
+                <p class="lead">2. Choose the content type </p>
                 <p class="paragraph">
-                    Explain some constraints so people are not failing by uploading wrong images.
+                    Select supported content type from the list below and upload the file from your computer.
                 </p>
-                <label class="passive-button">
-                    <input id="marker-file" type="file" accept="image/png, image/jpeg" hidden
-                        onchange="handleMarkerUpload(this)" />
-                    Upload image
+                <file-select></file-select>
+                <label class="passive-button file-input">
+                    <input id="contentFile" accept="*" type="file" hidden onchange="handleContentUpload(event)" />
+                    Upload file
                 </label>
-                <p id="marker-error" class="error"></p>
+                <p id="content-error" class="error"></p>
             </div>
-            <div id="marker-preview" target="marker-file">
+            <div id="content-preview">
                 <file-holder></file-holder>
             </div>
         </div>
-
     </div>
     <page-footer></page-footer>
 </body>
