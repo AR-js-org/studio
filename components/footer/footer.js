@@ -76,9 +76,9 @@ const FooterContent = `
     </p>
 
     <div class="buttons">
-      <button class="primary-button">
+      <a class="primary-button" href="/pages/publish">
         Publish on Github
-      </button>
+      </a>
 
       <button id="zip-button" class="passive-button">
         Download package
