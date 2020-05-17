@@ -12,7 +12,8 @@ const FooterContent = `
       line-height: 140%;
     }
 
-    .buttons > button {
+    .buttons > button,
+    .buttons > a {
         margin-right: 3.125em;
         cursor: pointer;
     }
