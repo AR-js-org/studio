@@ -11,9 +11,23 @@ const unloadFileStyle = `
     }`;
 
 const previewImageStyle = `
-    img {
+    .imageFrame {
+        position:relative;
+        width: 23.75em;
+        height: 23.75em;
         object-fit: contain;
         font-size: 1.25em;
+        text-align: center;
+    }
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        max-width: 100%;
+        max-height: 100%;
     }
     .filename-container {
         display: flex;
@@ -93,7 +107,9 @@ const previewImageTemplate = (fileURL, fileName) => `
         ${unloadFileStyle}
     </style>
 
-    <img src=${fileURL} alt="${fileName}">
+    <div class="imageFrame">
+        <img id="img" src=${fileURL} alt="${fileName}">
+    </div>
     ${unloadFileTemplate(fileName)}`;
 
 const previewAudioTemplate = (fileURL, fileName) => `

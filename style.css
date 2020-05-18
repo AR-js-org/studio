@@ -186,9 +186,21 @@ page-footer {
   margin-bottom: 2.5rem;
 }
 
-.input-container label {
+.input-container label,
+.project-input-container label {
   font-family: Source Sans Pro;
   font-size: 0.875rem;
+}
+
+.project-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.project-input-container input {
+  width: 100%;
 }
 
 .text-input {
