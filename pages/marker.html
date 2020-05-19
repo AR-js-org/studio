@@ -9,7 +9,6 @@
 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../components/main/main.css" />
 
     <!-- import studio-backend api -->
     <script
@@ -63,13 +62,15 @@
                 <p class="lead">1. Choose the content </p>
                 <p class="paragraph">
                     Select supported content with the type listed below:<br />
-                    &nbsp;&nbsp;- 3D Object (.gltf, .glb .zip; max size 50MB)<br />
-                    &nbsp;&nbsp;- Image (.jpg, .png, .gif; max size 15MB)<br />
-                    &nbsp;&nbsp;- Audio (.mp3; max size 10MB)<br />
-                    &nbsp;&nbsp;- Video (.mp4; max size 25MB)
+                    <ul>
+                        <li>3D Object (.gltf, .glb .zip; max size 50MB)</li>
+                        <li>Image (.jpg, .png, .gif; max size 15MB)</li>
+                        <li>Audio (.mp3; max size 10MB)</li>
+                        <li>Video (.mp4; max size 25MB)</li>
+                    </ul>
                 </p>
-                <!-- <file-select></file-select> -->
-                <label class="passive-button file-input">
+
+                <label class="passive-button cursor-pointer">
                     <input id="content-file" accept="*" type="file" hidden onchange="handleContentUpload(this)" />
                     Upload file
                 </label>
@@ -80,7 +81,7 @@
             </div>
         </div>
 
-        <hr class="divider">
+        <hr>
 
         <div class="pages-content-container">
             <div class="pages-content-element">

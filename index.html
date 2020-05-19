@@ -2,45 +2,46 @@
 <html lang="en">
   <head>
     <title>AR.js Studio</title>
-    <link rel="shortcut icon" href="assets/img/favicon.ico" />
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="components/main/main.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./pages/main/main.css" />
 
     <!-- import the webpage's javascript file -->
-    <script src="components/header/header.js"></script>
-    <script src="components/main/index.js"></script>
+    <script src="./components/header/header.js"></script>
+    <script src="./pages/main/index.js"></script>
   </head>
 
   <body>
     <page-header assetsUrl="assets"></page-header>
     <div class="background">
-      <div class="content">
+      <div class="main-content">
         <p class="title">Web-enabled AR experiences</p>
+
+        <!-- to be removed on release -->
+        <p class="title main-subtitle">
+          This is a Work in Progress, alpha version. It's like our playground for now.
+          You may find missing features or bugs.
+        </h1>
+
         <p class="paragraph">
-
-            <!-- to be removed on release -->
-            <h1 style="font-size: 1.25em; font-weight: bold;">
-                This is a Work in Progress, alpha version. It's like our playground for now.
-                You may find missing features or bugs.
-            </h1>
-
-            AR.js studio is an open-source AR development environment for creating
-            augmented web experiences. You can create location or marker-based AR
-            applications and deploy them straight to web. Working with AR.js
-            studio doesn’t require any knowledge of coding. You can start working
-            on your project now.
+          AR.js studio is an open-source AR development environment for creating
+          augmented web experiences. You can create location or marker-based AR
+          applications and deploy them straight to web. Working with AR.js
+          studio doesn’t require any knowledge of coding. You can start working
+          on your project now.
         </p>
-        <img class="splashscreen" src="assets/img/splashscreen.png"/>
+
+        <img class="splashscreen" src="./assets/img/splashscreen.png"/>
 
         <p class="lead">Pick your project type</p>
 
         <div>
-          <label class="radio-container">
+          <label class="radio-container paragraph">
             Location-based
             <input
               id="location"
@@ -50,7 +51,8 @@
             />
             <span class="checkmark"></span>
           </label>
-          <label class="radio-container">
+
+          <label class="radio-container paragraph">
             Marker-based
             <input
               id="marker"
@@ -60,8 +62,11 @@
             />
             <span class="checkmark"></span>
           </label>
+
           <a onclick="anchorOnclick(this)" id="start-building" class="primary-button">Start building</a>
-          <div id="error" class="error" style="visibility: hidden;">Please, select a project type.</div>
+          <div id="error" class="error" style="visibility: hidden;">
+            Please, select a project type.
+          </div>
         </div>
       </div>
     </div>

@@ -112,13 +112,18 @@
   background: var(--passive-color-dark);
 }
 
-.file-input {
+.cursor-pointer {
   cursor: pointer;
 }
 
 /* body */
 body {
   margin: 0;
+}
+
+hr {
+  margin: 2.25em 0.625em;
+  border: 1px solid var(--passive-color);
 }
 
 page-header {
@@ -136,21 +141,10 @@ page-footer {
   width: 100%;
 }
 
-.content {
-  position: relative;
-}
 
-.divider {
-  margin: 2.25em 0.625em;
-  border: 1px solid var(--passive-color);
-}
-
-.splashscreen {
-  top: 12%;
-  position: absolute;
-  right: 0;
-  margin-right: -15em;
-  height: 90%;
+.pages-content {
+  font-family: Source Sans Pro;
+  padding: 4em 12vw;
 }
 
 .pages-content-container {
@@ -165,42 +159,29 @@ page-footer {
   margin-right: 1em;
 }
 
+/* TODO: move this to location.css */
 .pages-content-element .lead {
   margin-top: 0;
 }
 
+/* TODO: move this to location.css */
 .pages-content-container:first-of-type {
   margin-bottom: 2.25em;
 }
 
+/* TODO: resolve duplicate conflict. move this to the back-anchor component. */
 .back-anchor {
   padding: 1em 0em;
   height: 3rem;
 }
 
+/* TODO: move .coordinates-input-container to location.css */
 .coordinates-input-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   margin-bottom: 2.5rem;
-}
-
-.input-container label,
-.project-input-container label {
-  font-family: Source Sans Pro;
-  font-size: 0.875rem;
-}
-
-.project-input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.project-input-container input {
-  width: 100%;
 }
 
 .text-input {
@@ -218,16 +199,19 @@ input:focus {
   outline: none;
 }
 
+/* TODO: resolve duplicate conflict. move this to the back-anchor component. */
 .back-anchor {
   padding: 1em;
   font-size: 1em;
 }
 
-#marker-preview, #content-preview {
+#marker-preview, 
+#content-preview {
     display: flex;
     flex-direction: column;
 }
 
+/* TODO: move this to marker.css */
 #marker-preview > .file-holder {
     width: 100%;
     height: 100%;
@@ -235,6 +219,11 @@ input:focus {
 
 /* Responsive */
 @media screen and (max-width: 900px) {
+  /* Typography */
+  .title {
+    font-size: 2.5em;
+  }
+
   .pages-content-container {
     flex-direction: column;
   }
