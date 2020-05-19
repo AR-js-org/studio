@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AR.js Studio</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./publish.css" />
+
+    <!-- import studio-backend api -->
+    <script src="https://cdn.statically.io/gh/AR-js-org/studio-backend/50963278/dist/arjs-studio-backend.min.js"></script>
+
+    <!-- import web components -->
+    <script src="../../components/back-anchor/back-anchor.js"></script>
+    <script src="../../components/header/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="./publish.js"></script>
+</head>
+
+<body>
+    <page-header assetsUrl="../../assets"></page-header>
+
+    <div class="pages-content">
+        <back-anchor assetsUrl="../../assets"></back-anchor>
+
+        <div class="pages-content-container">
+            <div class="pages-content-element">
+                <p class="title">Publish the project</p>
+                <p class="paragraph margin-bottom-2rem">Before we publish, let’s confirm we got everything right.</p>
+                <p class="paragraph margin-bottom-2rem">This is the marker your project will use. Be sure you have it downloaded or printed so you can put your project where you want it.</p>
+            </div>
+        </div>
+
+        <div class="pages-content-container">
+            <div class="pages-content-element">
+                <p class="lead">Publish to a repository</p>
+                <p class="paragraph margin-bottom-2rem">Ready to go live? There’s one more thing to do!</p>
+                <p class="paragraph margin-bottom-2rem">Provide a name for your project and an email so we can send you your project link.</p>
+
+                <div class="input-container">
+                    <label class="small" for="project-name">Name your project:</label>
+                    <input 
+                        id="project-name" 
+                        class="text-input margin-bottom-2rem" 
+                        type="text" 
+                        name="project-name" 
+                        placeholder="your-new-ar-project"
+                    />
+
+                    <label class="small" for="personal-email">Personal email:</label>
+                    <input 
+                        id="personal-email" 
+                        class="text-input margin-bottom-2rem" 
+                        type="text" 
+                        name="personal-email" 
+                        placeholder="your@email.com" 
+                    />
+                    <a id="publish-project" class="primary-button">Publish</a>
+                </div>
+        </div>
+
+        <script></script>
+</body>
+
+</html>

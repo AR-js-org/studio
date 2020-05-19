@@ -1,0 +1,15 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-container input {
+  width: 100%;
+}
+
+/* TODO: consider moving this to style.css */
+.margin-bottom-2rem {
+  margin-bottom: 2rem;
+}
+
