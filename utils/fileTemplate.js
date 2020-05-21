@@ -3,13 +3,19 @@ const unloadFileStyle = `
         vertical-align: middle;
         font-size: 2.25em;
     }
+    .download-marker {
+        display: flex;
+    }
+    .download-marker span {
+        display: flex;
+        padding: 0.25em 0em;
+    }
     .filename {
         vertical-align: middle;
         font-style: italic;
         font-weight: bold;
         font-size: 18px;
     }`;
-
 const previewImageStyle = `
     .imageFrame {
         position:relative;
@@ -32,7 +38,8 @@ const previewImageStyle = `
     .filename-container {
         display: flex;
         align-items: center;
-        padding: 1em;
+        justify-content: space-between;
+        padding: 0 3em;
         cursor: pointer;
     }`;
 
@@ -54,7 +61,8 @@ const previewAudioStyle = `
     .filename-container {
         display: flex;
         align-items: center;
-        padding: 1em;
+        justify-content: space-between;
+        padding: 0 3em;
         cursor: pointer;
     }`;
 
@@ -73,8 +81,12 @@ const previewVideoStyle = `
     .filename-container {
         display: flex;
         align-items: center;
-        padding: 1em;
+        justify-content: space-between;
+        padding: 0 3em;
         cursor: pointer;
+    }
+    .remove-marker {
+        display: flex;
     }
     video {
         object-fit: cover;
@@ -91,14 +103,25 @@ const previewModelStyle = `
     .filename-container {
         display: flex;
         align-items: center;
-        padding: 1em;
+        justify-content: space-between;
+        padding: 0 3em;
         cursor: pointer;
     }`;
 
-const unloadFileTemplate = (fileName) => `
+const unloadFileTemplate = (fileName, fileURL) => `
     <div class="filename-container">
-        <span class="crossmark" onclick="handleUnload(this)">&times;</span>
-        <span class="filename">${fileName}</span>
+        <div class="remove-marker">
+            <span class="crossmark" onclick="handleUnload(this)">&times;</span>
+            <span class="filename">Remove</span>
+        </div>
+        <div class="download-marker">
+            <span>
+                <svg width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    <path d="M16.5 8L15.09 6.59L9.5 12.17V0H7.5V12.17L1.92 6.58L0.5 8L8.5 16L16.5 8Z" fill="black"/>
+                </svg>
+            </span>
+            <a class="filename" style="text-decoration: none; color: black;" href="${fileURL}" download>Download marker</button>
+        </div>
     </div>`;
 
 const previewImageTemplate = (fileURL, fileName) => `
@@ -110,7 +133,7 @@ const previewImageTemplate = (fileURL, fileName) => `
     <div class="imageFrame">
         <img id="img" src=${fileURL} alt="${fileName}">
     </div>
-    ${unloadFileTemplate(fileName)}`;
+    ${unloadFileTemplate(fileName, fileURL)}`;
 
 const previewAudioTemplate = (fileURL, fileName) => `
     <style>
@@ -120,7 +143,7 @@ const previewAudioTemplate = (fileURL, fileName) => `
     <div class="audioFrame">
         <audio controls src=${fileURL} alt="${fileName}"></audio>
     </div>
-    ${unloadFileTemplate(fileName)}`;
+    ${unloadFileTemplate(fileName, fileURL)}`;
 
 const previewVideoTemplate = (fileURL, fileName) => `
     <style>
@@ -130,7 +153,7 @@ const previewVideoTemplate = (fileURL, fileName) => `
     <div id="videoFrame" class="videoFrame" style="opacity:0">
         <video id="video" controls src=${fileURL} alt="${fileName}"></video>
     </div>
-    ${unloadFileTemplate(fileName)}`;
+    ${unloadFileTemplate(fileName, fileURL)}`;
 
 const previewModelTemplate = (fileURL, fileName) => `
     <style>
@@ -156,4 +179,4 @@ const previewModelTemplate = (fileURL, fileName) => `
             </a-entity>
         </a-scene>
     </div>
-    ${unloadFileTemplate(fileName)}`;
+    ${unloadFileTemplate(fileName, fileURL)}`;

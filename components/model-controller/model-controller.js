@@ -23,7 +23,6 @@ AFRAME.registerComponent('model-controller', {
                         let box = this.getSizeFromObj(this.el.object3D);
                         box.getSize(size);
 
-                        // console.log(box);
                         window.assetParam.isValid = true;
                         window.assetParam.scale = 1;
                         window.assetParam.size = {

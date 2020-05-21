@@ -178,7 +178,6 @@ function handleModelUpload(file) {
                 previewError.innerHTML = '*The gltf file is corrupted.'
                 return;
             }
-            // console.log(reader.result);
         };
     } else if (fileType == 'zip') {
         handleZip(file, (err, result) => {
