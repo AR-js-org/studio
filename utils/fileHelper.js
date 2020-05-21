@@ -34,6 +34,8 @@ function isValidFile(type, file, errorId) {
     const supportedFile = supportedFileMap[type];
     const previewError = document.getElementById(errorId)
 
+    console.log(type, file, errorId)
+
     if (!type || !isValidFileType(type, file)) {
         previewError.innerHTML = '*Please select a supported file listed above.';
         return false;
