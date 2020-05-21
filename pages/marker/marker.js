@@ -59,7 +59,7 @@ const publish = (event) => {
         }
         sessionStorage.clear();
         sessionStorage.setItem("session", JSON.stringify(session));
-        window.location = "./publish";
+        window.location = "../publish";
     })
     event.preventDefault();
 }
