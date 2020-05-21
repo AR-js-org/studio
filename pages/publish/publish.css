@@ -1,15 +1,34 @@
-.input-container {
+/* Input */
+#input-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.input-container input {
+#input-container input {
   width: 100%;
 }
 
-/* TODO: consider moving this to style.css */
+/* Image container */
+#image-container {
+  display: flex;
+  align-items: center;
+}
+
+#image-container img {
+  position: relative;
+  width: 10em;
+  height: 10em;
+  object-fit: contain;
+  font-size: 1.25em;
+  text-align: center;
+}
+
+/* TODO: consider moving these functional attributes to style.css */
 .margin-bottom-2rem {
   margin-bottom: 2rem;
 }
 
+.bold {
+  font-weight: bold;
+}

@@ -18,10 +18,11 @@
     <script src="../../components/back-anchor/back-anchor.js"></script>
     <script src="../../components/header/header.js"></script>
     <script src="../../components/footer/footer.js"></script>
+    <script src="../../utils/fileHelper.js"></script>
     <script src="./publish.js"></script>
 </head>
 
-<body>
+<body onload="initPage()">
     <page-header assetsUrl="../../assets"></page-header>
 
     <div class="pages-content">
@@ -32,6 +33,7 @@
                 <p class="title">Publish the project</p>
                 <p class="paragraph margin-bottom-2rem">Before we publish, let’s confirm we got everything right.</p>
                 <p class="paragraph margin-bottom-2rem">This is the marker your project will use. Be sure you have it downloaded or printed so you can put your project where you want it.</p>
+                <div id="preview-container"></div>
             </div>
         </div>
 
@@ -41,7 +43,7 @@
                 <p class="paragraph margin-bottom-2rem">Ready to go live? There’s one more thing to do!</p>
                 <p class="paragraph margin-bottom-2rem">Provide a name for your project and an email so we can send you your project link.</p>
 
-                <div class="input-container">
+                <div id="input-container">
                     <label class="small" for="project-name">Name your project:</label>
                     <input 
                         id="project-name" 
@@ -59,7 +61,7 @@
                         name="personal-email" 
                         placeholder="your@email.com" 
                     />
-                    <button id="publish-project" class="primary-button" onclick="handleClick(this)">Publish</button>
+                    <button id="publish-project" class="primary-button" onclick="handleClick(event)">Publish</button>
                 </div>
 
                 <div id="feedback-container"></div>
