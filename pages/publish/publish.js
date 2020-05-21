@@ -100,7 +100,7 @@ const handleClick = (event) => {
     const personalEmailInput = document.getElementById("personal-email");
 
     if (isValidInput(projectNameInput.value, personalEmailInput.value)) {
-        // TODO: Implement GitHub publish logic.
+        // TODO: Add GitHub publish logic.
         const projectUrl = "https://account.github.io/your-new-project-URL";
         displaySuccess(projectUrl);
     } else {
