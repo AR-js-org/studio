@@ -241,6 +241,7 @@ input:focus {
 }
 
 .download-default-marker {
+    display: flex;
     vertical-align: middle;
     font-style: italic;
     font-weight: bold;
@@ -264,6 +265,14 @@ input:focus {
     font-size: 1.25em;
     line-height: 25px;
     color: var(--passive-color-dark);
+}
+
+.marker img {
+    position: relative;
+}
+
+#marker-preview file-holder {
+    padding: 0;
 }
 
 /* Responsive */

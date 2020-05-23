@@ -114,6 +114,14 @@ const unloadFileTemplate = (fileName, fileURL) => `
             <span class="crossmark" onclick="handleUnload(this)">&times;</span>
             <span class="filename">Remove</span>
         </div>
+    </div>`;
+
+const unloadMarkerTemplate = (fileName, fileURL) => `
+    <div class="filename-container">
+        <div class="remove-marker">
+            <span class="crossmark" onclick="handleUnload(this, true)">&times;</span>
+            <span class="filename">Remove</span>
+        </div>
         <div class="download-marker">
             <span>
                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none">
@@ -124,16 +132,32 @@ const unloadFileTemplate = (fileName, fileURL) => `
         </div>
     </div>`;
 
-const previewImageTemplate = (fileURL, fileName) => `
-    <style>
-        ${previewImageStyle}
-        ${unloadFileStyle}
-    </style>
 
-    <div class="imageFrame">
-        <img id="img" src=${fileURL} alt="${fileName}">
-    </div>
-    ${unloadFileTemplate(fileName, fileURL)}`;
+const previewImageTemplate = (fileURL, fileName, marker) => {
+    if (marker) {
+        return `
+            <style>
+                ${previewImageStyle}
+                ${unloadFileStyle}
+            </style>
+
+            <div class="imageFrame">
+                <img id="img" src=${fileURL} alt="${fileName}">
+            </div>
+            ${unloadMarkerTemplate(fileName, fileURL)}`;
+    }
+
+    return `
+        <style>
+            ${previewImageStyle}
+            ${unloadFileStyle}
+        </style>
+
+        <div class="imageFrame">
+            <img id="img" src=${fileURL} alt="${fileName}">
+        </div>
+        ${unloadFileTemplate(fileName, fileURL)}`;
+}
 
 const previewAudioTemplate = (fileURL, fileName) => `
     <style>

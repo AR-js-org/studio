@@ -35,6 +35,27 @@
     <script src="../utils/fileTemplate.js"></script>
     <script src="../utils/fileHandler.js"></script>
     <script src="./marker.js" defer></script>
+
+    <script>
+        // set default marker image
+        window.onload = () => {
+            let c = document.createElement('canvas');
+            let img = document.querySelector('#marker-preview .marker img');
+            c.height = img.naturalHeight;
+            c.width = img.naturalWidth;
+            let ctx = c.getContext('2d');
+
+            ctx.drawImage(img, 0, 0, c.width, c.height);
+            let base64String = c.toDataURL();
+
+            MarkerModule.getFullMarkerImage(base64String, 0.5, 512, "black")
+                .then((fullMarkerImage) => {
+                    window.defaultMarkerImage = fullMarkerImage;
+                    window.markerImage = window.defaultMarkerImage;
+                })
+        }
+
+    </script>
 </head>
 
 <body>
