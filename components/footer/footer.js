@@ -64,6 +64,11 @@ const FooterContent = `
     .passive-button:hover {
       background: var(--passive-color-dark);
     }
+
+    .buttons > .publish-disabled {
+        cursor: default;
+        opacity: 0.4;
+    }
   </style>
 
   <div>
@@ -77,11 +82,11 @@ const FooterContent = `
     </p>
 
     <div class="buttons">
-      <a class="primary-button" href="../pages/publish.html">
+      <a class="primary-button publish-disabled">
         Publish on Github
       </a>
 
-      <button id="zip-button" class="passive-button">
+      <button disabled id="zip-button" class="passive-button publish-disabled">
         Download package
       </button>
     </div>
