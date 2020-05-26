@@ -1,5 +1,25 @@
 const { MarkerModule, Package } = ARjsStudioBackend;
 
+/**
+ * Initialize the default marker image on page load.
+ */
+const setDefaultMarker = () => {
+    const c = document.createElement('canvas');
+    const img = document.querySelector('#marker-preview .marker img');
+    c.height = img.naturalHeight;
+    c.width = img.naturalWidth;
+    const ctx = c.getContext('2d');
+
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+    const base64String = c.toDataURL();
+
+    MarkerModule.getFullMarkerImage(base64String, 0.5, 512, "black")
+        .then((fullMarkerImage) => {
+            window.fullMarkerImage = fullMarkerImage;
+            window.markerImage = fullMarkerImage;
+        })
+}
+
 const zip = () => {
     // TODO: replace alerts with HTML error messages.
     if (!window.markerImage) return alert('please select a marker image');

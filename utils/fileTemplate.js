@@ -132,32 +132,23 @@ const unloadMarkerTemplate = (fileName, fileURL) => `
         </div>
     </div>`;
 
+/**
+ * 
+ * @param {string} fileURL 
+ * @param {string} fileName 
+ * @param {boolean} isMarker 
+ */
+const previewImageTemplate = (fileURL, fileName, isMarker) => `
+    <style>
+        ${previewImageStyle}
+        ${unloadFileStyle}
+    </style>
 
-const previewImageTemplate = (fileURL, fileName, marker) => {
-    if (marker) {
-        return `
-            <style>
-                ${previewImageStyle}
-                ${unloadFileStyle}
-            </style>
+    <div class="imageFrame">
+        <img id="img" src=${fileURL} alt="${fileName}">
+    </div>
+    ${isMarker ? unloadMarkerTemplate(fileName, fileURL) : unloadFileTemplate(fileName, fileURL)}`;
 
-            <div class="imageFrame">
-                <img id="img" src=${fileURL} alt="${fileName}">
-            </div>
-            ${unloadMarkerTemplate(fileName, fileURL)}`;
-    }
-
-    return `
-        <style>
-            ${previewImageStyle}
-            ${unloadFileStyle}
-        </style>
-
-        <div class="imageFrame">
-            <img id="img" src=${fileURL} alt="${fileName}">
-        </div>
-        ${unloadFileTemplate(fileName, fileURL)}`;
-}
 
 const previewAudioTemplate = (fileURL, fileName) => `
     <style>
