@@ -1,9 +1,14 @@
 const reg4Base64 = /^data\:[\w-]+\/[\w-]+;base64,/; // check where the data is base64 format
 
-function handleUnload(self) {
-    const preview = self.parentElement.parentElement;
+function handleUnload(self, isMarker=false) {
+    const marker = document.querySelector('#marker-preview img');
+    if (isMarker && marker) {
+        marker.remove();
+    }
+
+    const preview = self.parentElement.parentElement.parentElement;
     const previewId = preview.getAttribute("id");
-    preview.innerHTML = "<file-holder></file-holder>";
+    preview.innerHTML = '<file-holder></file-holder>'
 
     if (previewId === 'content-preview') {
         window.assetFile = null;
@@ -29,7 +34,7 @@ function handleMarkerUpload(self) {
                 const fileURL = URL.createObjectURL(blob);
 
                 const preview = document.getElementById("marker-preview");
-                preview.innerHTML = previewImageTemplate(fileURL, file.name);
+                preview.innerHTML = previewImageTemplate(fileURL, file.name, true);
             }
             );
     };
@@ -178,7 +183,6 @@ function handleModelUpload(file) {
                 previewError.innerHTML = '*The gltf file is corrupted.'
                 return;
             }
-            // console.log(reader.result);
         };
     } else if (fileType == 'zip') {
         handleZip(file, (err, result) => {
