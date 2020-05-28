@@ -10,6 +10,7 @@
   --secondary-color-dark: #00c28e;
   --passive-color: #f2f2f2;
   --passive-color-dark: #d9d9d9;
+  --link-color: #0000FF;
   --max-z-index: 99999;
 }
 
@@ -48,8 +49,9 @@
 }
 
 .link {
-  font-size: 1em;
-  color: #0000ff;
+  color: var(--link-color);
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .error {
@@ -149,6 +151,7 @@ page-footer {
 .pages-content-container {
   display: flex;
   align-items: flex-start;
+  margin-bottom: 2em;
 }
 
 .pages-content-element {
@@ -214,6 +217,45 @@ input:focus {
 #marker-preview > .file-holder {
     width: 100%;
     height: 100%;
+}
+
+#marker-preview {
+    padding: 1em;
+}
+
+.download-default-marker {
+    display: flex;
+    vertical-align: middle;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.marker {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 23.75em;
+    width: 23.75em;
+    background: var(--passive-color);
+    border: 1px solid var(--passive-color-dark);
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-family: Chakra Petch;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.25em;
+    line-height: 25px;
+    color: var(--passive-color-dark);
+}
+
+.marker img {
+    position: relative;
+}
+
+#marker-preview file-holder {
+    padding: 0;
 }
 
 /* Responsive */
