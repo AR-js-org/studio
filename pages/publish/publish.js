@@ -11,9 +11,9 @@ const previewImageTemplate = (fileURL) =>
  * Display marker image from a template.
  */
 const displayImage = () => {
-    const fullMarkerImage = window.session.fullMarkerImage;
-    const imageblob = dataURItoBlob(fullMarkerImage);
-    const fileURL = URL.createObjectURL(imageblob);
+    const imageData = window.session.fullMarkerImage ? window.session.fullMarkerImage : window.session.markerImage;
+    const imageBlob = dataURItoBlob(imageData);
+    const fileURL = URL.createObjectURL(imageBlob);
 
     const previewContainer = document.getElementById("preview-container");
     previewContainer.innerHTML = previewImageTemplate(fileURL);

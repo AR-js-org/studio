@@ -1,6 +1,21 @@
 const { MarkerModule, Package } = ARjsStudioBackend;
 
 /**
+ * Initialize the default marker image on page load.
+ */
+const setDefaultMarker = () => {
+    const c = document.createElement('canvas');
+    const img = document.querySelector('#marker-preview .marker img');
+    c.height = img.naturalHeight;
+    c.width = img.naturalWidth;
+    const ctx = c.getContext('2d');
+
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+    const base64String = c.toDataURL();
+    window.markerImage = base64String;
+}
+
+/**
  * Packages the data into a zip file and prompts download.
  * 
  * TODO: Add the generated markerImage into the zip package.
