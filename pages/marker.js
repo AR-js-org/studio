@@ -20,6 +20,22 @@ const setDefaultMarker = () => {
         })
 }
 
+const checkUserUploadStatus = () => {
+    if (window.markerImage && window.assetFile) {
+        enablePageFooter();
+    }
+}
+
+// All the required components are uploaded by the user => footer will be enable
+const enablePageFooter = () => {
+    var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
+    var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
+
+    githubButton.classList.remove('publish-disabled');
+    zipButton.classList.remove('publish-disabled');
+    zipButton.removeAttribute('disabled');
+}
+
 const zip = () => {
     // TODO: replace alerts with HTML error messages.
     if (!window.markerImage) return alert('please select a marker image');
