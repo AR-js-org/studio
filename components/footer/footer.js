@@ -102,7 +102,7 @@ class PageFooter extends HTMLElement {
     }
 
     connectedCallback() {
-        const button = this.shadow.querySelector('.zip-publish');
+        const button = this.shadow.querySelector('#zip-publish');
         button.onclick =  () => {
             this.dispatchEvent(new CustomEvent('onClick'));
         }
