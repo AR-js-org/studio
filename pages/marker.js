@@ -22,14 +22,14 @@ const setDefaultMarker = () => {
 
 const checkUserUploadStatus = () => {
     if (window.markerImage && window.assetFile) {
-        enableMarkerFooter();
+        enablePageFooter();
     }
 }
 
 // All the required components are uploaded by the user => footer will be enable
-const enableMarkerFooter = () => {
-    var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('.github-publish');
-    var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('.zip-publish');
+const enablePageFooter = () => {
+    var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
+    var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
 
     githubButton.classList.remove('publish-disabled');
     zipButton.classList.remove('publish-disabled');
