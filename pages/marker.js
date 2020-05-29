@@ -20,26 +20,20 @@ const setDefaultMarker = () => {
         })
 }
 
-const checkUserUploadStatus = () =>
-{
-  
-    if (window.markerImage && window.assetFile ) enableMarkerFooter();
-
+const checkUserUploadStatus = () => {
+    if (window.markerImage && window.assetFile) {
+        enableMarkerFooter();
+    }
 }
 
-//All the required components are uploaded by the user => footer will be enable
-const enableMarkerFooter = () => 
-{
-    var githubutton = document.querySelector('page-footer')
-        .shadowRoot.querySelector('#github-publish-button');
+// All the required components are uploaded by the user => footer will be enable
+const enableMarkerFooter = () => {
+    var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('.github-publish');
+    var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('.zip-publish');
 
-    var zipbutton = document.querySelector('page-footer')
-        .shadowRoot.querySelector('#zip-button');
-
-    githubutton.classList.remove('publish-disabled');
-    zipbutton.classList.remove('publish-disabled');
-    zipbutton.setAttribute('disabled',false);
-
+    githubButton.classList.remove('publish-disabled');
+    zipButton.classList.remove('publish-disabled');
+    zipButton.removeAttribute('disabled');
 }
 
 const zip = () => {
