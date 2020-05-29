@@ -35,6 +35,7 @@ function handleMarkerUpload(self) {
 
                 const preview = document.getElementById("marker-preview");
                 preview.innerHTML = previewImageTemplate(fileURL, file.name, true);
+                checkUserUploadStatus();
             }
             );
     };
@@ -77,6 +78,7 @@ function handleImageUpload(file) {
     reader.onloadend = function () {
         window.assetFile = reader.result.split(",")[1];
         window.assetName = file.type.replace('image/', 'asset.');
+          checkUserUploadStatus();
     };
 
     let preview = document.getElementById("content-preview");
@@ -93,6 +95,7 @@ function handleAudioUpload(file) {
         //for backend api asset needs only base64 part
         window.assetFile = reader.result;
         window.assetName = file.type.replace('audio/', 'asset.');
+        checkUserUploadStatus();
     };
 
     let preview = document.getElementById("content-preview");
@@ -109,6 +112,7 @@ function handleVideoUpload(file) {
         window.assetFile = reader.result;
         window.assetName = file.type.replace('video/', 'asset.');
         window.assetParam.isValid = true;
+        checkUserUploadStatus();
     };
     let preview = document.getElementById("content-preview");
     preview.innerHTML = previewVideoTemplate(fileURL, fileName);
@@ -137,7 +141,7 @@ function handleModelUpload(file) {
             //for backend api asset needs only base64 part
             window.assetFile = reader.result.split(",")[1];
             window.assetName = 'asset.glb';
-
+	    checkUserUploadStatus();
             let preview = document.getElementById("content-preview");
             preview.innerHTML = previewModelTemplate(reader.result, file.name);
         };
@@ -174,7 +178,7 @@ function handleModelUpload(file) {
                     //for backend api asset needs only base64 part
                     window.assetFile = reader2.result.split(",")[1];
                     window.assetName = 'asset.gltf';
-
+		    checkUserUploadStatus();
                     let preview = document.getElementById("content-preview");
                     preview.innerHTML = previewModelTemplate(reader2.result, file.name);
                 };
@@ -193,7 +197,7 @@ function handleModelUpload(file) {
             }
             window.assetFile = result.split(",")[1];
             window.assetName = 'asset.gltf';
-
+	    checkUserUploadStatus();
             let preview = document.getElementById("content-preview");
             preview.innerHTML = previewModelTemplate(result, file.name);
         })

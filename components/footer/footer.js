@@ -82,7 +82,7 @@ const FooterContent = `
     </p>
 
     <div class="buttons">
-      <a class="primary-button publish-disabled">
+       <a id="github-publish-button" class="primary-button publish-disabled">
         Publish on Github
       </a>
 
