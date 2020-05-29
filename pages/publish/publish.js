@@ -75,7 +75,8 @@ const displaySuccess = (projectUrl) => {
     const feedbackContainer = document.getElementById("feedback-container");
     const successTemplate = `
         <p class="paragraph margin-bottom-2rem">Hooray! You’ve succesfuly published your project! See it at:</p>
-        <p class="link">${projectUrl}</p>`;
+        <p class="link margin-bottom-2rem">${projectUrl}</p>
+        <p class="small disclaimer-color">You still own your content! So if you want anything taken down, let us know at <b>arjsstudiohelp@gmail.com</b> and we will delete it. We’re there for any other questions too. :)</p>`;
     feedbackContainer.innerHTML = successTemplate;
 }
 

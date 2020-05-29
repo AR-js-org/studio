@@ -177,6 +177,11 @@ page-footer {
   height: 3rem;
 }
 
+.back-anchor {
+  padding: 1em;
+  font-size: 1em;
+}
+
 /* TODO: move .coordinates-input-container to location.css */
 .coordinates-input-container {
   display: flex;
@@ -201,61 +206,9 @@ input:focus {
   outline: none;
 }
 
-/* TODO: resolve duplicate conflict. move this to the back-anchor component. */
-.back-anchor {
-  padding: 1em;
-  font-size: 1em;
-}
-
-#marker-preview, 
 #content-preview {
-    display: flex;
-    flex-direction: column;
-}
-
-/* TODO: move this to marker.css */
-#marker-preview > .file-holder {
-    width: 100%;
-    height: 100%;
-}
-
-#marker-preview {
-    padding: 1em;
-}
-
-.download-default-marker {
-    display: flex;
-    vertical-align: middle;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.marker {
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 23.75em;
-    width: 23.75em;
-    background: var(--passive-color);
-    border: 1px solid var(--passive-color-dark);
-    box-sizing: border-box;
-    border-radius: 5px;
-    font-family: Chakra Petch;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.25em;
-    line-height: 25px;
-    color: var(--passive-color-dark);
-}
-
-.marker img {
-    position: relative;
-}
-
-#marker-preview file-holder {
-    padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Responsive */

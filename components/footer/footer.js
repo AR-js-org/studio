@@ -82,9 +82,9 @@ const FooterContent = `
     </p>
 
     <div class="buttons">
-      <a class="primary-button publish-disabled">
+      <button id="publish-button" class="primary-button publish-disabled">
         Publish on Github
-      </a>
+      </button>
 
       <button disabled id="zip-button" class="passive-button publish-disabled">
         Download package
