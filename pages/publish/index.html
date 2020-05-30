@@ -19,7 +19,6 @@
     <script src="../../components/header/header.js"></script>
     <script src="../../components/footer/footer.js"></script>
     <script src="../../utils/fileHelper.js"></script>
-    <script src="../../utils/githubHelper.js"></script>
     <script src="./publish.js"></script>
 </head>
 
@@ -46,22 +45,23 @@
 
                 <div id="input-container">
                     <label class="small" for="project-name">Name your project:</label>
-                    <input 
-                        id="project-name" 
-                        class="text-input margin-bottom-2rem" 
-                        type="text" 
-                        name="project-name" 
+                    <input
+                        id="project-name"
+                        class="text-input margin-bottom-2rem"
+                        type="text"
+                        name="project-name"
                         placeholder="your-new-ar-project"
                     />
 
-                    <label class="small" for="personal-email">Personal email:</label>
-                    <input 
-                        id="personal-email" 
-                        class="text-input margin-bottom-2rem" 
-                        type="text" 
-                        name="personal-email" 
-                        placeholder="your@email.com" 
-                    />
+                    <!-- to be added post MVP -->
+                    <!-- <label class="small" for="personal-email">Personal email:</label>
+                    <input
+                        id="personal-email"
+                        class="text-input margin-bottom-2rem"
+                        type="text"
+                        name="personal-email"
+                        placeholder="your@email.com"
+                    /> -->
                     <button id="publish-project" class="primary-button" onclick="handleClick(event)">Publish</button>
                 </div>
 

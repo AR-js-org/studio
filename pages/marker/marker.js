@@ -27,6 +27,7 @@ const enablePageFooter = () => {
     var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
 
     githubButton.classList.remove('publish-disabled');
+    githubButton.href = '../publish';
     zipButton.classList.remove('publish-disabled');
     zipButton.removeAttribute('disabled');
 }
