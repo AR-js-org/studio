@@ -68,8 +68,8 @@ const displayError = () => {
 
 /**
  * Display success message with the published URL.
- * 
- * @param {String} projectUrl 
+ *
+ * @param {String} projectUrl
  */
 const displaySuccess = (projectUrl) => {
     const feedbackContainer = document.getElementById("feedback-container");
@@ -82,26 +82,29 @@ const displaySuccess = (projectUrl) => {
 
 /**
  * Simply checks for empty input.
- * 
- * @param {String} name 
- * @param {String} email 
+ *
+ * @param {String} name
+ * @param {String} email
  * @returns {boolean}
  */
 const isValidInput = (name, email) => {
+    if (!email) {
+        return name.length;
+    }
     return name.length && email.length;
 }
 
 /**
  * Event handler for the publish button.
- * 
- * @param {event} event 
+ *
+ * @param {event} event
  */
 const handleClick = (event) => {
     const projectNameInput = document.getElementById("project-name");
-    const personalEmailInput = document.getElementById("personal-email");
 
-    if (isValidInput(projectNameInput.value, personalEmailInput.value)) {
-        // TODO: Add GitHub publish logic.
+    if (isValidInput(projectNameInput.value)) {
+        // TODO: Add GitHub publish logic
+        // to be handled by backend, probably
         const projectUrl = "https://account.github.io/your-new-project-URL";
         displaySuccess(projectUrl);
     } else {
@@ -112,7 +115,7 @@ const handleClick = (event) => {
 
 /**
  * Event handler for the marker image download.
- * @param {event} event 
+ * @param {event} event
  */
 const handleDownload = (event) => {
     const fullMarkerImage = window.session.fullMarkerImage;
