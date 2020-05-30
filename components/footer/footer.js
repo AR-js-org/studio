@@ -82,11 +82,11 @@ const FooterContent = `
     </p>
 
     <div class="buttons">
-      <button id="publish-button" class="primary-button publish-disabled">
+      <a id="github-publish" class="primary-button publish-disabled">
         Publish on Github
-      </button>
+      </a>
 
-      <button disabled id="zip-button" class="passive-button publish-disabled">
+      <button id="zip-publish" disabled class="passive-button publish-disabled">
         Download package
       </button>
     </div>
@@ -102,13 +102,9 @@ class PageFooter extends HTMLElement {
     }
 
     connectedCallback() {
-        const zipButton = this.shadow.querySelector("#zip-button");
-        zipButton.onclick = () => {
-            this.dispatchEvent(new CustomEvent("zip-button"));
-        }
-        const publishButton = this.shadow.querySelector("#publish-button");
-        publishButton.onclick = () => {
-            this.dispatchEvent(new CustomEvent("publish-button"));
+        const button = this.shadow.querySelector('#zip-publish');
+        button.onclick =  () => {
+            this.dispatchEvent(new CustomEvent('onClick'));
         }
     }
 }

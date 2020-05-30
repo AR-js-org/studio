@@ -15,14 +15,23 @@ const setDefaultMarker = () => {
     window.markerImage = base64String;
 }
 
-/**
- * Packages the data into a zip file and prompts download.
- * 
- * TODO: Add the generated markerImage into the zip package.
- * 
- * @param {event} event 
- */
-const zip = (event) => {
+const checkUserUploadStatus = () => {
+    if (window.markerImage && window.assetFile) {
+        enablePageFooter();
+    }
+}
+
+// All the required components are uploaded by the user => footer will be enable
+const enablePageFooter = () => {
+    var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
+    var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
+
+    githubButton.classList.remove('publish-disabled');
+    zipButton.classList.remove('publish-disabled');
+    zipButton.removeAttribute('disabled');
+}
+
+const zip = () => {
     // TODO: replace alerts with HTML error messages.
     if (!window.markerImage) return alert('please select a marker image');
     if (!window.assetType) return alert('please select the corret content type');
@@ -51,8 +60,8 @@ const zip = (event) => {
 
 /**
  * Stores the session data and redirects to publish page.
- * 
- * @param {event} event 
+ *
+ * @param {event} event
  */
 const publish = (event) => {
     // TODO: replace alerts with HTML error messages.
