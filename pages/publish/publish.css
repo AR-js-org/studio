@@ -9,19 +9,12 @@
   width: 100%;
 }
 
-/* Image container */
-#image-container {
-  display: flex;
-  align-items: center;
-}
-
 #image-container img {
   position: relative;
-  width: 10em;
-  height: 10em;
   object-fit: contain;
   font-size: 1.25em;
   text-align: center;
+  border: 1px solid black;
 }
 
 /* TODO: consider moving these functional attributes to style.css */

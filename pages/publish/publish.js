@@ -46,15 +46,9 @@ const displayPreview = () => {
  * Initialize page with the session data and display preview on load.
  */
 const initPage = () => {
-    const sessionString = sessionStorage.getItem("session");
-
-    if (sessionString) {
-        window.session = JSON.parse(sessionString);
-        console.log(window.session); // TODO: Remove this line.
-        displayPreview();
-    } else {
-        alert("Could not find the files. Please upload first.");
-    }
+    // no other things to do here
+    window.session = JSON.parse(window.name);
+    displayPreview();
 }
 
 /**
@@ -118,7 +112,7 @@ const handleClick = (event) => {
  * @param {event} event
  */
 const handleDownload = (event) => {
-    const fullMarkerImage = window.session.fullMarkerImage;
+    const fullMarkerImage = window.session.fullMarkerImage || window.session.markerImage;
     const imageblob = dataURItoBlob(fullMarkerImage);
     const fileURL = URL.createObjectURL(imageblob);
 

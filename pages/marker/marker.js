@@ -71,7 +71,7 @@ const publish = () => {
 
     MarkerModule.getMarkerPattern(window.markerImage)
         .then((markerPattern) => {
-            const session = {
+            window.name = JSON.stringify({
                 arType: 'pattern',
                 assetType: window.assetType, // image/audio/video/3d
                 assetFile: window.assetFile,
@@ -80,10 +80,8 @@ const publish = () => {
                 markerPatt: markerPattern,
                 markerImage: window.markerImage,
                 fullMarkerImage: window.fullMarkerImage,
-            };
+            });
 
-            sessionStorage.clear();
-            sessionStorage.setItem('session', JSON.stringify(session));
             window.location = '../publish';
         }
     )
