@@ -9,6 +9,15 @@ let shadow;
 let array = [];
 let markerId = [];
 
+var numberIcon = L.divIcon({
+          className: "number-icon",
+          shadowSize: [20, 30], // size of the shadow
+          iconAnchor: [20, 40], 
+          shadowAnchor: [4, 30],  // the same for the shadow
+          popupAnchor: [0, -30],
+          html: "1"      
+    });
+
 // filter config array returning by uri path name for ex. location.html => {} config for this page
 // if you want to use the map on a different page for ex. differentpage.html => {} config for this page
 function returnPageConfig(path) {
@@ -31,6 +40,7 @@ function reUseMapComponent(path) {
 
 
 function updateMyLocationMarker(lat, lng) {
+
     array.push({
                 id: 'mylocation',
                 coords: [lat, lng],
@@ -39,20 +49,30 @@ function updateMyLocationMarker(lat, lng) {
             })
     map.panTo(new L.LatLng(lat, lng)); // will pan map to make the center of map the newly located coords
     array.map(e => {
+        
         L.marker(e.coords).addTo(layerGroup);
     }) 
 }
 
 function updateMarker() {
+
     let key = "id";
     const unique = [...new Map(array.map(item =>
   [item[key], item])).values()];
     layerGroup.clearLayers();
 
     map.panTo(new L.LatLng(unique[0].lat, unique[0].lng)); // will pan map to make the center of map the newly located coords
-    unique.map(e => {
+    unique.map((e,i) => {
 
-        L.marker(e.coords).addTo(layerGroup);
+        L.marker(e.coords, {icon: L.divIcon({
+          className: "number-icon",
+          shadowSize: [20, 30], // size of the shadow
+          iconAnchor: [20, 40], 
+          shadowAnchor: [4, 30],  // the same for the shadow
+          popupAnchor: [0, -30],
+          html: i+1      
+        })}).addTo(layerGroup);
+
     }) 
 }
 

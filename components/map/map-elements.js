@@ -56,6 +56,15 @@ const map_styles = `
         color: black;
         margin-left: 2px;
     }
+    .number-icon{
+        background-color: blue;
+        padding: 9px;
+        border-radius: 15%;
+        text-align:center;
+        color:white;
+        font-weight: bold;  
+        font-size: 15px; 
+    }
 
 </style>`;
 
