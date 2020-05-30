@@ -1,5 +1,8 @@
 const { MarkerModule, Package } = ARjsStudioBackend;
 
+var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
+var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
+
 /**
  * Initialize the default marker image on page load.
  */
@@ -23,9 +26,6 @@ const checkUserUploadStatus = () => {
 
 // All the required components are uploaded by the user => footer will be enable
 const enablePageFooter = () => {
-    var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
-    var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
-
     githubButton.classList.remove('publish-disabled');
     zipButton.classList.remove('publish-disabled');
     zipButton.removeAttribute('disabled');
@@ -55,7 +55,6 @@ const zip = () => {
             link.download = 'ar.zip';
             link.click();
         });
-    event.preventDefault();
 };
 
 /**
@@ -63,11 +62,12 @@ const zip = () => {
  *
  * @param {event} event
  */
-const publish = (event) => {
+const publish = () => {
     // TODO: replace alerts with HTML error messages.
-    if (!window.markerImage) return alert('please select a marker image');
-    if (!window.assetType) return alert('please select the corret content type');
-    if (!window.assetFile || !window.assetName) return alert('please upload a content');
+
+    if (!window.markerImage) return alert('Please, select a marker image.');
+    if (!window.assetType) return alert('Please, select the correct content type.');
+    if (!window.assetFile || !window.assetName) return alert('Please, upload a content.');
 
     MarkerModule.getMarkerPattern(window.markerImage)
         .then((markerPattern) => {
@@ -87,9 +87,7 @@ const publish = (event) => {
             window.location = '../publish';
         }
     )
-    event.preventDefault();
 }
 
-const element = document.querySelector('page-footer');
-element.addEventListener('zip-button', zip);
-element.addEventListener('publish-button', publish);
+zipButton.addEventListener('click', zip);
+githubButton.addEventListener('click', publish);

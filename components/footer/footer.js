@@ -100,13 +100,6 @@ class PageFooter extends HTMLElement {
         this.shadow = this.attachShadow({ mode: 'open' });
         this.shadow.innerHTML = FooterContent
     }
-
-    connectedCallback() {
-        const button = this.shadow.querySelector('#zip-publish');
-        button.onclick =  () => {
-            this.dispatchEvent(new CustomEvent('onClick'));
-        }
-    }
 }
 
 customElements.define('page-footer', PageFooter);
