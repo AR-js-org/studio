@@ -1,15 +1,22 @@
 /* Main content */
 .background {
+  display: flex;
+  flex-direction: column;
   width: 70vw;
   min-height: 100vh;
   background: var(--secondary-color);
 }
 
+.content {
+  margin-left: 1.5em;
+  padding: 1.5em;
+  padding-right: 20vw;
+}
+
 .splashscreen {
   top: 12%;
   position: absolute;
-  right: 0;
-  margin-right: -15em;
+  right: 8vw;
   height: 90%;
 }
 
@@ -21,7 +28,7 @@
 
 /* TODO: remove this on release */
 .main-subtitle {
-  font-size: 1.25em; 
+  font-size: 1.25em;
   font-weight: bold;
 }
 
