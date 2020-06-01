@@ -56,13 +56,20 @@ const initPage = () => {
 
     const randomString = Math.random().toString(36).substring(7);
     publishAnchor.setAttribute('href', `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=repo:public_repo&state=${randomString}&redirect_uri=${window.origin}/studio/pages/publish-confirm/index.html}`);
-    window.name.randomString = randomString;
+    window.session.randomString = randomString;
+
+    setSession(window.session);
 
     const input = document.querySelector('#project-name');
     input.addEventListener('blur', () => {
-        window.name.projectName = input.value;
+        window.session.projectName = input.value;
+        setSession(window.session);
     });
 }
+
+const setSession = (session) => {
+    window.name = JSON.stringify(session);
+};
 
 /**
  * Display success message with the published URL.
