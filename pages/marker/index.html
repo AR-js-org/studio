@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="../components/main/main.css" />
+    <link rel="stylesheet" href="../../style.css" />
 
     <!-- import studio-backend api -->
     <script
@@ -23,26 +22,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.3.0/jszip.min.js"></script>
 
     <!-- import web components -->
-    <script src="../components/back-anchor/back-anchor.js"></script>
-    <script src="../components/file-holder/file-holder.js"></script>
-    <script src="../components/file-select/file-select.js"></script>
-    <script src="../components/header/header.js"></script>
-    <script src="../components/footer/footer.js"></script>
-    <script src="../components/model-controller/model-controller.js"></script>
+    <script src="../../components/back-anchor/back-anchor.js"></script>
+    <script src="../../components/file-holder/file-holder.js"></script>
+    <script src="../../components/file-select/file-select.js"></script>
+    <script src="../../components/header/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="../../components/model-controller/model-controller.js"></script>
 
     <!-- import utils -->
-    <script src="../utils/fileHelper.js"></script>
-    <script src="../utils/fileTemplate.js"></script>
-    <script src="../utils/fileHandler.js"></script>
+    <script src="../../utils/fileHelper.js"></script>
+    <script src="../../utils/fileTemplate.js"></script>
+    <script src="../../utils/fileHandler.js"></script>
     <script src="./marker.js" defer></script>
 
 </head>
 
 <body onload="setDefaultMarker()">
-    <page-header assetsUrl="../assets"></page-header>
+    <page-header assetsUrl="../../assets"></page-header>
 
     <div class="pages-content">
-        <back-anchor assetsUrl="../assets"></back-anchor>
+        <back-anchor assetsUrl="../../assets"></back-anchor>
         <div class="pages-content-container">
             <div class="pages-content-element">
                 <p class="title">Marker-based</p>
@@ -73,7 +72,7 @@
             </div>
             <div id="marker-preview" target="marker-file">
                 <div class="marker">
-                    <img src="../assets/default-marker.png"/>
+                    <img src="../../assets/default-marker.png"/>
                 </div>
                 <div class="download-marker" style="display: flex; justify-content: flex-end; padding: 0 3em;">
                     <div class="download-default-marker">
@@ -82,7 +81,7 @@
                                 <path d="M16.5 8L15.09 6.59L9.5 12.17V0H7.5V12.17L1.92 6.58L0.5 8L8.5 16L16.5 8Z" fill="black"/>
                             </svg>
                         </span>
-                        <a class="filename" style="text-decoration: none; color: black; justify-self: flex-end;" href="../assets/default-marker.png" download>Download marker</a>
+                        <a class="filename" style="text-decoration: none; color: black; justify-self: flex-end;" href="../../assets/default-marker.png" download>Download marker</a>
                     </div>
                 </div>
             </div>
@@ -93,10 +92,12 @@
                 <p class="lead">2. Choose the content </p>
                 <p class="paragraph">
                     Select supported content with the type listed below:<br />
-                    &nbsp;&nbsp;- 3D Object (.gltf, .glb .zip; max size 50MB)<br />
-                    &nbsp;&nbsp;- Image (.jpg, .png, .gif; max size 15MB)<br />
-                    &nbsp;&nbsp;- Audio (.mp3; max size 10MB)<br />
-                    &nbsp;&nbsp;- Video (.mp4; max size 25MB)
+                    <ul>
+                        <li>3D Object (.gltf, .glb .zip; max size 50MB)</li>
+                        <li>Image (.jpg, .png, .gif; max size 15MB)</li>
+                        <li>Audio (.mp3; max size 10MB)</li>
+                        <li>Video (.mp4; max size 25MB)</li>
+                    </ul>
                 </p>
                 <label class="passive-button file-input">
                     <input id="content-file" accept="*" type="file" hidden onchange="handleContentUpload(this)" />
@@ -109,7 +110,7 @@
             </div>
         </div>
 
-        <hr class="divider">
+        <hr>
     </div>
     <page-footer></page-footer>
 </body>

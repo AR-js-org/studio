@@ -27,9 +27,11 @@ function handleMarkerUpload(self) {
     reader.readAsDataURL(file);
     reader.onloadend = function () {
         const base64Data = reader.result;
+        window.markerImage = base64Data;
+
         MarkerModule.getFullMarkerImage(base64Data, 0.5, 512, "black")
             .then((fullMarkerImage) => {
-                window.markerImage = base64Data;
+                window.fullMarkerImage = fullMarkerImage;
                 const blob = dataURItoBlob(fullMarkerImage);
                 const fileURL = URL.createObjectURL(blob);
 

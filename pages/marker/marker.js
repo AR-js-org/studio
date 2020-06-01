@@ -1,5 +1,8 @@
 const { MarkerModule, Package } = ARjsStudioBackend;
 
+var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
+var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
+
 /**
  * Initialize the default marker image on page load.
  */
@@ -12,12 +15,7 @@ const setDefaultMarker = () => {
 
     ctx.drawImage(img, 0, 0, c.width, c.height);
     const base64String = c.toDataURL();
-
-    MarkerModule.getFullMarkerImage(base64String, 0.5, 512, "black")
-        .then((fullMarkerImage) => {
-            window.fullMarkerImage = fullMarkerImage;
-            window.markerImage = fullMarkerImage;
-        })
+    window.markerImage = base64String;
 }
 
 const checkUserUploadStatus = () => {
@@ -28,9 +26,6 @@ const checkUserUploadStatus = () => {
 
 // All the required components are uploaded by the user => footer will be enable
 const enablePageFooter = () => {
-    var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
-    var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
-
     githubButton.classList.remove('publish-disabled');
     zipButton.classList.remove('publish-disabled');
     zipButton.removeAttribute('disabled');
@@ -51,20 +46,46 @@ const zip = () => {
             assetParam: window.assetParam,
             markerPatt: markerPattern
         })))
-        .then((package) => package.serve({ packageType: "zip" }))
+        .then((package) => package.serve({ packageType: 'zip' }))
         .then((base64) => {
             // window.location = `data:application/zip;base64,${base64}`;
             // sometimes it doesn't work by use window.location directly, so change to this way
-            var link = document.createElement('a');
+            const link = document.createElement('a');
             link.href = `data:application/zip;base64,${base64}`;
-            link.download = "ar.zip";
-            document.body.appendChild(link);
+            link.download = 'ar.zip';
             link.click();
-            document.body.removeChild(link);
-
-
         });
 };
 
-const element = document.querySelector("page-footer");
-element.addEventListener("onClick", zip);
+/**
+ * Stores the session data and redirects to publish page.
+ *
+ * @param {event} event
+ */
+const publish = () => {
+    // TODO: replace alerts with HTML error messages.
+
+    if (!window.markerImage) return alert('Please, select a marker image.');
+    if (!window.assetType) return alert('Please, select the correct content type.');
+    if (!window.assetFile || !window.assetName) return alert('Please, upload a content.');
+
+    MarkerModule.getMarkerPattern(window.markerImage)
+        .then((markerPattern) => {
+            window.name = JSON.stringify({
+                arType: 'pattern',
+                assetType: window.assetType, // image/audio/video/3d
+                assetFile: window.assetFile,
+                assetName: window.assetName,
+                assetParam: window.assetParam,
+                markerPatt: markerPattern,
+                markerImage: window.markerImage,
+                fullMarkerImage: window.fullMarkerImage,
+            });
+
+            window.location = '../publish';
+        }
+    )
+}
+
+zipButton.addEventListener('click', zip);
+githubButton.addEventListener('click', publish);
