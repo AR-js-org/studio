@@ -55,7 +55,7 @@ const initPage = () => {
     const publishAnchor = document.getElementById("publish-project");
 
     const randomString = Math.random().toString(36).substring(7);
-    publishAnchor.setAttribute('href', `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=repo:public_repo&state=${randomString}&redirect_uri=${window.location}/publish-confirm/}`);
+    publishAnchor.setAttribute('href', `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=repo:public_repo&state=${randomString}&redirect_uri=${window.origin}/studio/pages/publish-confirm/}`);
     window.name.randomString = randomString;
 
     const input = document.querySelector('#project-name');
