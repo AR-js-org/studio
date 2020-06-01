@@ -104,4 +104,8 @@
   .background {
     width: 100%;
   }
+
+  .splashscreen {
+      display: none;
+  }
 }

@@ -21,10 +21,11 @@
     font-size: 1.25em;
     line-height: 25px;
     color: var(--passive-color-dark);
-    border: 1px solid black;
 }
 
 .marker img {
     position: relative;
+    width: 100%;
+    border: 1px solid black;
 }
 

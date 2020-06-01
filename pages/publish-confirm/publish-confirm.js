@@ -17,14 +17,14 @@ window.onload = async () => {
     let response = await fetch(`https://arjs-studio-backend.herokuapp.com/authenticate/${queryDict.code}`);
     response = await response.json();
 
-    const pagesUrl = await new Package(window.session)
-        .then((package) => package.serve({
-            packageType: 'github',
-            token: response.token, // required, must be an OAuth2 token
-            message: 'first commit for WebAR!', // optional
-            repo: window.session.projectName + window.session.randomString, // using user + GH code, gg wp
-            branch: 'gh-pages' // automatically deploy to Pages by default
-    }));
+    const package = new Package(window.session);
+    const pagesUrl = await package.serve({
+        packageType: 'github',
+        token: response.token, // required, must be an OAuth2 token
+        message: 'first commit for WebAR!', // optional
+        repo: window.session.projectName + window.session.randomString, // using user + GH code, gg wp
+        branch: 'gh-pages' // automatically deploy to Pages by default
+    });
 
     console.debug(pagesUrl);
 
