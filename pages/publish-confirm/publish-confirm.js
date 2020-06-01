@@ -1,7 +1,6 @@
 window.onload = async () => {
 
-    const { GithubProvider } = ARjsStudioBackend;
-    const github = new GithubProvider();
+    const { Package } = ARjsStudioBackend;
 
     window.session = JSON.parse(window.name);
 
