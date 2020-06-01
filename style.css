@@ -211,6 +211,16 @@ input:focus {
   flex-direction: column;
 }
 
+.beta {
+    font-family: Source Sans Pro;
+    width: 100%;
+    left: 0;
+    position: absolute;
+    top: 5em;
+    background-color: #fff700;
+    padding: 1em;
+}
+
 /* Responsive */
 @media screen and (max-width: 900px) {
   /* Typography */
