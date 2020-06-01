@@ -24,9 +24,9 @@ const previewImageStyle = `
         object-fit: contain;
         font-size: 1.25em;
         text-align: center;
+        border: 1px solid black;
     }
     img {
-        position: absolute;
         top: 0;
         left: 0;
         right: 0;
