@@ -39,7 +39,6 @@ const previewImageStyle = `
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 3em;
         cursor: pointer;
     }`;
 
@@ -62,7 +61,6 @@ const previewAudioStyle = `
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 3em;
         cursor: pointer;
     }`;
 
@@ -82,11 +80,11 @@ const previewVideoStyle = `
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 3em;
         cursor: pointer;
     }
     .remove-marker {
         display: flex;
+        align-items: center;
     }
     video {
         object-fit: cover;
@@ -104,7 +102,6 @@ const previewModelStyle = `
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 3em;
         cursor: pointer;
     }`;
 
@@ -133,10 +130,10 @@ const unloadMarkerTemplate = (fileName, fileURL) => `
     </div>`;
 
 /**
- * 
- * @param {string} fileURL 
- * @param {string} fileName 
- * @param {boolean} isMarker 
+ *
+ * @param {string} fileURL
+ * @param {string} fileName
+ * @param {boolean} isMarker
  */
 const previewImageTemplate = (fileURL, fileName, isMarker) => `
     <style>

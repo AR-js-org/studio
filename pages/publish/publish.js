@@ -52,24 +52,15 @@ const initPage = () => {
     window.session = JSON.parse(window.name);
     displayPreview();
 
-    const projectNameInput = document.getElementById("project-name");
     const publishAnchor = document.getElementById("publish-project");
 
-    if (isValidInput(projectNameInput.value)) {
-        const randomString = Math.random().toString(36).substring(7);
-        publishAnchor.href = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=repo:public_repo&state=${randomString}&redirect_uri=${window.location.href}`;
-    } else {
-        displayError();
-    }
-}
+    const randomString = Math.random().toString(36).substring(7);
+    publishAnchor.setAttribute('href', `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=repo:public_repo&state=${randomString}&redirect_uri=${window.location.href}`);
 
-/**
- * Display error message.
- */
-const displayError = () => {
-    const feedbackContainer = document.getElementById("feedback-container");
-    const errorTemplate = `<p class="error">* Please provide both a name and email for your project</p>`;
-    feedbackContainer.innerHTML = errorTemplate;
+    const input = document.querySelector('#project-name');
+    input.addEventListener('blur', () => {
+        window.projectName = input.value;
+    });
 }
 
 /**
