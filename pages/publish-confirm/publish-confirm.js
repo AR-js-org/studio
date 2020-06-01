@@ -1,5 +1,7 @@
 window.onload = () => {
-    document.querySelector('#project-name').innerHTML = window.name.projectName;
+    window.session = JSON.parse(window.name);
+
+    document.querySelector('#project-name').innerHTML = window.session.projectName;
 
     const queryDict = {}
     location.search.substr(1).split("&").forEach((item) => {
