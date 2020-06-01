@@ -41,7 +41,7 @@
             <div class="pages-content-element">
                 <p class="lead">Publish to a repository</p>
                 <p class="paragraph margin-bottom-2rem">Ready to go live? There’s one more thing to do!</p>
-                <p class="paragraph margin-bottom-2rem">Provide a name for your project and an email so we can send you your project link.</p>
+                <p class="paragraph margin-bottom-2rem">Provide a name for your project.</p>
 
                 <div id="input-container">
                     <label class="small" for="project-name">Name your project:</label>
@@ -62,7 +62,10 @@
                         name="personal-email"
                         placeholder="your@email.com"
                     /> -->
-                    <button id="publish-project" class="primary-button" onclick="handleClick(event)">Publish</button>
+                    <div style="display: flex; align-items: center;">
+                        <button id="publish-project" class="primary-button" onclick="handleClick(event)">Publish</button>
+                        <p class="paragraph margin-bottom-2rem" style="margin-left: 2em;">You will required to login on Github.</p>
+                    </div>
                 </div>
 
                 <div id="feedback-container"></div>
