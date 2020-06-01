@@ -49,6 +49,7 @@ const displayPreview = () => {
  */
 const initPage = () => {
     // no other things to do here
+    window.session = JSON.parse(window.name);
     displayPreview();
 
     const publishAnchor = document.getElementById("publish-project");
