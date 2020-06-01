@@ -1,4 +1,8 @@
 window.onload = async () => {
+
+    const { GithubProvider } = ARjsStudioBackend;
+    const github = new GithubProvider();
+
     window.session = JSON.parse(window.name);
 
     document.querySelector('#project-name').innerHTML = window.session.projectName;
@@ -17,7 +21,7 @@ window.onload = async () => {
     response = await response.json();
 
     // let's publish on user's repo
-    const githubResponse = await provider.serveFiles({
+    const githubResponse = await github.serveFiles({
         token: response.token, // required, must be an OAuth2 token
         message: 'first commit for WebAR!', // optional
         repo: window.session.projectName + window.session.randomString, // using user + GH code, gg wp

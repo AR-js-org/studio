@@ -18,6 +18,7 @@ const unloadFileStyle = `
     }`;
 const previewImageStyle = `
     .imageFrame {
+        display: flex;
         position:relative;
         width: 23.75em;
         height: 23.75em;
