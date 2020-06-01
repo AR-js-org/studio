@@ -1,4 +1,4 @@
-window.onload = () => {
+window.onload = async () => {
     window.session = JSON.parse(window.name);
 
     document.querySelector('#project-name').innerHTML = window.session.projectName;
@@ -13,5 +13,7 @@ window.onload = () => {
         return;
     }
 
-    console.debug('code', queryDict.code);
+    let response = await fetch(`https://arjs-studio-backend.herokuapp.com/authenticate/${queryDict.code}`);
+    response = await response.json();
+    console.log(response)
 };
