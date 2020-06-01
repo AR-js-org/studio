@@ -21,16 +21,10 @@
     font-size: 1.25em;
     line-height: 25px;
     color: var(--passive-color-dark);
+    border: 1px solid black;
 }
 
 .marker img {
     position: relative;
 }
 
-.download-default-marker {
-    display: flex;
-    vertical-align: middle;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 18px;
-}

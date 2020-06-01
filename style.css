@@ -211,6 +211,14 @@ input:focus {
   flex-direction: column;
 }
 
+.download-default-marker {
+    display: flex;
+    vertical-align: middle;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .beta {
     font-family: Source Sans Pro;
     margin-top: 5em;
