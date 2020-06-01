@@ -51,6 +51,16 @@ const initPage = () => {
     // no other things to do here
     window.session = JSON.parse(window.name);
     displayPreview();
+
+    const projectNameInput = document.getElementById("project-name");
+    const publishAnchor = document.getElementById("publish-project");
+
+    if (isValidInput(projectNameInput.value)) {
+        const randomString = Math.random().toString(36).substring(7);
+        publishAnchor.href = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=repo:public_repo&state=${randomString}&redirect_uri=${window.location.href}`;
+    } else {
+        displayError();
+    }
 }
 
 /**
@@ -88,29 +98,6 @@ const isValidInput = (name, email) => {
         return name.length;
     }
     return name.length && email.length;
-}
-
-/**
- * Event handler for the publish button.
- *
- * @param {event} event
- */
-const handleClick = async (event) => {
-    const projectNameInput = document.getElementById("project-name");
-
-    if (isValidInput(projectNameInput.value)) {
-        let response = await fetch('https://github.com/login/oauth/authorize?client_id=' + GITHUB_CLIENT_ID,  {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-          });
-        console.log(response)
-        response = await response.json();
-        console.log(response)
-    } else {
-        displayError();
-    }
-    event.preventDefault();
 }
 
 /**
