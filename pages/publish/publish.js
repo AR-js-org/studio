@@ -1,3 +1,5 @@
+const GITHUB_CLIENT_ID = '284c2ed8c719c8520bd1';
+
 // TODO: Replace darr with an icon.
 const previewImageTemplate = (fileURL) =>
     `<div id="image-container">
@@ -93,14 +95,18 @@ const isValidInput = (name, email) => {
  *
  * @param {event} event
  */
-const handleClick = (event) => {
+const handleClick = async (event) => {
     const projectNameInput = document.getElementById("project-name");
 
     if (isValidInput(projectNameInput.value)) {
-        // TODO: Add GitHub publish logic
-        // to be handled by backend, probably
-        const projectUrl = "https://account.github.io/your-new-project-URL";
-        displaySuccess(projectUrl);
+        let response = await fetch('https://github.com/login/oauth/authorize?client_id=' + GITHUB_CLIENT_ID,  {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+          });
+        console.log(response)
+        response = await response.json();
+        console.log(response)
     } else {
         displayError();
     }
