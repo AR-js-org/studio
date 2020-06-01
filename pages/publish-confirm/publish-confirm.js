@@ -8,10 +8,10 @@ window.onload = () => {
         queryDict[item.split("=")[0]] = item.split("=")[1]
     }); // thx stackoverflow <3
 
-    if (queryDict.state !== window.name.randomString) {
-        console.error('Someone is pwning us?', window.name.randomString, queryDict.state);
+    if (queryDict.state !== window.session.randomString) {
+        console.error('Someone is pwning us?', window.session.randomString, queryDict.state);
         return;
     }
 
-    console.log('code', queryDict.code);
+    console.debug('code', queryDict.code);
 };
