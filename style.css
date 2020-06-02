@@ -226,6 +226,10 @@ input:focus {
     padding: 1em;
 }
 
+.repo-url {
+    font-size: 1.25em;
+}
+
 /* Responsive */
 @media screen and (max-width: 900px) {
   /* Typography */

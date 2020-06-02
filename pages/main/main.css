@@ -99,10 +99,6 @@
   background: white;
 }
 
-.repo-url {
-    font-size: 1.25em;
-}
-
 /* Responsive */
 @media screen and (max-width: 900px) {
   .background {

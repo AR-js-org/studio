@@ -29,7 +29,7 @@ window.onload = async () => {
     document.querySelector('.all-set').remove();
     document.querySelector('.repo-url').innerHTML = `
         We're done! Your Web AR Experience can be found at <p class="url">
-            <a href="${pagesUrl}">${pagesUrl}</a>
+            <a target="_blank" href="${pagesUrl}">${pagesUrl}</a>
         </p>
         It will be available in few minutes. Refresh the link to see it working!
     `;
