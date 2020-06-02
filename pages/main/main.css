@@ -104,8 +104,11 @@
   .background {
     width: 100%;
   }
-
-  .splashscreen {
-      display: none;
-  }
 }
+
+@media screen and (max-width: 1280px) {
+    .splashscreen {
+        display: none;
+    }
+}
+

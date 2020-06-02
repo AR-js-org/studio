@@ -16,7 +16,6 @@ class PageHeader extends HTMLElement {
                 }
 
                 img {
-                    width: 2.25em;
                     height: 2.25em;
                     padding: 0;
                     margin: 0;
@@ -40,7 +39,6 @@ class PageHeader extends HTMLElement {
 
             <a href="/studio">
                 <img class="logo-img" alt="logo" />
-                <p>AR.js Studio</p>
             </a>
         `;
 
