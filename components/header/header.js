@@ -16,7 +16,7 @@ class PageHeader extends HTMLElement {
                 }
 
                 img {
-                    height: 2.25em;
+                    height: 2em;
                     padding: 0;
                     margin: 0;
                 }

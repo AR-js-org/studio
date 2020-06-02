@@ -26,7 +26,7 @@ const previewImageStyle = `
         font-size: 1.25em;
         text-align: center;
     }
-    .marker-preview .imageFrame {
+    #marker-preview .imageFrame {
         border: 1px solid black;
     }
     img {
