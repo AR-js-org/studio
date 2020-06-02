@@ -26,11 +26,11 @@ window.onload = async () => {
         branch: 'gh-pages' // automatically deploy to Pages by default
     });
 
-    console.debug(pagesUrl);
-
-    document.querySelector('#input-container').remove();
+    document.querySelector('.all-set').remove();
     document.querySelector('.repo-url').innerHTML = `
-        We're done! Your Web AR Experience can be found at <p class="url">${pagesUrl}</p>
-        Share it to make others enjoy your work!
+        We're done! Your Web AR Experience can be found at <p class="url">
+            <a href="${pagesUrl}">${pagesUrl}</a>
+        </p>
+        It will be available in few minutes. Refresh the link to see it working!
     `;
 };
