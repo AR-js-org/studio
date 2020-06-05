@@ -1,6 +1,6 @@
 const reg4Base64 = /^data\:[\w-]+\/[\w-]+;base64,/; // check where the data is base64 format
 
-function handleUnload(self, isMarker=false) {
+function handleUnload(self, isMarker = false) {
     const marker = document.querySelector('#marker-preview img');
     if (isMarker && marker) {
         marker.remove();
@@ -112,7 +112,6 @@ function handleVideoUpload(file) {
         //for backend api asset needs only base64 part
         window.assetFile = reader.result;
         window.assetName = file.type.replace('video/', 'asset.');
-        window.assetParam.isValid = true;
         checkUserUploadStatus();
     };
     let preview = document.getElementById("content-preview");
@@ -126,7 +125,7 @@ function handleVideoUpload(file) {
             video.style.height = '100%';
         }
 
-        window.assetParam = { size: { width: video.videoWidth, height: video.videoHeight } };
+        window.assetParam = { isValid: true, size: { width: video.videoWidth, height: video.videoHeight } };
 
         video.parentElement.style.backgroundColor = 'black';
         document.querySelector('#videoFrame').style.opacity = 1;
@@ -142,7 +141,7 @@ function handleModelUpload(file) {
             //for backend api asset needs only base64 part
             window.assetFile = reader.result.split(",")[1];
             window.assetName = 'asset.glb';
-	        checkUserUploadStatus();
+            checkUserUploadStatus();
             let preview = document.getElementById("content-preview");
             preview.innerHTML = previewModelTemplate(reader.result, file.name);
         };
@@ -179,7 +178,7 @@ function handleModelUpload(file) {
                     //for backend api asset needs only base64 part
                     window.assetFile = reader2.result.split(",")[1];
                     window.assetName = 'asset.gltf';
-		            checkUserUploadStatus();
+                    checkUserUploadStatus();
                     let preview = document.getElementById("content-preview");
                     preview.innerHTML = previewModelTemplate(reader2.result, file.name);
                 };
@@ -198,7 +197,7 @@ function handleModelUpload(file) {
             }
             window.assetFile = result.split(",")[1];
             window.assetName = 'asset.gltf';
-	        checkUserUploadStatus();
+            checkUserUploadStatus();
             let preview = document.getElementById("content-preview");
             preview.innerHTML = previewModelTemplate(result, file.name);
         })

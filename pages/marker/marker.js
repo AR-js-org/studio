@@ -43,7 +43,7 @@ const zip = () => {
             assetType: window.assetType, // image/audio/video/3d
             assetFile: window.assetFile,
             assetName: window.assetName,
-            assetParam: window.assetParam,
+            assetParam: window.assetParam && (window.assetParam.isValid ? window.assetParam : null),
             markerPatt: markerPattern
         })))
         .then((package) => package.serve({ packageType: 'zip' }))
@@ -84,7 +84,7 @@ const publish = () => {
 
             window.location = '../publish';
         }
-    )
+        )
 }
 
 zipButton.addEventListener('click', zip);
