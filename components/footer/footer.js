@@ -78,7 +78,10 @@ const FooterContent = `
     </p>
 
     <p class="paragraph">
-      Export your project to GitHub or download the package containing all files and generated code to save it locally.
+        Your project is going to be safely hosted on GitHub - a space for code repositories online.
+    </p>
+    <p class="paragraph">
+    If you would like to save your project locally, you can also download the package containing the generated code and all supporting files.
     </p>
 
     <div class="buttons">

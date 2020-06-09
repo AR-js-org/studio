@@ -34,7 +34,8 @@
 
 /* Custom radio buttons */
 .radio-container {
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: relative;
   padding-left: 3em;
   margin: 1.25em 0; /* TODO: merge margin attributes */
@@ -45,6 +46,14 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.radio-container .radio-title {
+    font-weight: bold;
+}
+
+.radio-container span {
+    margin-top: 1em;
 }
 
 /* Hide the browser's default radio button */
@@ -107,8 +116,7 @@
 }
 
 @media screen and (max-width: 1280px) {
-    .splashscreen {
-        display: none;
-    }
+  .splashscreen {
+    display: none;
+  }
 }
-

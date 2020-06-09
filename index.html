@@ -24,11 +24,11 @@
       <div class="content">
         <p class="title">Web-enabled AR experiences</p>
         <p class="paragraph">
-            AR.js studio is an open-source AR development environment for creating
-            augmented web experiences. You can create location or marker-based AR
-            applications and deploy them straight to web. Working with AR.js
-            studio doesn’t require any knowledge of coding. You can start working
-            on your project now.
+            AR.js Studio is an open-source AR creation platform for building custom augmented reality experiences.
+            You can create location-based or marker-based AR applications and deploy them straight to the web.
+            That means you won’t have to download any extra apps to access your experience!
+            Working with AR.js Studio doesn’t require any knowledge of coding, either.
+            You can start creating your first AR project right now.
         </p>
 
         <img class="splashscreen" src="./assets/img/splashscreen.png"/>
@@ -37,24 +37,30 @@
 
         <div>
           <label class="radio-container paragraph">
-            Location-based
+            <span class="radio-title">Location-based</span>
             <input
               id="location"
               type="radio"
               name="radio"
               onclick="radioOnclick(this)"
             />
+            <span>
+                Place your creation on a map, so it remains tied to a physical location.
+            </span>
             <span class="checkmark"></span>
           </label>
 
           <label class="radio-container paragraph">
-            Marker-based
+            <span class="radio-title">Marker-based</span>
             <input
               id="marker"
               type="radio"
               name="radio"
               onclick="radioOnclick(this)"
             />
+            <span>
+                Connect your creation to a visual marker, which can be moved to any location.
+            </span>
             <span class="checkmark"></span>
           </label>
 
