@@ -123,7 +123,7 @@ function createButtonUseMyLocation() {
 // let x = `<input class="text-input" type="text" id="latitude" onblur="check_lat_lon()" name="latitude" />`;
 function createInput(name, i) {
     let coordInput = document.createElement('input');
-    coordInput.className = "text-input coordinates-inputs";
+    coordInput.className = "text-input coordinates-inputs is-" + name;
     coordInput.type = 'text';
     coordInput.id = `${name}${i}`;
     coordInput.name = i;
@@ -148,6 +148,8 @@ function deleteCoords(e) {
         updateMarker();
         window.locationNumber = window.locationNumber - 1;
     }
+
+    updateLocationParam();
 }
 
 
@@ -180,6 +182,22 @@ function updateLatLngInputs(i) {
     delIconDiv.append(delIcon)
 }
 
+function updateLocationParam() {
+    let locations = window.assetParam.locations;
+    locations.length = 0;
+    let lats = document.querySelectorAll('.is-latitude');
+    let lngs = document.querySelectorAll('.is-longitude');
+    console.log(lats.length, lngs.length);
+    for (let i = 0, lat, lng; i < lats.length; i++) {
+        lat = lats[i].value.trim();
+        lng = lats[i].value.trim();
+        if (lat > 0 && lng.length > 0) {
+            locations.push({ latitude: parseFloat(lat), longitude: parseFloat(lng) })
+        }
+    }
+    console.log(locations);
+    checkUserUploadStatus();
+};
 
 class MapPickLocation extends HTMLElement {
     constructor() {
@@ -201,7 +219,7 @@ class MapPickLocation extends HTMLElement {
         this.addLatLngInputs();
 
         let addLocation = document.getElementsByClassName('add-location-container');
-        addLocation[0].addEventListener('click', function() {
+        addLocation[0].addEventListener('click', function () {
             window.locationNumber = window.locationNumber + 1;
             updateLatLngInputs(window.locationNumber)
         })
@@ -219,13 +237,15 @@ class MapPickLocation extends HTMLElement {
 
             const longitude = document.querySelector(`.longitude-elements input[name="${locationNumber}"]`);
             longitude.value = lng;
+
+            updateLocationParam();
         };
 
         map = L.map(this.mapRoot).setView(this.mapConfig.center, this.mapConfig.onLoad_zoom);
         layerGroup = L.layerGroup().addTo(map);
         L.tileLayer(tile_url, this.mapConfig.attribution_opts).addTo(map);
         window.locationNumber = 1;
-        map.on('click', function(e) { // => {} that contains the coordinates
+        map.on('click', function (e) { // => {} that contains the coordinates
             array.push({
                 id: 'mapclick',
                 coords: [e.latlng.lat, e.latlng.lng],
@@ -240,13 +260,13 @@ class MapPickLocation extends HTMLElement {
         let buttonUseMyLocation = createButtonUseMyLocation();
         leafletControlAttribution.appendChild(buttonUseMyLocation);
 
-        buttonUseMyLocation.addEventListener("click", function(e) {
+        buttonUseMyLocation.addEventListener("click", function (e) {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
+                navigator.geolocation.getCurrentPosition(function (position) {
 
                     updateMyLocationMarker(position.coords.latitude, position.coords.longitude);
                 },
-                    function(error) {
+                    function (error) {
                         if (error.code == error.PERMISSION_DENIED) {
                             updateLatLngInnerHtmlDenied(error.message);
                             // if permission on browser has been set to default deny of position - will provide basic steps to adjust for this url
@@ -322,7 +342,7 @@ class MapPickLocation extends HTMLElement {
         delIcon.className = 'hidden-delete-icon';
         delIcon.style.visibility = 'hidden';
 
-        delIconDiv.addEventListener('click', function(e) {
+        delIconDiv.addEventListener('click', function (e) {
             let item = e.target.id;
 
         })
