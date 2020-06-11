@@ -16,6 +16,8 @@ function handleUnload(self, isMarker = false) {
     } else if (previewId === 'marker-preview') {
         window.markerImage = null;
     }
+
+    checkUserUploadStatus();
 };
 
 function handleMarkerUpload(self) {

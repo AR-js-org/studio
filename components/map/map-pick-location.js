@@ -190,12 +190,11 @@ function updateLocationParam() {
     console.log(lats.length, lngs.length);
     for (let i = 0, lat, lng; i < lats.length; i++) {
         lat = lats[i].value.trim();
-        lng = lats[i].value.trim();
+        lng = lngs[i].value.trim();
         if (lat > 0 && lng.length > 0) {
             locations.push({ latitude: parseFloat(lat), longitude: parseFloat(lng) })
         }
     }
-    console.log(locations);
     checkUserUploadStatus();
 };
 

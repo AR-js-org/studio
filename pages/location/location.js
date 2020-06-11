@@ -1,4 +1,4 @@
-const { MarkerModule, Package } = ARjsStudioBackend;
+const { Package } = ARjsStudioBackend;
 
 var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
 var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
