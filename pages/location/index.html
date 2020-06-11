@@ -7,17 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- import the leaflet css and script -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-        crossorigin="">
-        </script>
-
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="../../style.css" />
+
+    <!-- import the leaflet css and script -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" crossorigin=""
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" crossorigin=""
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="></script>
+
+
+    <!-- import studio-backend api -->
+    <script src="https://raw.githack.com/AR-js-org/studio-backend/master/dist/arjs-studio-backend.min.js"></script>
+
+    <!-- import aframe to support model preview -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.js"></script>
+    <script src="https://cdn.statically.io/gh/donmccurdy/aframe-extras/fe293f78/dist/aframe-extras.loaders.js"></script>
+
+    <!-- import JsZip -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.3.0/jszip.min.js"></script>
 
     <!-- import web components -->
     <script src="../../components/back-anchor/back-anchor.js"></script>
@@ -27,6 +35,13 @@
     <script src="../../components/map/map-pick-location.js"></script>
     <script src="../../components/header/header.js"></script>
     <script src="../../components/footer/footer.js"></script>
+    <script src="../../components/model-controller/model-controller.js"></script>
+
+    <!-- import utils -->
+    <script src="../../utils/fileHelper.js"></script>
+    <script src="../../utils/fileTemplate.js"></script>
+    <script src="../../utils/fileHandler.js"></script>
+    <script src="./location.js" defer></script>
 </head>
 
 <body>
@@ -72,22 +87,28 @@
             <map-pick-location></map-pick-location>
         </div>
 
-        <hr>
-
         <div class="pages-content-container">
             <div class="pages-content-element">
-                <p class="lead">2. Choose the content</p>
+                <p class="lead">2. Choose the content </p>
                 <p class="paragraph">
-                    Select the type of content you would like to appear and then upload the file from your computer.
-                    Your uploaded content will appear in all the locations you have set above.
+                <p>Select the type of content you would like to link to your marker and then upload the file from your
+                    computer.</p>
+                <ul>
+                    <li>3D Object (.gltf, .glb .zip; max size 50MB)</li>
+                    <li>Image (.jpg, .png, .gif; max size 15MB)</li>
+                    <li>Audio (.mp3; max size 10MB)</li>
+                    <li>Video (.mp4; max size 25MB)</li>
+                </ul>
                 </p>
-                <file-select></file-select>
-                <label class="passive-button cursor-pointer">
-                    <input type="file" hidden />
+                <label class="passive-button file-input">
+                    <input id="content-file" accept="*" type="file" hidden onchange="handleContentUpload(this)" />
                     Upload file
                 </label>
+                <p id="content-error" class="error"></p>
             </div>
-            <file-holder></file-holder>
+            <div id="content-preview" target="content-file">
+                <file-holder></file-holder>
+            </div>
         </div>
     </div>
     <page-footer></page-footer>
