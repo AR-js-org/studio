@@ -46,7 +46,9 @@ function handleMarkerUpload(self) {
 function handleContentUpload(self) {
     const file = self.files[0];
     window.assetType = getFileType(file); // set the assetType according to the file extension.
-    window.assetParam = { isValid: false }; // set to invalid first until the data is processed.
+    window.assetParam.scale = 1.0;
+    window.assetParam.size = { width: 1.0, height: 1.0, depth: 1.0, };
+
     if (isValidFile(window.assetType, file, "content-error")) {
         switch (window.assetType) {
             case 'image': {
@@ -125,7 +127,7 @@ function handleVideoUpload(file) {
             video.style.height = '100%';
         }
 
-        window.assetParam = { isValid: true, size: { width: video.videoWidth, height: video.videoHeight } };
+        window.assetParam.size = { width: video.videoWidth, height: video.videoHeight };
 
         video.parentElement.style.backgroundColor = 'black';
         document.querySelector('#videoFrame').style.opacity = 1;

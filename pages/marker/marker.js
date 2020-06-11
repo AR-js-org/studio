@@ -3,6 +3,15 @@ const { MarkerModule, Package } = ARjsStudioBackend;
 var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
 var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
 
+window.assetParam = {
+    scale: 1.0,
+    size: {
+        width: 1.0,
+        height: 1.0,
+        depth: 1.0,
+    },
+};
+
 /**
  * Initialize the default marker image on page load.
  */
@@ -43,7 +52,7 @@ const zip = () => {
             assetType: window.assetType, // image/audio/video/3d
             assetFile: window.assetFile,
             assetName: window.assetName,
-            assetParam: window.assetParam && (window.assetParam.isValid ? window.assetParam : null),
+            assetParam: window.assetParam,
             markerPatt: markerPattern
         })))
         .then((package) => package.serve({ packageType: 'zip' }))
