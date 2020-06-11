@@ -1,7 +1,6 @@
 const fileHolderTemplate = `
   <style>
     .image-placeholder {
-      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -34,7 +33,7 @@ class FileHolder extends HTMLElement {
     var shadow = this.attachShadow({ mode: 'open' });
     shadow.innerHTML = fileHolderTemplate;
     setTimeout(function () {
-      var targetAttr = this.getAttribute('target');
+      var targetAttr = this.parentElement.getAttribute('target');
       var target = document.querySelector('#' + targetAttr)
       if (target) {
         this.onclick = function () {

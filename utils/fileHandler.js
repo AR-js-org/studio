@@ -1,7 +1,14 @@
-function handleUnload(self) {
-    const preview = self.parentElement.parentElement;
+const reg4Base64 = /^data\:[\w-]+\/[\w-]+;base64,/; // check where the data is base64 format
+
+function handleUnload(self, isMarker = false) {
+    const marker = document.querySelector('#marker-preview img');
+    if (isMarker && marker) {
+        marker.remove();
+    }
+
+    const preview = self.parentElement.parentElement.parentElement;
     const previewId = preview.getAttribute("id");
-    preview.innerHTML = "<file-holder></file-holder>";
+    preview.innerHTML = '<file-holder></file-holder>'
 
     if (previewId === 'content-preview') {
         window.assetFile = null;
@@ -20,23 +27,26 @@ function handleMarkerUpload(self) {
     reader.readAsDataURL(file);
     reader.onloadend = function () {
         const base64Data = reader.result;
+        window.markerImage = base64Data;
+
         MarkerModule.getFullMarkerImage(base64Data, 0.5, 512, "black")
             .then((fullMarkerImage) => {
-                window.markerImage = base64Data;
+                window.fullMarkerImage = fullMarkerImage;
                 const blob = dataURItoBlob(fullMarkerImage);
                 const fileURL = URL.createObjectURL(blob);
 
                 const preview = document.getElementById("marker-preview");
-                preview.innerHTML = previewImageTemplate(fileURL, file.name);
-            }
-            );
+                preview.innerHTML = previewImageTemplate(fileURL, file.name, true);
+                checkUserUploadStatus();
+            });
     };
     self.value = ''; // Reset required for re-upload
 };
 
 function handleContentUpload(self) {
     const file = self.files[0];
-
+    window.assetType = getFileType(file); // set the assetType according to the file extension.
+    window.assetParam = { isValid: false }; // set to invalid first until the data is processed.
     if (isValidFile(window.assetType, file, "content-error")) {
         switch (window.assetType) {
             case 'image': {
@@ -69,6 +79,7 @@ function handleImageUpload(file) {
     reader.onloadend = function () {
         window.assetFile = reader.result.split(",")[1];
         window.assetName = file.type.replace('image/', 'asset.');
+        checkUserUploadStatus();
     };
 
     let preview = document.getElementById("content-preview");
@@ -85,6 +96,7 @@ function handleAudioUpload(file) {
         //for backend api asset needs only base64 part
         window.assetFile = reader.result;
         window.assetName = file.type.replace('audio/', 'asset.');
+        checkUserUploadStatus();
     };
 
     let preview = document.getElementById("content-preview");
@@ -100,6 +112,7 @@ function handleVideoUpload(file) {
         //for backend api asset needs only base64 part
         window.assetFile = reader.result;
         window.assetName = file.type.replace('video/', 'asset.');
+        checkUserUploadStatus();
     };
     let preview = document.getElementById("content-preview");
     preview.innerHTML = previewVideoTemplate(fileURL, fileName);
@@ -111,6 +124,8 @@ function handleVideoUpload(file) {
         } else {
             video.style.height = '100%';
         }
+
+        window.assetParam = { isValid: true, size: { width: video.videoWidth, height: video.videoHeight } };
 
         video.parentElement.style.backgroundColor = 'black';
         document.querySelector('#videoFrame').style.opacity = 1;
@@ -125,9 +140,8 @@ function handleModelUpload(file) {
         reader.onloadend = function () {
             //for backend api asset needs only base64 part
             window.assetFile = reader.result.split(",")[1];
-            let fileName = file.name.split('.');
-            window.assetName = 'asset.' + fileName[fileName.length - 1];
-
+            window.assetName = 'asset.glb';
+            checkUserUploadStatus();
             let preview = document.getElementById("content-preview");
             preview.innerHTML = previewModelTemplate(reader.result, file.name);
         };
@@ -135,18 +149,16 @@ function handleModelUpload(file) {
         const reader = new FileReader();
         reader.readAsText(file);
         reader.onloadend = function () {
+            const previewError = document.getElementById("content-error");
             try {
                 let gltf = JSON.parse(reader.result);
                 let buffers = gltf.buffers || [];
                 let images = gltf.images || [];
                 let uri;
-                const previewError = document.getElementById("content-error");
 
-                // console.log(gltf.buffers);
-                // console.log(gltf.images);
                 for (let i = 0; i < buffers.length; i++) {
                     uri = buffers[i].uri;
-                    if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                    if (!reg4Base64.test(uri)) { // need a related file: data:application/octet-stream;base64,
                         previewError.innerHTML = '*Please pack all related files to zip file and try again.'
 
                         return;
@@ -154,17 +166,27 @@ function handleModelUpload(file) {
                 }
                 for (let i = 0; i < images.length; i++) {
                     uri = images[i].uri;
-                    if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                    if (!reg4Base64.test(uri)) { // need a related file
                         previewError.innerHTML = '*Please pack all related files to zip file and try again.'
                         return;
                     }
                 }
+                // need to load again
+                const reader2 = new FileReader();
+                reader2.readAsDataURL(file);
+                reader2.onloadend = function () {
+                    //for backend api asset needs only base64 part
+                    window.assetFile = reader2.result.split(",")[1];
+                    window.assetName = 'asset.gltf';
+                    checkUserUploadStatus();
+                    let preview = document.getElementById("content-preview");
+                    preview.innerHTML = previewModelTemplate(reader2.result, file.name);
+                };
 
             } catch (error) {
                 previewError.innerHTML = '*The gltf file is corrupted.'
                 return;
             }
-            // console.log(reader.result);
         };
     } else if (fileType == 'zip') {
         handleZip(file, (err, result) => {
@@ -175,7 +197,7 @@ function handleModelUpload(file) {
             }
             window.assetFile = result.split(",")[1];
             window.assetName = 'asset.gltf';
-
+            checkUserUploadStatus();
             let preview = document.getElementById("content-preview");
             preview.innerHTML = previewModelTemplate(result, file.name);
         })
@@ -208,14 +230,14 @@ function handleZip(file, cb) {
                             // console.log(gltf.images);
                             for (let i = 0; i < buffers.length; i++) {
                                 uri = buffers[i].uri;
-                                if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                                if (!reg4Base64.test(uri)) { // need a related file
                                     buffers[i].uri = prePath + uri;
                                     targets.push(buffers[i])
                                 }
                             }
                             for (let i = 0; i < images.length; i++) {
                                 uri = images[i].uri;
-                                if (uri.indexOf('data:application/octet-stream;base64,') != 0) { // need a related file
+                                if (!reg4Base64.test(uri)) { // need a related file
                                     images[i].uri = prePath + uri;
                                     targets.push(images[i])
                                 }

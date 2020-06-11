@@ -12,7 +12,8 @@ const FooterContent = `
       line-height: 140%;
     }
 
-    .buttons > button {
+    .buttons > button,
+    .buttons > a {
         margin-right: 3.125em;
         cursor: pointer;
     }
@@ -63,6 +64,11 @@ const FooterContent = `
     .passive-button:hover {
       background: var(--passive-color-dark);
     }
+
+    .buttons > .publish-disabled {
+        cursor: default;
+        opacity: 0.4;
+    }
   </style>
 
   <div>
@@ -72,15 +78,18 @@ const FooterContent = `
     </p>
 
     <p class="paragraph">
-      Export your project to GitHub or download the package containing all files and generated code to save it locally.
+        Your project is going to be safely hosted on GitHub - a space for code repositories online.
+    </p>
+    <p class="paragraph">
+    If you would like to save your project locally, you can also download the package containing the generated code and all supporting files.
     </p>
 
     <div class="buttons">
-      <button class="primary-button">
+      <button id="github-publish" class="primary-button publish-disabled">
         Publish on Github
       </button>
 
-      <button id="zip-button" class="passive-button">
+      <button id="zip-publish" disabled class="passive-button publish-disabled">
         Download package
       </button>
     </div>
@@ -93,13 +102,6 @@ class PageFooter extends HTMLElement {
         super();
         this.shadow = this.attachShadow({ mode: 'open' });
         this.shadow.innerHTML = FooterContent
-    }
-
-    connectedCallback() {
-        const button = this.shadow.querySelector("#zip-button");
-        button.onclick =  () => {
-            this.dispatchEvent(new CustomEvent("onClick"));
-        }
     }
 }
 

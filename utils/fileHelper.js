@@ -5,7 +5,7 @@ const supportedFileMap = {
         maxSizeText: '50MB',
     },
     image: {
-        types: ['image/png', 'image/jpeg', 'image/gif'],
+        types: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'],
         maxSize: 15 * 1024 * 1024,
         maxSizeText: '15MB',
     },
@@ -21,12 +21,21 @@ const supportedFileMap = {
     }
 };
 
-function isValidFile (type, file, errorId) {
+function getFileType(file) {
+    let type = file.name.split('.').pop();
+
+    if (supportedFileMap['3d'].types.indexOf(type) > -1) return '3d';
+    if (supportedFileMap['image'].types.indexOf('image/' + type) > -1) return 'image';
+    if (supportedFileMap['audio'].types.indexOf('audio/' + type) > -1) return 'audio';
+    if (supportedFileMap['video'].types.indexOf('video/' + type) > -1) return 'video';
+};
+
+function isValidFile(type, file, errorId) {
     const supportedFile = supportedFileMap[type];
     const previewError = document.getElementById(errorId)
 
     if (!type || !isValidFileType(type, file)) {
-        previewError.innerHTML = '*Please select an option before uploading a file.';
+        previewError.innerHTML = '*Please select a supported file listed above.';
         return false;
     }
     if (!isValidFileSize(type, file)) {

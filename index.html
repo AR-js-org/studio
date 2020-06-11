@@ -2,66 +2,72 @@
 <html lang="en">
   <head>
     <title>AR.js Studio</title>
-    <link rel="shortcut icon" href="assets/img/favicon.ico" />
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="components/main/main.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./pages/main/main.css" />
 
     <!-- import the webpage's javascript file -->
-    <script src="components/header/header.js"></script>
-    <script src="components/main/index.js"></script>
+    <script src="./components/header/header.js"></script>
+    <script src="./pages/main/main.js"></script>
   </head>
 
   <body>
     <page-header assetsUrl="assets"></page-header>
     <div class="background">
+        <!-- to be removed on release -->
+        <div class="beta">This is an alpha version. Features are not finished, bugs may be present. We will remove this disclaimer as soon as AR.js Studio reaches a stable version.</div>
       <div class="content">
         <p class="title">Web-enabled AR experiences</p>
         <p class="paragraph">
-
-            <!-- to be removed on release -->
-            <h1 style="font-size: 1.25em; font-weight: bold;">
-                This is a Work in Progress, alpha version. It's like our playground for now.
-                You may find missing features or bugs.
-            </h1>
-
-            AR.js studio is an open-source AR development environment for creating
-            augmented web experiences. You can create location or marker-based AR
-            applications and deploy them straight to web. Working with AR.js
-            studio doesn’t require any knowledge of coding. You can start working
-            on your project now.
+            AR.js Studio is an open-source AR creation platform for building custom augmented reality experiences.
+            You can create location-based or marker-based AR applications and deploy them straight to the web.
+            That means you won’t have to download any extra apps to access your experience!
+            Working with AR.js Studio doesn’t require any knowledge of coding, either.
+            You can start creating your first AR project right now.
         </p>
-        <img class="splashscreen" src="assets/img/splashscreen.png"/>
+
+        <img class="splashscreen" src="./assets/img/splashscreen.png"/>
 
         <p class="lead">Pick your project type</p>
 
         <div>
-          <label class="radio-container">
-            Location-based
+          <label class="radio-container paragraph">
+            <span class="radio-title">Location-based</span>
             <input
               id="location"
               type="radio"
               name="radio"
               onclick="radioOnclick(this)"
             />
+            <span>
+                Place your creation on a map, so it remains tied to a physical location.
+            </span>
             <span class="checkmark"></span>
           </label>
-          <label class="radio-container">
-            Marker-based
+
+          <label class="radio-container paragraph">
+            <span class="radio-title">Marker-based</span>
             <input
               id="marker"
               type="radio"
               name="radio"
               onclick="radioOnclick(this)"
             />
+            <span>
+                Connect your creation to a visual marker, which can be moved to any location.
+            </span>
             <span class="checkmark"></span>
           </label>
+
           <a onclick="anchorOnclick(this)" id="start-building" class="primary-button">Start building</a>
-          <div id="error" class="error" style="visibility: hidden;">Please, select a project type.</div>
+          <div id="error" class="error" style="visibility: hidden;">
+            Please, select a project type.
+          </div>
         </div>
       </div>
     </div>

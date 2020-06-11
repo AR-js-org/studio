@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AR.js Studio</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="../publish/publish.css" />
+
+    <!-- import studio-backend api -->
+    <script src="https://raw.githack.com/AR-js-org/studio-backend/master/dist/arjs-studio-backend.min.js"></script>
+
+    <!-- import web components -->
+    <script src="../../components/back-anchor/back-anchor.js"></script>
+    <script src="../../components/header/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="../../utils/fileHelper.js"></script>
+    <script src="./publish-confirm.js"></script>
+</head>
+
+<body>
+    <page-header assetsUrl="../../assets"></page-header>
+
+    <div class="pages-content">
+        <back-anchor assetsUrl="../../assets"></back-anchor>
+
+        <div class="pages-content-container">
+            <div class="pages-content-element">
+                <p class="title">Get your shareable link</p>
+                <p class="all-set paragraph margin-bottom-2rem loader" style="font-size: 1.25em;">
+                    We are all set! We are publishing your AR Experience. Please wait few seconds
+                    <span class="loader__dot">.</span><span class="loader__dot">.</span><span class="loader__dot">.</span>
+                </p>
+
+                <div class="repo-url">
+
+                </div>
+            </div>
+        </div>
+</body>
+</html>

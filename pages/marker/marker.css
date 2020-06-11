@@ -1,0 +1,31 @@
+#marker-preview {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.marker {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 23.75em;
+    width: 23.75em;
+    background: var(--passive-color);
+    border: 1px solid var(--passive-color-dark);
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-family: Chakra Petch;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.25em;
+    line-height: 25px;
+    color: var(--passive-color-dark);
+}
+
+.marker img {
+    position: relative;
+    width: 100%;
+    border: 1px solid black;
+}
+
