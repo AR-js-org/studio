@@ -35,7 +35,6 @@ function reUseMapComponent(path) {
 
 
 function updateMyLocationMarker(lat, lng) {
-
     array.push({
         id: 'mylocation',
         coords: [lat, lng],
@@ -50,7 +49,6 @@ function updateMyLocationMarker(lat, lng) {
 }
 
 function updateMarker() {
-
     let key = "id";
     const unique = [...new Map(array.map(item =>
         [item[key], item])).values()];
@@ -58,7 +56,6 @@ function updateMarker() {
 
     map.panTo(new L.LatLng(unique[0].lat, unique[0].lng)); // will pan map to make the center of map the newly located coords
     unique.map((e, i) => {
-
         L.marker(e.coords, {
             icon: L.divIcon({
                 className: "number-icon",
@@ -66,7 +63,7 @@ function updateMarker() {
                 iconAnchor: [20, 40],
                 shadowAnchor: [4, 30],  // the same for the shadow
                 popupAnchor: [0, -30],
-                html: i + 1
+                html: window.locationNumber,
             })
         }).addTo(layerGroup);
 
@@ -79,7 +76,6 @@ function updateLatLngValue(lat, lng) {
 }
 
 function check_lat_lon(e) {
-
     let regex_lat = /^(-?[1-8]?\d(?:\.\d{1,18})?|90(?:\.0{1,18})?)$/;
     let regex_lng = /^(-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,18})?|180(?:\.0{1,18})?)$/;
     let lat = document.getElementById(`latitude${e.target.name}`).value;
@@ -98,27 +94,12 @@ function check_lat_lon(e) {
                 lng: lng
             })
             updateMarker();
-            updateLatLngInnerHtml();
+
         }
         else {
             updateLatLngInnerHtmlInvalidCoords()
         }
     }
-}
-
-function updateLatLngInnerHtml() {
-
-
-    let allCoords = [];
-    array.map(e => {
-        allCoords.push(Number(e.lat).toFixed(7))
-        allCoords.push(Number(e.lng).toFixed(7))
-    })
-
-    shadow.querySelector('.set-location-button').disabled = false;
-    let x = shadow.querySelector(".location-set-display");
-    x.style.visibility = "visible"
-    x.innerHTML = `Location is set to: <b>[${allCoords.toString()}]</b>`;
 }
 
 function updateLatLngInnerHtmlDenied(msg) {
@@ -163,12 +144,10 @@ function deleteCoords(e) {
     if (lat.value.length !== 0 && lng.value.length !== 0) {
         let arr = array.filter(e => e.id !== id);
         array = arr;
-        console.log('fuck', array)
         layerGroup.clearLayers();
         updateMarker();
+        window.locationNumber = window.locationNumber - 1;
     }
-
-
 }
 
 
@@ -184,8 +163,6 @@ function updateLatLngInputs(i) {
     numTag.className = "num-tags";
     numTag.id = count.toString();
 
-
-
     let delIconDiv = document.createElement('div');
     delIconDiv.className = 'delete-icon-parent';
     delIconDiv.id = count.toString();
@@ -194,9 +171,7 @@ function updateLatLngInputs(i) {
     delIcon.innerHTML = trashCanSvg;
     delIcon.className = 'hidden-delete-icon';
 
-
     delIconDiv.addEventListener('click', deleteCoords)
-
 
     numTags[0].append(numTag);
     latElems[0].append(createInput('latitude', count))
@@ -225,29 +200,32 @@ class MapPickLocation extends HTMLElement {
         this.createMap();
         this.addLatLngInputs();
 
-        let setLocationButton = this.shadowRoot.querySelector('.set-location-button');
-        setLocationButton.addEventListener("click", (e) => {
-            let lat = document.getElementById(`latitude`).value;
-            let lng = document.getElementById(`longitude`).value;
-            alert(`progress to next screen, ${lat}, ${lng}`);
+        let addLocation = document.getElementsByClassName('add-location-container');
+        addLocation[0].addEventListener('click', function() {
+            window.locationNumber = window.locationNumber + 1;
+            updateLatLngInputs(window.locationNumber)
         })
-
-        let addIcon = document.getElementsByClassName('add-location-icon');
-        addIcon[0].addEventListener('click', function() {
-            updateLatLngInputs(1)
-
-        })
-
-
-
     }
 
     createMap() {
+        const editLocationInput = (locationNumber, lat, lng) => {
+            if (!locationNumber || !lat || !lng) {
+                console.debug('Wrong location values', locationNumber, lat, lng);
+                return;
+            }
+
+            const latitude = document.querySelector(`.latitude-elements input[name="${locationNumber}"]`);
+            latitude.value = lat;
+
+            const longitude = document.querySelector(`.longitude-elements input[name="${locationNumber}"]`);
+            longitude.value = lng;
+        };
+
         map = L.map(this.mapRoot).setView(this.mapConfig.center, this.mapConfig.onLoad_zoom);
         layerGroup = L.layerGroup().addTo(map);
         L.tileLayer(tile_url, this.mapConfig.attribution_opts).addTo(map);
+        window.locationNumber = 1;
         map.on('click', function(e) { // => {} that contains the coordinates
-
             array.push({
                 id: 'mapclick',
                 coords: [e.latlng.lat, e.latlng.lng],
@@ -255,7 +233,7 @@ class MapPickLocation extends HTMLElement {
                 lng: e.latlng.lng
             })
             updateMarker();
-            updateLatLngInnerHtml(e.latlng.lat, e.latlng.lng)
+            editLocationInput(window.locationNumber, e.latlng.lat, e.latlng.lng);
         })
 
         let leafletControlAttribution = shadow.querySelector(".leaflet-control-attribution");
@@ -265,10 +243,8 @@ class MapPickLocation extends HTMLElement {
         buttonUseMyLocation.addEventListener("click", function(e) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    updateLatLngInnerHtml("Locating", "....");
 
                     updateMyLocationMarker(position.coords.latitude, position.coords.longitude);
-                    updateLatLngInnerHtml(position.coords.latitude, position.coords.longitude)
                 },
                     function(error) {
                         if (error.code == error.PERMISSION_DENIED) {
@@ -286,10 +262,7 @@ class MapPickLocation extends HTMLElement {
     }
 
 
-
-
     addLatLngInputs() {
-
         const parent = document.getElementsByClassName('coordinates-input-wrapper')[0];
         const coordsParent = document.createElement('div');
         coordsParent.className = 'coordinates-input-container';
@@ -323,7 +296,7 @@ class MapPickLocation extends HTMLElement {
 
         const addCoordsName = document.createElement('div');
         addCoordsName.className = 'add-location-name';
-        addCoordsName.innerHTML = 'add location';
+        addCoordsName.innerHTML = 'Add a location';
 
 
         latElems.append(latElemLabel); // static

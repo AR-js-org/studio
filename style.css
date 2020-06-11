@@ -188,6 +188,16 @@ page-footer {
 /* TODO: move .coordinates-input-container to location.css */
 .coordinates-input-container {
   display: flex;
+  margin-bottom: 1em;
+}
+
+.coordinates-input-container .input-number-tags {
+    padding-left: 0;
+}
+
+.add-location-container {
+    width: fit-content;
+    cursor: pointer;
 }
 
 .coordinates-input-container > div {

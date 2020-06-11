@@ -26,24 +26,7 @@ const map_styles = `
         text-decoration: none;
         color: black;
     }
-    .set-location-button {
-        display: inline-block;
-        font-family: Chakra Petch;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 1em;
-        line-height: 1.5em;
-        height: 3.5em;
-        border: none;
-        border: 1.5px solid black;
-        box-sizing: border-box;
-        box-shadow: 10px 10px 0px black;
-        border-radius: 10px;
-        padding: 1em 1.25em;
-        margin-top: 1.875em;
-        text-decoration: none;
-        color: black;
-    }
+
     .svg-define-location {
         padding-top: 0.3em;
     }
@@ -62,19 +45,24 @@ const map_styles = `
         border-radius: 15%;
         text-align:center;
         color:white;
-        font-weight: bold;  
-        font-size: 15px; 
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .leaflet-marker-icon {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary-color);
+        color: black;
     }
 
 </style>`;
-
 
 
 // tile url most likely not to change
 const tile_url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 // attribution required for use of open street maps
 const openStreetMaps_attribution = "<a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a>";
-
 
 const defineLocationSvg = `
   <?xml version="1.0" ?>
@@ -83,16 +71,11 @@ const defineLocationSvg = `
   </svg>`
 
 
-
-
 const trashCanSvg = `
 <?xml version='1.0' encoding='iso-8859-1'?>
 <svg version="1.1"  width="20.20px" height="20.20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 463 463" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 463 463">
   <path d="M375.5,48H295V31.5C295,14.131,280.869,0,263.5,0h-64C182.131,0,168,14.131,168,31.5V48H87.5C65.72,48,48,65.72,48,87.5v24  c0,4.142,3.357,7.5,7.5,7.5H64v288.5c0,10.336,6.71,19.128,16,22.266v9.734c0,12.958,10.542,23.5,23.5,23.5h256  c12.958,0,23.5-10.542,23.5-23.5v-9.734c9.29-3.138,16-11.93,16-22.266V119h8.5c4.143,0,7.5-3.358,7.5-7.5v-24  C415,65.72,397.28,48,375.5,48z M183,31.5c0-9.098,7.402-16.5,16.5-16.5h64c9.098,0,16.5,7.402,16.5,16.5V48h-97V31.5z M79,159.5  c0-4.687,3.813-8.5,8.5-8.5s8.5,3.813,8.5,8.5V416h-8.5c-4.687,0-8.5-3.813-8.5-8.5V159.5z M359.5,448h-256  c-4.687,0-8.5-3.813-8.5-8.5V431h273v8.5C368,444.187,364.187,448,359.5,448z M168,416h-17V159.5c0-4.687,3.813-8.5,8.5-8.5  s8.5,3.813,8.5,8.5V416z M240,416h-17V159.5c0-4.687,3.813-8.5,8.5-8.5s8.5,3.813,8.5,8.5V416z M312,416h-17V159.5  c0-4.687,3.813-8.5,8.5-8.5s8.5,3.813,8.5,8.5V416z M384,407.5c0,4.687-3.813,8.5-8.5,8.5H367V159.5c0-4.687,3.813-8.5,8.5-8.5  s8.5,3.813,8.5,8.5V407.5z M384,137.597c-2.638-1.027-5.503-1.597-8.5-1.597c-12.958,0-23.5,10.542-23.5,23.5V416h-25V159.5  c0-12.958-10.542-23.5-23.5-23.5S280,146.542,280,159.5V416h-25V159.5c0-12.958-10.542-23.5-23.5-23.5S208,146.542,208,159.5V416  h-25V159.5c0-12.958-10.542-23.5-23.5-23.5S136,146.542,136,159.5V416h-25V159.5c0-12.958-10.542-23.5-23.5-23.5  c-2.997,0-5.862,0.57-8.5,1.597V119h305V137.597z M400,104H63V87.5C63,73.991,73.99,63,87.5,63h288c13.51,0,24.5,10.991,24.5,24.5  V104z"/>
 </svg>`
-
-
-
 
 
 const plusSignSvg = `
@@ -107,8 +90,6 @@ const plusSignSvg = `
     c0-1.657,1.343-3,3-3c1.655,0,3,1.343,3,3v5.683h5.685C29.512,16.171,30.855,17.514,30.855,19.171z"/>
 </svg>`
 
-
-
 const config = [
     {
         id: "001",
@@ -116,7 +97,6 @@ const config = [
         className: ".map-pick-location",
         elem: `<div id="map-container">
                 <div class="map-pick-location"></div>
-                <button id="baseem" class="set-location-button" disabled>Set Location</button>
                 <p id="location-set-display" class="location-set-display">
                 User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
                 </p>
@@ -134,7 +114,6 @@ const config = [
         className: ".map-pick-location",
         elem: `<div id="map-container">
             <div class="map-pick-location"></div>
-            <button class="set-location-button" disabled>Set Location</button>
             <p id="location-set-display" class="location-set-display">
             User denied Geolocation: if this was a mistake you can allow location for this page only by clicking the little 🔒left of the url
             </p>
@@ -146,4 +125,4 @@ const config = [
             maxZoom: 18,
         }
     },
-]
+];
