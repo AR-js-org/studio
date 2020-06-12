@@ -48,7 +48,7 @@ function updateMarker() {
                 iconAnchor: [20, 40],
                 shadowAnchor: [4, 30],  // the same for the shadow
                 popupAnchor: [0, -30],
-                html: window.locationNumber,
+                html: e.number,
             })
         }).addTo(layerGroup);
 
@@ -76,10 +76,11 @@ function check_lat_lon(e) {
                 id: e.target.name,
                 coords: [lat, lng],
                 lat: lat,
-                lng: lng
+                lng: lng,
+                number: window.locationNumber,
             })
+            console.log('qui')
             updateMarker();
-
         }
         else {
             updateLatLngInnerHtmlInvalidCoords()
@@ -138,7 +139,7 @@ function deleteCoords(id) {
 }
 
 
-function updateLatLngInputs(i) {
+function updateLatLngInputs() {
     let numTags = document.getElementsByClassName('input-number-tags');
     let latElems = document.getElementsByClassName('latitude-elements');
     let lngElems = document.getElementsByClassName('longitude-elements');
@@ -152,6 +153,8 @@ function updateLatLngInputs(i) {
     numTags[0].append(numTag);
     latElems[0].append(createInput('latitude', count))
     lngElems[0].append(createInput('longitude', count))
+
+    window.locationNumber = window.locationNumber + 1;
 }
 
 function updateLocationParam() {
@@ -159,7 +162,6 @@ function updateLocationParam() {
     locations.length = 0;
     let lats = document.querySelectorAll('.is-latitude');
     let lngs = document.querySelectorAll('.is-longitude');
-    console.log(lats.length, lngs.length);
     for (let i = 0, lat, lng; i < lats.length; i++) {
         lat = lats[i].value.trim();
         lng = lngs[i].value.trim();
@@ -191,8 +193,7 @@ class MapPickLocation extends HTMLElement {
 
         let addLocation = document.getElementsByClassName('add-location-container');
         addLocation[0].addEventListener('click', function () {
-            window.locationNumber = window.locationNumber + 1;
-            updateLatLngInputs(window.locationNumber)
+            updateLatLngInputs();
         })
     }
 
@@ -218,10 +219,11 @@ class MapPickLocation extends HTMLElement {
         window.locationNumber = 1;
         map.on('click', function (e) { // => {} that contains the coordinates
             array.push({
-                id: 'mapclick',
+                id: 'mapclick_' + window.locationNumber,
                 coords: [e.latlng.lat, e.latlng.lng],
                 lat: e.latlng.lat,
-                lng: e.latlng.lng
+                lng: e.latlng.lng,
+                number: window.locationNumber,
             })
             updateMarker();
             editLocationInput(window.locationNumber, e.latlng.lat, e.latlng.lng);
