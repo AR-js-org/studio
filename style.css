@@ -212,16 +212,9 @@ page-footer {
   margin-top: 2.5rem;
 }
 
-.delete-icon-parent {
-  width: 20px;
-  height: 20px;
-  z-index: 1000;
-  margin-top: 2.5rem;
-}
-
-.hidden-delete-icon {
-  pointer-events: none;
-  z-index: 0;
+.remove-location-container {
+    display: flex;
+    cursor: pointer;
 }
 
 .add-location-container {
@@ -235,6 +228,11 @@ page-footer {
 .input-container label {
   font-family: Source Sans Pro;
   font-size: 0.875rem;
+}
+
+.map-buttons-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 .text-input {

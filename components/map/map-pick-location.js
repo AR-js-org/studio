@@ -110,23 +110,30 @@ function createInput(name, i) {
 }
 
 
-function deleteCoords(e) {
-    let id = e.target.id;
+function deleteCoords(id) {
+    if (id === 0) {
+        return;
+    }
+
     let lat = document.getElementById(`latitude${id}`);
-    lat.remove();
     let lng = document.getElementById(`longitude${id}`);
+
+    if (!lat || !lng) {
+        return;
+    }
+
+    lat.remove();
     lng.remove();
     document.getElementById(id).remove();
-    e.target.remove();
 
     if (lat.value.length !== 0 && lng.value.length !== 0) {
         let arr = array.filter(e => e.id !== id);
         array = arr;
         layerGroup.clearLayers();
         updateMarker();
-        window.locationNumber = window.locationNumber - 1;
     }
 
+    window.locationNumber = window.locationNumber - 1;
     updateLocationParam();
 }
 
@@ -135,7 +142,6 @@ function updateLatLngInputs(i) {
     let numTags = document.getElementsByClassName('input-number-tags');
     let latElems = document.getElementsByClassName('latitude-elements');
     let lngElems = document.getElementsByClassName('longitude-elements');
-    let delCoords = document.getElementsByClassName('delete-coordinates-container');
     let tagCount = document.getElementsByClassName('num-tags').length;
     let count = tagCount + 1;
     let numTag = document.createElement('p');
@@ -143,21 +149,9 @@ function updateLatLngInputs(i) {
     numTag.className = "num-tags";
     numTag.id = count.toString();
 
-    let delIconDiv = document.createElement('div');
-    delIconDiv.className = 'delete-icon-parent';
-    delIconDiv.id = count.toString();
-
-    let delIcon = document.createElement('svg');
-    delIcon.innerHTML = trashCanSvg;
-    delIcon.className = 'hidden-delete-icon';
-
-    delIconDiv.addEventListener('click', deleteCoords)
-
     numTags[0].append(numTag);
     latElems[0].append(createInput('latitude', count))
     lngElems[0].append(createInput('longitude', count))
-    delCoords[0].append(delIconDiv)
-    delIconDiv.append(delIcon)
 }
 
 function updateLocationParam() {
@@ -258,9 +252,6 @@ class MapPickLocation extends HTMLElement {
         lngElemLabel.for = 'longitude';
         lngElemLabel.innerHTML = 'Longitude:'
 
-        const delCoords = document.createElement('div');
-        delCoords.className = 'delete-coordinates-container';
-
         const addCoords = document.createElement('div');
         addCoords.className = 'add-location-container';
         const addCoordsIcon = document.createElement('div');
@@ -271,35 +262,43 @@ class MapPickLocation extends HTMLElement {
         addCoordsName.className = 'add-location-name';
         addCoordsName.innerHTML = 'Add a location';
 
+        const removeCoords = document.createElement('div');
+        removeCoords.className = 'remove-location-container';
+        const removeCoordsIcon = document.createElement('div');
+        removeCoordsIcon.className = 'remove-location-icon';
+        removeCoordsIcon.innerHTML = trashCanSvg;
+
+        const removeCoordsName = document.createElement('div');
+        removeCoordsName.className = 'remove-location-name';
+        removeCoordsName.innerHTML = 'Remove a location';
+        removeCoords.addEventListener('click', () => {
+            // remove last added place
+            deleteCoords(window.locationNumber);
+        })
 
         latElems.append(latElemLabel); // static
         lngElems.append(lngElemLabel); // static
         coordsParent.append(numTags); // static
         coordsParent.append(latElems); // static
         coordsParent.append(lngElems); // static
-        coordsParent.append(delCoords); // static
-        parent.append(addCoords); // static
         addCoords.append(addCoordsIcon); // static
         addCoords.append(addCoordsName); // static
+        removeCoords.append(removeCoordsIcon); // static
+        removeCoords.append(removeCoordsName); // static
 
+        const divContainer = document.createElement('div');
+        divContainer.className = 'map-buttons-container';
+        divContainer.appendChild(addCoords);
+        divContainer.appendChild(removeCoords);
+        parent.append(divContainer); // static
 
         let numTag = document.createElement('p');
         numTag.innerHTML = 1 + '.';
         numTag.className = "num-tags";
-        let delIconDiv = document.createElement('div');
-        delIconDiv.className = 'delete-icon-parent';
-        delIconDiv.id = "1";
-
-        let delIcon = document.createElement('svg');
-        delIcon.innerHTML = trashCanSvg;
-        delIcon.className = 'hidden-delete-icon';
-        delIcon.style.visibility = 'hidden';
 
         numTags.append(numTag);
         latElems.append(createInput('latitude', 1))
         lngElems.append(createInput('longitude', 1))
-        delCoords.append(delIconDiv)
-        delIconDiv.append(delIcon)
     }
 
 }
