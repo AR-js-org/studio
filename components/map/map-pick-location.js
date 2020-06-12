@@ -33,21 +33,6 @@ function reUseMapComponent(path) {
     return MapTemplate;
 }
 
-
-function updateMyLocationMarker(lat, lng) {
-    array.push({
-        id: 'mylocation',
-        coords: [lat, lng],
-        lat: lat,
-        lng: lng
-    })
-    map.panTo(new L.LatLng(lat, lng)); // will pan map to make the center of map the newly located coords
-    array.map(e => {
-
-        L.marker(e.coords).addTo(layerGroup);
-    })
-}
-
 function updateMarker() {
     let key = "id";
     const unique = [...new Map(array.map(item =>
@@ -114,13 +99,6 @@ function updateLatLngInnerHtmlInvalidCoords() {
     x.innerHTML = `Try to enter valid coordinates for example: 21.2908, -157.8305`;
 }
 
-function createButtonUseMyLocation() {
-    let buttonUseMyLocation = document.createElement('button');
-    buttonUseMyLocation.innerHTML = `${defineLocationSvg} Use my location`;
-    buttonUseMyLocation.className = "use-my-location-button";
-    return buttonUseMyLocation;
-}
-// let x = `<input class="text-input" type="text" id="latitude" onblur="check_lat_lon()" name="latitude" />`;
 function createInput(name, i) {
     let coordInput = document.createElement('input');
     coordInput.className = "text-input coordinates-inputs is-" + name;
@@ -254,30 +232,6 @@ class MapPickLocation extends HTMLElement {
             updateMarker();
             editLocationInput(window.locationNumber, e.latlng.lat, e.latlng.lng);
         })
-
-        let leafletControlAttribution = shadow.querySelector(".leaflet-control-attribution");
-        let buttonUseMyLocation = createButtonUseMyLocation();
-        leafletControlAttribution.appendChild(buttonUseMyLocation);
-
-        buttonUseMyLocation.addEventListener("click", function (e) {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-
-                    updateMyLocationMarker(position.coords.latitude, position.coords.longitude);
-                },
-                    function (error) {
-                        if (error.code == error.PERMISSION_DENIED) {
-                            updateLatLngInnerHtmlDenied(error.message);
-                            // if permission on browser has been set to default deny of position - will provide basic steps to adjust for this url
-                        }
-                    });
-            }
-            else {
-                updateLatLngInnerHtmlDenied("Geolocation is not supported by this browser.");
-                // this seems to be an unlikely problem according to MDN - all browser support this:
-                // src: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
-            }
-        })
     }
 
 
@@ -340,11 +294,6 @@ class MapPickLocation extends HTMLElement {
         delIcon.innerHTML = trashCanSvg;
         delIcon.className = 'hidden-delete-icon';
         delIcon.style.visibility = 'hidden';
-
-        delIconDiv.addEventListener('click', function (e) {
-            let item = e.target.id;
-
-        })
 
         numTags.append(numTag);
         latElems.append(createInput('latitude', 1))
