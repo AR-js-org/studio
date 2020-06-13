@@ -23,7 +23,6 @@ AFRAME.registerComponent('model-controller', {
                         let box = this.getSizeFromObj(this.el.object3D);
                         box.getSize(size);
 
-                        window.assetParam.isValid = true;
                         window.assetParam.scale = 1;
                         window.assetParam.size = {
                             width: box.max.x - box.min.x,

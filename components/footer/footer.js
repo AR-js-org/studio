@@ -85,7 +85,7 @@ const FooterContent = `
     </p>
 
     <div class="buttons">
-      <button id="github-publish" class="primary-button publish-disabled">
+      <button id="github-publish" disabled class="primary-button publish-disabled">
         Publish on Github
       </button>
 
@@ -97,12 +97,12 @@ const FooterContent = `
   </div>`;
 
 class PageFooter extends HTMLElement {
-    shadow = null;
-    constructor() {
-        super();
-        this.shadow = this.attachShadow({ mode: 'open' });
-        this.shadow.innerHTML = FooterContent
-    }
+  shadow = null;
+  constructor() {
+    super();
+    this.shadow = this.attachShadow({ mode: 'open' });
+    this.shadow.innerHTML = FooterContent
+  }
 }
 
 customElements.define('page-footer', PageFooter);

@@ -10,7 +10,7 @@ function radioOnclick(self) {
     if (radioState == "marker") {
         startBuilding.href = "pages/marker/index.html"
     } else if (radioState == "location") {
-        startBuilding.href = "pages/location.html"
+        startBuilding.href = "pages/location/index.html"
     } else {
         // Display error message
     }

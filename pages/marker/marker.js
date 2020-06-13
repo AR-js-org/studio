@@ -3,6 +3,15 @@ const { MarkerModule, Package } = ARjsStudioBackend;
 var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
 var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
 
+window.assetParam = {
+    scale: 1.0,
+    size: {
+        width: 1.0,
+        height: 1.0,
+        depth: 1.0,
+    },
+};
+
 /**
  * Initialize the default marker image on page load.
  */
@@ -19,16 +28,22 @@ const setDefaultMarker = () => {
 }
 
 const checkUserUploadStatus = () => {
-    if (window.markerImage && window.assetFile) {
-        enablePageFooter();
-    }
+    enablePageFooter(window.markerImage && window.assetFile);
 }
 
 // All the required components are uploaded by the user => footer will be enable
-const enablePageFooter = () => {
-    githubButton.classList.remove('publish-disabled');
-    zipButton.classList.remove('publish-disabled');
-    zipButton.removeAttribute('disabled');
+const enablePageFooter = (enable) => {
+    if (enable) {
+        githubButton.classList.remove('publish-disabled');
+        zipButton.classList.remove('publish-disabled');
+        githubButton.removeAttribute('disabled');
+        zipButton.removeAttribute('disabled');
+    } else {
+        githubButton.classList.add('publish-disabled');
+        zipButton.classList.add('publish-disabled');
+        githubButton.setAttribute('disabled', '');
+        zipButton.setAttribute('disabled', '');
+    }
 }
 
 const zip = () => {
@@ -43,7 +58,7 @@ const zip = () => {
             assetType: window.assetType, // image/audio/video/3d
             assetFile: window.assetFile,
             assetName: window.assetName,
-            assetParam: window.assetParam && (window.assetParam.isValid ? window.assetParam : null),
+            assetParam: window.assetParam,
             markerPatt: markerPattern
         })))
         .then((package) => package.serve({ packageType: 'zip' }))
