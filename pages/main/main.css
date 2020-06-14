@@ -2,22 +2,28 @@
 .background {
   display: flex;
   flex-direction: column;
+  flex: 1 auto;
   width: 70vw;
-  min-height: 100vh;
   background: var(--secondary-color);
 }
 
 .content {
-  margin-left: 1.5em;
-  padding: 1.5em;
-  padding-right: 20vw;
+  padding: 1.5em 1.875em;
+  width: 75ch;
+  max-width: 100%;
 }
 
 .splashscreen {
-  top: 12%;
-  position: absolute;
-  right: 8vw;
+  top: 10%;
+  position: fixed;
+  right: 9vw;
+  width: 40vw;
   height: 90%;
+  object-position: top center;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 }
 
 .main-content {
@@ -49,16 +55,14 @@
 }
 
 .radio-container .radio-title {
-    font-weight: bold;
-}
-
-.radio-container span {
-    margin-top: 1em;
+  font-weight: bold;
 }
 
 /* Hide the browser's default radio button */
 .radio-container input {
   position: absolute;
+  width: 0;
+  height: 0;
   opacity: 0;
   cursor: pointer;
 }
@@ -66,7 +70,7 @@
 /* Create a custom radio button */
 .checkmark {
   position: absolute;
-  top: 0;
+  top: 0.125em;
   left: 0;
   height: 1.3em;
   width: 1.3em;
@@ -109,13 +113,11 @@
 }
 
 /* Responsive */
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1280px) {
   .background {
     width: 100%;
   }
-}
 
-@media screen and (max-width: 1280px) {
   .splashscreen {
     display: none;
   }

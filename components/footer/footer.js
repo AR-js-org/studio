@@ -1,7 +1,7 @@
 const FooterContent = `
   <style>
     #footer{
-      padding: 2em 12vw;
+      padding: 2em 1.875em;
     }
 
     .lead {
@@ -14,7 +14,7 @@ const FooterContent = `
 
     .buttons > button,
     .buttons > a {
-        margin-right: 3.125em;
+        margin-right: 2em;
         cursor: pointer;
     }
 

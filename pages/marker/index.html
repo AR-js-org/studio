@@ -42,7 +42,7 @@
     <page-header assetsUrl="../../assets"></page-header>
 
     <div class="pages-content">
-        <back-anchor assetsUrl="../../assets"></back-anchor>
+        <back-anchor href="/" assetsUrl="../../assets"></back-anchor>
         <div class="pages-content-container">
             <div class="pages-content-element">
                 <p class="title">Marker-based</p>
@@ -70,9 +70,11 @@
                 </label>
                 <p id="marker-error" class="error"></p>
             </div>
-            <div id="marker-preview" target="marker-file">
-                <div class="marker">
-                    <img src="../../assets/default-marker.png"/>
+            <div id="marker-preview" class="pages-content-element" target="marker-file">
+                <div class="marker-wrapper">
+                    <div class="marker">
+                        <img src="../../assets/default-marker.png"/>
+                    </div>
                 </div>
                 <div class="download-marker" style="display: flex; justify-content: flex-end; padding: 1em 0;">
                     <div class="download-default-marker">
@@ -105,12 +107,10 @@
                 </label>
                 <p id="content-error" class="error"></p>
             </div>
-            <div id="content-preview" target="content-file">
+            <div id="content-preview" class="pages-content-element" target="content-file">
                 <file-holder></file-holder>
             </div>
         </div>
-
-        <hr>
     </div>
     <page-footer></page-footer>
 </body>

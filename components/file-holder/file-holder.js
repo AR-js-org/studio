@@ -1,11 +1,20 @@
 const fileHolderTemplate = `
   <style>
+    .image-placeholder-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+    }
+
     .image-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 23.75em;
-      width: 23.75em;
       background: var(--passive-color);
       border: 1px solid var(--passive-color-dark);
       box-sizing: border-box;
@@ -20,7 +29,7 @@ const fileHolderTemplate = `
     }
   </style>
 
-  <div>
+  <div class="image-placeholder-wrapper">
     <div class="image-placeholder">
       Click to upload
     </div>
