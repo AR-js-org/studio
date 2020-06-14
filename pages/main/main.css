@@ -16,11 +16,11 @@
 .splashscreen {
   top: 10%;
   position: fixed;
-  right: 9vw;
+  right: 10vw;
   width: 40vw;
   height: 90%;
   object-position: top center;
-  object-fit: cover;
+  object-fit: contain;
   user-select: none;
   -webkit-user-select: none;
   -webkit-user-drag: none;
