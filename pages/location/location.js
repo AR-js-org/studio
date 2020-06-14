@@ -20,7 +20,6 @@ window.assetParam = {
 };
 
 const checkUserUploadStatus = () => {
-    console.log(window.assetParam.locations)
     enablePageFooter(window.assetParam.locations.length && window.assetFile);
 };
 
