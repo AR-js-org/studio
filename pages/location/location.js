@@ -32,14 +32,17 @@ function getTplFile(self) {
             eval('var tpl=' + reader.result);
             let error = checkTpl(tpl);
             if (error) {
-                tplError.innerHTML = '* Your uploaded JSON file is error: <br/>' + error;
+                tplError.innerHTML = '* Your uploaded JSON file got a problem: <br/>' + error;
             } else {
-                // TODO use this tpl
-                console.log(tpl);
+                window.dispatchEvent(new CustomEvent('location-tpl', {
+                    detail: {
+                        tpl,
+                    }
+                }));
             }
 
         } catch (error) {
-            tplError.innerHTML = '* Your uploaded JSON file is error: <br/>' + error.toString();
+            tplError.innerHTML = '* Your uploaded JSON file has got a problem: <br/>' + error.toString();
         }
     };
 
@@ -53,7 +56,6 @@ function uploadLocations() {
 };
 
 function downloadJsonTpl() {
-    // var tpl = 'aaaa';
     var base64 = btoa(multiLocationsTemplate);
     var link = document.createElement('a');
     link.href = `data:application/json;base64,${base64}`;
