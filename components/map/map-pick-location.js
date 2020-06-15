@@ -79,8 +79,8 @@ function check_lat_lon(e) {
                 lng: lng,
                 number: window.locationNumber,
             })
-            console.log('qui')
             updateMarker();
+            updateLocationParam();
         }
         else {
             updateLatLngInnerHtmlInvalidCoords()
