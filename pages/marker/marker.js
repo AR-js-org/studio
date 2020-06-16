@@ -49,7 +49,7 @@ const enablePageFooter = (enable) => {
 const zip = () => {
     // TODO: replace alerts with HTML error messages.
     if (!window.markerImage) return alert('please select a marker image');
-    if (!window.assetType) return alert('please select the corret content type');
+    if (!window.assetType) return alert('please select the correct content type');
     if (!window.assetFile || !window.assetName) return alert('please upload a content');
 
     MarkerModule.getMarkerPattern(window.markerImage)
@@ -96,7 +96,6 @@ const publish = () => {
                 markerImage: window.markerImage,
                 fullMarkerImage: window.fullMarkerImage,
             });
-
             window.location = '../publish';
         }
         )
