@@ -26,7 +26,7 @@ const setDefaultMarker = () => {
     const base64String = c.toDataURL();
     window.markerImage = base64String;
 
-    MarkerModule.getFullMarkerImage(base64Data, 0.5, 512, "black")
+    MarkerModule.getFullMarkerImage(base64String, 0.5, 512, "black")
         .then((fullMarkerImage) => {
             window.fullMarkerImage = fullMarkerImage;
             img.remove();
