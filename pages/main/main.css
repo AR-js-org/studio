@@ -13,6 +13,10 @@
   padding-right: 20vw;
 }
 
+.content .title {
+    margin-top: 2em;
+}
+
 .splashscreen {
   top: 12%;
   position: absolute;
