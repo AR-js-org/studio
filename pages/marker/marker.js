@@ -17,7 +17,7 @@ window.assetParam = {
  */
 const setDefaultMarker = () => {
     const c = document.createElement('canvas');
-    const img = document.querySelector('#marker-preview .marker img');
+    const img = document.querySelector('.default-marker-hidden');
     c.height = img.naturalHeight;
     c.width = img.naturalWidth;
     const ctx = c.getContext('2d');
@@ -25,6 +25,8 @@ const setDefaultMarker = () => {
     ctx.drawImage(img, 0, 0, c.width, c.height);
     const base64String = c.toDataURL();
     window.markerImage = base64String;
+
+    img.remove();
 }
 
 const checkUserUploadStatus = () => {
