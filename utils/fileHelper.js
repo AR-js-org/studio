@@ -22,7 +22,7 @@ const supportedFileMap = {
 };
 
 function getFileType(file) {
-    let type = file.name.split('.').pop();
+    let type = file.name.split('.').pop().toLocaleLowerCase();
 
     if (supportedFileMap['3d'].types.indexOf(type) > -1) return '3d';
     if (supportedFileMap['image'].types.indexOf('image/' + type) > -1) return 'image';
