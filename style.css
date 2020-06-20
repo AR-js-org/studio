@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Chakra+Petch&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
 
+/* HTML & body */
 html, body {
   width: 100%;
   height: 100%;
@@ -10,9 +11,10 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
+  margin: 0;
 }
 
-* {
+body * {
   box-sizing: border-box;
 }
 
@@ -130,11 +132,6 @@ body {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-/* body */
-body {
-  margin: 0;
 }
 
 hr {
