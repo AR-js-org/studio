@@ -61,30 +61,26 @@ function updateLatLngValue(lat, lng) {
 }
 
 function check_lat_lon(e) {
-    let regex_lat = /^(-?[1-8]?\d(?:\.\d{1,18})?|90(?:\.0{1,18})?)$/;
-    let regex_lng = /^(-?(?:1[0-7]|[1-9])?\d(?:\.\d{1,18})?|180(?:\.0{1,18})?)$/;
     let lat = document.getElementById(`latitude${e.target.name}`).value;
     let lng = document.getElementById(`longitude${e.target.name}`).value;
 
-    let validLat = regex_lat.test(lat); // 21.2908
-    let validLng = regex_lng.test(lng); // -157.8305
+    console.log(typeof lat)
+    let validLat = !isNaN(lat) && lat >= -90 && lat <= 90;
+    let validLng = !isNaN(lng) && lng >= -180 && lng <= 180;
 
-    // only fire invalid coords if length on both is not 0
-    if (lat.length !== 0 && lng.length !== 0) {
-        if (validLat && validLng) {
-            array.push({
-                id: e.target.name,
-                coords: [lat, lng],
-                lat: lat,
-                lng: lng,
-                number: window.locationNumber,
-            })
-            updateMarker();
-            updateLocationParam();
-        }
-        else {
-            updateLatLngInnerHtmlInvalidCoords()
-        }
+    if (validLat && validLng) {
+        array.push({
+            id: e.target.name,
+            coords: [lat, lng],
+            lat: lat,
+            lng: lng,
+            number: window.locationNumber,
+        })
+        updateMarker();
+        updateLocationParam();
+    }
+    else {
+        updateLatLngInnerHtmlInvalidCoords()
     }
 }
 
@@ -112,6 +108,11 @@ function createInput(name, i) {
 
 
 function deleteCoords(id) {
+    const inputTags = [...document.querySelectorAll('.num-tags')];
+    if (inputTags.length <= 1) {
+        return;
+    }
+
     if (id === 0) {
         return;
     }
