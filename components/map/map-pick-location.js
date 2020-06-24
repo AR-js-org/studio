@@ -64,7 +64,6 @@ function check_lat_lon(e) {
     let lat = document.getElementById(`latitude${e.target.name}`).value;
     let lng = document.getElementById(`longitude${e.target.name}`).value;
 
-    console.log(typeof lat)
     let validLat = !isNaN(lat) && lat >= -90 && lat <= 90;
     let validLng = !isNaN(lng) && lng >= -180 && lng <= 180;
 
