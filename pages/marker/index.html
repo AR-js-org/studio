@@ -40,7 +40,7 @@
 
 <body onload="setDefaultMarker()">
     <page-header assetsUrl="../../assets"></page-header>
-
+    <img class="default-marker-hidden" style="position: absolute; top: 0; right: -1000px;" src="../../assets/default-marker-no-border.png"/>
     <div class="pages-content">
         <back-anchor assetsUrl="../../assets"></back-anchor>
         <div class="pages-content-container">
@@ -95,7 +95,8 @@
                     <ul>
                         <li>3D Object (.gltf, .glb .zip; max size 50MB)</li>
                         <li>Image (.jpg, .png, .gif; max size 15MB)</li>
-                        <li>Audio (.mp3; max size 10MB)</li>
+                        <!-- TODO fix the bug for audio -->
+                        <!-- <li>Audio (.mp3; max size 10MB)</li> -->
                         <li>Video (.mp4; max size 25MB)</li>
                     </ul>
                 </p>
