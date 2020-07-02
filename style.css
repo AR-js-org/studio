@@ -248,6 +248,13 @@ input:focus {
   font-size: 1.25em;
 }
 
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    padding-right: 2em;
+}
+
 @keyframes blink {
   50% {
     color: transparent;

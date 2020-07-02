@@ -17,7 +17,7 @@ window.assetParam = {
  */
 const setDefaultMarker = () => {
     const c = document.createElement('canvas');
-    const img = document.querySelector('#marker-preview .marker img');
+    const img = document.querySelector('.default-marker-hidden');
     c.height = img.naturalHeight;
     c.width = img.naturalWidth;
     const ctx = c.getContext('2d');
@@ -25,6 +25,12 @@ const setDefaultMarker = () => {
     ctx.drawImage(img, 0, 0, c.width, c.height);
     const base64String = c.toDataURL();
     window.markerImage = base64String;
+
+    MarkerModule.getFullMarkerImage(base64String, 0.5, 512, "black")
+        .then((fullMarkerImage) => {
+            window.fullMarkerImage = fullMarkerImage;
+            img.remove();
+        });
 }
 
 const checkUserUploadStatus = () => {
@@ -49,7 +55,7 @@ const enablePageFooter = (enable) => {
 const zip = () => {
     // TODO: replace alerts with HTML error messages.
     if (!window.markerImage) return alert('please select a marker image');
-    if (!window.assetType) return alert('please select the corret content type');
+    if (!window.assetType) return alert('please select the correct content type');
     if (!window.assetFile || !window.assetName) return alert('please upload a content');
 
     MarkerModule.getMarkerPattern(window.markerImage)
@@ -96,7 +102,6 @@ const publish = () => {
                 markerImage: window.markerImage,
                 fullMarkerImage: window.fullMarkerImage,
             });
-
             window.location = '../publish';
         }
         )

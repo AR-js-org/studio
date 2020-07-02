@@ -98,7 +98,7 @@ function handleAudioUpload(file) {
     reader.readAsArrayBuffer(file);
     reader.onloadend = function () {
         //for backend api asset needs only base64 part
-        window.assetFile = reader.result;
+        window.assetFile =  Array.from(new Uint8Array(reader.result));
         window.assetName = file.type.replace('audio/', 'asset.');
         checkUserUploadStatus();
     };
@@ -114,7 +114,7 @@ function handleVideoUpload(file) {
     reader.readAsArrayBuffer(file);
     reader.onloadend = function () {
         //for backend api asset needs only base64 part
-        window.assetFile = reader.result;
+        window.assetFile = Array.from(new Uint8Array(reader.result));
         window.assetName = file.type.replace('video/', 'asset.');
         checkUserUploadStatus();
     };

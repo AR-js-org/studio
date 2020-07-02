@@ -4,6 +4,10 @@ window.onload = async () => {
 
     window.session = JSON.parse(window.name);
 
+    if (window.session.assetType === "audio" || window.session.assetType === "video") {
+        window.session.assetFile = new Uint8Array(window.session.assetFile).buffer;
+    }
+
     const queryDict = {}
     location.search.substr(1).split("&").forEach((item) => {
         queryDict[item.split("=")[0]] = item.split("=")[1]
