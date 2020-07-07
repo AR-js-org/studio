@@ -101,6 +101,7 @@ function createInput(name, i) {
     coordInput.type = 'text';
     coordInput.id = `${name}${i}`;
     coordInput.name = i;
+    coordInput.title = name + i;
     coordInput.addEventListener('blur', check_lat_lon)
     return coordInput;
 }
