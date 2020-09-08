@@ -36,5 +36,10 @@ window.onload = async () => {
             <a target="_blank" href="${pagesUrl}">${pagesUrl}</a>
         </p>
         It will be available in few minutes. Refresh the link to see it working!
+
+        <p>
+            If you have a Mac, IPhone or IPad use Safari. On these devices Chrome does not allow AR.
+            If you have an Android or a PC you can use Chrome, Firefox, Samsung Internet and others browsers.
+        </p>
     `;
 };
