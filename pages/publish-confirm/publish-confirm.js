@@ -38,8 +38,10 @@ window.onload = async () => {
         It will be available in few minutes. Refresh the link to see it working!
 
         <p>
-            If you have a Mac, IPhone or IPad use Safari. On these devices Chrome does not allow AR.
-            If you have an Android or a PC you can use Chrome, Firefox, Samsung Internet and others browsers.
+            If you have a Mac, an IPhone or an IPad please use the Safari browser. On these devices Chrome does not allow AR.
+        </p>
+        <p>
+            If you have an Android or a PC you can use Chrome, Firefox, Samsung Internet and other browsers.
         </p>
     `;
 };
