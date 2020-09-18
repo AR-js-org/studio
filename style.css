@@ -22,6 +22,11 @@
   font-size: 3em;
 }
 
+.bold {
+    font-weight: bold;
+    color: var(--link-color);
+}
+
 .lead {
   font-family: Chakra Petch;
   font-style: normal;
