@@ -8,11 +8,7 @@ var loadVideos = function() {
     var playlist = [
         dir + '0.mp4',
         dir + '1.mp4',
-        dir + '2.mp4',
-        dir + '3.mp4',
-        dir + '4.mp4',
-        dir + '5.mp4',
-        dir + '6.mp4',
+        dir + '2.mp4'
     ];
 
     var videoElement = document.querySelector('video');

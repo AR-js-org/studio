@@ -6,9 +6,13 @@ body {
     color: #eee;
 }
 
+
+h1 { color: #d54d7b; font-family: "Great Vibes", cursive; font-size: 30px; font-weight: normal; margin-bottom: 0px; margin-top: 10px; text-align: left; text-shadow: 0 1px 1px #fff; }
+
+
 video {
     max-width: 1024px;
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
     top: 0;
     left: 0;
@@ -34,7 +38,19 @@ button[data-action="show"] {
     max-width: 30em;
     padding: 0.5em;
     background-color: rgb(20, 20, 20);
-    left: 60%;
+    left: 80%;
+    color: #eee;
+    position: absolute;
+    list-style: none;
+    z-index: 1;
+}
+
+
+.menu-right {
+    max-width: 30em;
+    padding: 0.5em;
+    background-color: rgb(20, 20, 20);
+    right: 80%;
     color: #eee;
     position: absolute;
     list-style: none;
@@ -79,7 +95,15 @@ a {
         max-width: none;
     }
 
-    .menu, .container, video{
+    .menu-right {
+        left: 0;
+        margin-left: 0;
+        max-width: none;
+    }
+
+
+
+    .menu, .container, .menu-right, video{
         position: relative;
     }
 
