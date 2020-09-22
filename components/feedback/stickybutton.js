@@ -20,11 +20,16 @@ const StickyButton = `
         -webkit-transform: rotate(-90deg);
         transform: rotate(-90deg);
       }
-      .sticky-button:hover .sticky-button:focus {
+      .sticky-button:active {
+        box-shadow: -5px 5px 0px #000000;
+        webkit-transform-origin: 105% 100%;
+        transform-origin: 105% 100%;
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+    .sticky-button:hover {
         background-color: var(--primary-color-dark);
-        transition: all .2s ease-in-out;
-        box-shadow: 2px 2px 10px rgba(0,0,0, 0.3);
-      }
+    }
       .icono-mail {
         box-sizing: border-box;
         display: inline-block;
