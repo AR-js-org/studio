@@ -9,6 +9,8 @@ AR.js Studio is an authoring platform to build Web Augmented Reality experiences
 ## Try now!
 
  🚀[Online version](https://ar-js-org.github.io/studio/)
+ 
+ [HacktoberFest page](https://ar-js-org.github.io/studio/hacktoberfest)
 
 ## Resources
 
