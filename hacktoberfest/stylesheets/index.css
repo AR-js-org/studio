@@ -43,6 +43,7 @@ button[data-action="show"] {
     position: absolute;
     list-style: none;
     z-index: 1;
+    font-size: 1.25em
 }
 
 
