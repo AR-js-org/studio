@@ -46,6 +46,9 @@ button[data-action="show"] {
     font-size: 1.25em
 }
 
+.font-125{
+    font-size: 1.25 em;
+}
 
 .menu-right {
     max-width: 30em;
@@ -59,6 +62,10 @@ button[data-action="show"] {
 }
 
 .menu a {
+    color: #ee6;
+}
+
+.menu-right a {
     color: #ee6;
 }
 
