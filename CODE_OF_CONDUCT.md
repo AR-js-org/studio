@@ -19,7 +19,7 @@ Adapted from the [A-Frame Code of Conduct](https://github.com/aframevr/aframe/bl
 - We will exclude you from interaction if you insult, demean or harass anyone.
   That is not welcome behaviour. We interpret the term
   "harassment" as including the definition in the [Citizen Code of
-  Conduct](http://citizencodeofconduct.org/); if you have any lack of clarity
+  Conduct](https://github.com/stumpsyn/policies/blob/master/citizen_code_of_conduct.md); if you have any lack of clarity
   about what might be included in that concept, please read their definition. In
   particular, we don't tolerate behavior that excludes people in socially
   marginalized groups.
