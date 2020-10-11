@@ -58,7 +58,7 @@ members.
   than others.
 
 The initial and interim moderators will be the developers of AR.js Studio including,
-but not limited to, Fabio Cortes <fcor14@gmail.com> and GIovanni Ciandrini
+but not limited to, Fabio Cortes <fcor14@gmail.com> and Giovanni Ciandrini
 <gciandrini@gmail.com>. Contact us if you would like to volunteer and be listed as
 a moderator.
 

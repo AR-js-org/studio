@@ -26,7 +26,6 @@ If you're not sure how to do something with AR.js studio, please let us know by 
 [hacktoberfest]: https://github.com/AR-js-org/studio/issues?q=is%3Aissue+is%3Aopen+label%3Ahacktoberfest
 [pr]: https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github
 [ssh]: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
-[testing-guide]: https://github.com/aframevr/aframe/tree/master/tests#a-frame-unit-tests
 
 Check out the [issues labeled *1.0.0*][first] or [*hacktoberfest*][hacktoberfest] for good issues to tackle. Here's how to submit a pull request (PR):
 
@@ -35,7 +34,7 @@ Check out the [issues labeled *1.0.0*][first] or [*hacktoberfest*][hacktoberfest
 3. Clone your fork of the repository locally (i.e., `git clone git@github.com:yourusername/studio`).
 4. Create a branch to work in (i.e., `git checkout -b mybranch`).
 6. Make changes to your fork of the repository, commit them, and push them (i.e., `git add -A . && git commit -m 'My Changes (fixes #1234)' && git push origin mybranch`).
-7. [Submit a pull request][pr] to the master branch. If you head to the [AR.js Studio repository][studio] after running `git push` from earlier, you should see a pop up to submit a pull request.
+7. [Submit a pull request][pr] against the master branch. If you head to the [AR.js Studio repository][studio] after running `git push` from earlier, you should see a pop up to submit a pull request.
 9. [Address review comments](http://stackoverflow.com/questions/9790448/how-to-update-a-pull-request) if any.
 
 As per usual with open source, you would agree to license your contributions
@@ -45,7 +44,6 @@ under the [MIT License](LICENSE).
 
 1. Create something awesome!.
 2. Publish your work to Github (and GitHub pages) so everyone can learn from your work.
-3. Share it on [Slack][slack] or Twitter using #madewithARjs.
 
 # Help Your Fellow Contributors
 
