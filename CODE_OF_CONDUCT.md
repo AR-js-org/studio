@@ -31,6 +31,11 @@ Adapted from the [A-Frame Code of Conduct](https://github.com/aframevr/aframe/bl
   your back.
 - Likewise any spamming, trolling, flaming, baiting or other attention-stealing
   behaviour is not welcome.
+- Our community is open to everyone who wants to work with us: obviously you can create whatever project starting with "Studio", 
+  but it is very preferred that this project will be not setup for commercial issues, because Studio borns free and open-source. 
+  We would like always to keep update if there are some commercial projects or spin-off.
+- We would like to keep the entire community "active": if you have some interests to the project and you are not a programmer or a designer, no worry; 
+  but if you are always inactive we reserve to make our decisions, also deleting your user from the channel. 
 
 ## Moderation
 
