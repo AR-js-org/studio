@@ -14,6 +14,7 @@
     <!-- import the webpage's javascript file -->
     <script src="./components/header/header.js"></script>
     <script src="./pages/main/main.js"></script>
+    <script src="./components/feedback/stickybutton.js"></script>
   </head>
 
   <body>
@@ -62,9 +63,9 @@
           </label>
 
           <div class="buttons-container">
-              <a onclick="anchorOnclick(this)" id="start-building" class="primary-button">Start building</a>
-              <a target="_blank" class="passive-button" href="https://forms.gle/s9EPDNyCzZ2g5j3C9">Send feedback</a>
+            <a onclick="anchorOnclick(this)" id="start-building" class="primary-button">Start building</a>
           </div>
+          <feedback-button></feedback-button>
           <div id="error" class="error" style="visibility: hidden;">
             Please, select a project type.
           </div>

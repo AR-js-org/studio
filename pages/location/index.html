@@ -37,6 +37,7 @@
     <script src="../../components/header/header.js"></script>
     <script src="../../components/footer/footer.js"></script>
     <script src="../../components/model-controller/model-controller.js"></script>
+    <script src="../../components/feedback/stickybutton.js"></script>
 
     <!-- import utils -->
     <script src="../../utils/fileHelper.js"></script>
@@ -96,6 +97,9 @@
                 <p class="paragraph">
                 <p>Select the type of content you would like to link to your marker and then upload the file from your
                     computer.</p>
+                <p class="bold">
+                    Please check the file name and remove whitepaces.
+                </p>
                 <ul>
                     <li>3D Object (.gltf, .glb .zip; max size 50MB)</li>
                     <li>Image (.jpg, .png, .gif; max size 15MB)</li>
@@ -116,6 +120,7 @@
         </div>
     </div>
     <page-footer></page-footer>
+    <feedback-button></feedback-button>
 </body>
 
 </html>

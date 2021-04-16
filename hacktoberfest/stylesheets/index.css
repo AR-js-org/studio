@@ -1,0 +1,143 @@
+body {
+    background-color: rgb(20, 20, 20);
+    display: flex;
+    flex-direction: column;
+    margin: 0 10%;
+    color: #eee;
+}
+
+
+h1 { color: #d54d7b; font-family: "Great Vibes", cursive; font-size: 30px; font-weight: normal; margin-bottom: 0px; margin-top: 10px; text-align: left; text-shadow: 0 1px 1px #fff; }
+
+
+video {
+    max-width: 1024px;
+    width: 60%;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    object-fit: cover;
+    opacity: 0.4;
+}
+
+button[data-action="show"] {
+    display: none;
+}
+
+.container {
+    width: 100%;
+    font-family: 'Space Mono', monospace;
+    margin-right: 0;
+    perspective: 1000px;
+    font-size: 0.85em;
+    z-index: 9999;
+}
+
+.menu {
+    max-width: 30em;
+    padding: 0.5em;
+    background-color: rgb(20, 20, 20);
+    left: 80%;
+    color: #eee;
+    position: absolute;
+    list-style: none;
+    z-index: 1;
+    font-size: 1.25em
+}
+
+.font-125{
+    font-size: 1.25 em;
+}
+
+.menu-right {
+    max-width: 30em;
+    padding: 0.5em;
+    background-color: rgb(20, 20, 20);
+    right: 80%;
+    color: #eee;
+    position: absolute;
+    list-style: none;
+    z-index: 1;
+}
+
+.menu a {
+    color: #ee6;
+}
+
+.menu-right a {
+    color: #ee6;
+}
+
+a {
+    color: #ee6;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+@media all and (max-width: 850px) {
+    button[data-action="show"] {
+        background-color: #ee6;
+        padding: 0.25em;
+        line-height: 0.25em;
+        outline: none;
+        border: none;
+        display: block;
+        width: 3em;
+        height: 3em;
+        border-radius: 100%;
+        position: absolute;
+        right: 12px;
+        top: 12px;
+    }
+
+
+    body {
+        margin: 0;
+    }
+
+    .menu {
+        left: 0;
+        margin-left: 0;
+        max-width: none;
+    }
+
+    .menu-right {
+        left: 0;
+        margin-left: 0;
+        max-width: none;
+    }
+
+
+
+    .menu, .container, .menu-right, video{
+        position: relative;
+    }
+
+    .container {
+        margin: 0;
+        width: 100%;
+    }
+
+    video {
+        width: 100%;
+        opacity: 1;
+    }
+
+   .px {
+       max-width: none;
+       width: 100%;
+       opacity: 0.15;
+   }
+}
+
+.menu-element {
+    line-height: 2em;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.menu-element:last-child {
+    border: none;
+}

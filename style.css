@@ -38,6 +38,11 @@ body * {
   font-size: 3em;
 }
 
+.bold {
+    font-weight: bold;
+    color: var(--link-color);
+}
+
 .lead {
   font-family: Chakra Petch;
   font-style: normal;
@@ -87,7 +92,6 @@ body * {
   font-size: 1em;
   line-height: 1.25em;
   height: 3.5em;
-  border: none;
   border: 1.5px solid black;
   box-sizing: border-box;
   box-shadow: 10px 10px 0px black;
