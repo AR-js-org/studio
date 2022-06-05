@@ -163,7 +163,7 @@ function handleModelUpload(file) {
                 for (let i = 0; i < buffers.length; i++) {
                     uri = buffers[i].uri;
                     if (!reg4Base64.test(uri)) { // need a related file: data:application/octet-stream;base64,
-                        previewError.innerHTML = '*Please pack all related files to zip file and try again.'
+                        previewError.innerHTML = '*Please pack all related files to zip file and try again, consult <a class="link" target="_blank" href="https://github.com/AR-js-org/studio/blob/master/how-to-upload-gltf.md">this guide on uploading gltf.</a>'
 
                         return;
                     }
@@ -171,7 +171,7 @@ function handleModelUpload(file) {
                 for (let i = 0; i < images.length; i++) {
                     uri = images[i].uri;
                     if (!reg4Base64.test(uri)) { // need a related file
-                        previewError.innerHTML = '*Please pack all related files to zip file and try again.'
+                        previewError.innerHTML = '*Please pack all related files to zip file and try again, consult <a class="link" target="_blank" href="https://github.com/AR-js-org/studio/blob/master/how-to-upload-gltf.md">this guide on uploading gltf.</a>'
                         return;
                     }
                 }
