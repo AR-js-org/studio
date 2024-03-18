@@ -9,6 +9,7 @@
 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./location.css" />
 
     <!-- import the leaflet css and script -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" crossorigin=""
@@ -42,6 +43,7 @@
     <script src="../../utils/fileHelper.js"></script>
     <script src="../../utils/fileTemplate.js"></script>
     <script src="../../utils/fileHandler.js"></script>
+    <script src="./multiLocationsTemplate.js" defer></script>
     <script src="./location.js" defer></script>
 </head>
 
@@ -68,23 +70,21 @@
                 <p class="lead">1. Pick the location</p>
                 <p class="paragraph">
                     Click to drop a pin on the map or enter exact GPS coordinates. You may enter up to 10 locations.
-                    You can retrieve latitude and longitude from an address using <a target="_blannk" href="https://www.latlong.net/" class="link">this tool</a>.
+                    You can retrieve latitude and longitude from an address using
+                    <a target="_blank" href="https://www.latlong.net/" class="link">this tool</a>.
                 </p>
+                <p>
+                    <input type="file" id="uploadTpl" accept="application/JSON" hidden onchange="getTplFile(this)" />
+
+                    If you want to place your creation in more than 10 locations, you may upload your own JSON file by clicking
+                    <span class="clickable" onclick="uploadLocations()">here</span>.<br />
+                    If you don't know hwo to set up your own JSON file, you can follow <span class="clickable" onclick="downloadJsonTpl()">this template</span>.
+                </p>
+                <p id="tpl-error" class="error"></p>
                 <div class="coordinates-input-wrapper">
-                    <div class="coordinates-input-container">
-                        <!-- <div>
-                            <label for="latitude">Latitude:</label>
-                            <input class="text-input" type="text" id="latitude" onblur="check_lat_lon()" name="latitude" />
-                        </div>
-                        <div>
-                            <label for="longitude">Longitude:</label>
-                            <input class="text-input" type="text" id="longitude" onblur="check_lat_lon()" name="longitude" />
-                        </div> -->
-                    </div>
                 </div>
             </div>
         </div>
-
 
         <div class="pages-content-container">
             <map-pick-location></map-pick-location>

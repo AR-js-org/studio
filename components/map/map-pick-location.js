@@ -193,7 +193,7 @@ class MapPickLocation extends HTMLElement {
         this.addLatLngInputs();
 
         let addLocation = document.getElementsByClassName('add-location-container');
-        addLocation[0].addEventListener('click', function () {
+        addLocation[0].addEventListener('click', function() {
             updateLatLngInputs();
         })
     }
@@ -214,11 +214,66 @@ class MapPickLocation extends HTMLElement {
             updateLocationParam();
         };
 
+        window.addEventListener('location-tpl', (ev) => {
+            const tpl = ev.detail.tpl;
+            const coordsParent = document.querySelector('.coordinates-input-container');
+
+            [...coordsParent.childNodes].forEach((a) => a.remove());
+            const numTags = document.createElement('div');
+            numTags.className = 'input-number-tags';
+
+            const latElems = document.createElement('div');
+            latElems.className = 'latitude-elements';
+
+            const lngElems = document.createElement('div');
+            lngElems.className = 'longitude-elements';
+
+            coordsParent.append(numTags); // static
+            coordsParent.append(latElems); // static
+            coordsParent.append(lngElems); // static
+
+            tpl.places.forEach((place) => {
+                const numTags = document.querySelector('.input-number-tags');
+                const latElems = document.querySelector('.latitude-elements');
+                const lngElems = document.querySelector('.longitude-elements');
+
+                const latElemLabel = document.createElement('label');
+                latElemLabel.for = 'latitude';
+                latElemLabel.innerHTML = 'Latitude:';
+
+                const lngElemLabel = document.createElement('label');
+                lngElemLabel.for = 'longitude';
+                lngElemLabel.innerHTML = 'Longitude:'
+
+                latElems.append(latElemLabel); // static
+                lngElems.append(lngElemLabel); // static
+                coordsParent.append(numTags); // static
+                coordsParent.append(latElems); // static
+                coordsParent.append(lngElems); // static
+
+                latElems.value = place.latitude;
+                lngElems.value = place.longitude;
+
+                [...latElems.querySelectorAll('input')].forEach((elem) => elem.setAttribute('name', place.id + 1));
+                [...lngElems.querySelectorAll('input')].forEach((elem) => elem.setAttribute('name', place.id + 1));
+
+                let numTag = document.createElement('p');
+                numTag.innerHTML = place.id + 1 + '.';
+                numTag.className = "num-tags";
+
+                numTags.append(numTag);
+                latElems.append(createInput('latitude', 1))
+                lngElems.append(createInput('longitude', 1))
+
+                updateLocationParam();
+            });
+        });
+
         map = L.map(this.mapRoot).setView(this.mapConfig.center, this.mapConfig.onLoad_zoom);
         layerGroup = L.layerGroup().addTo(map);
         L.tileLayer(tile_url, this.mapConfig.attribution_opts).addTo(map);
         window.locationNumber = 1;
-        map.on('click', function (e) { // => {} that contains the coordinates
+        map.on('click', function(e) { // => {} that contains the coordinates
             array.push({
                 id: 'mapclick_' + window.locationNumber,
                 coords: [e.latlng.lat, e.latlng.lng],

@@ -1,0 +1,13 @@
+.clickable {
+    color : blue;
+    cursor: pointer;
+}
+
+#uploadTpl {
+    position: fixed;
+    left    : -100px;
+    filter  : alpha(opacity=0);
+    opacity : 0;
+    width   : 0;
+    height  : 0;
+}

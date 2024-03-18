@@ -1,5 +1,69 @@
 const { Package } = ARjsStudioBackend;
 
+function checkTpl(tpl) {
+    tpl.showDistance = !!tpl.showDistance;
+    tpl.showName = !!tpl.showName;
+    tpl.heightFromGround = parseFloat(tpl.heightFromGround) || 0;
+    if (tpl.places && tpl.places.length > 0) {
+        for (let places = tpl.places, i = places.length - 1; i >= 0; i--) {
+            let one = places[i];
+            // one.id ??
+            one.name = (one.name || '').trim();
+
+            one.latitude = parseFloat(one.latitude);
+            if (isNaN(one.latitude) || one.latitude < -90 || one.latitude > 90) return `The ${i + 1} latitude shoulde be in range of -90 ~ 90`;
+
+            one.longitude = parseFloat(one.longitude);
+            if (isNaN(one.longitude) || one.longitude < -180 || one.longitude > 180) return `The ${i + 1} longitude shoulde be in range of -90 ~ 90`;
+        }
+    }
+    if (!tpl.places || tpl.places.length < 1) return 'No valid places';
+};
+
+function getTplFile(self) {
+    const tplError = document.getElementById("tpl-error");
+    tplError.innerHTML = '';
+
+    const file = self.files[0];
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onloadend = function () {
+        try {
+            eval('var tpl=' + reader.result);
+            let error = checkTpl(tpl);
+            if (error) {
+                tplError.innerHTML = '* Your uploaded JSON file got a problem: <br/>' + error;
+            } else {
+                window.dispatchEvent(new CustomEvent('location-tpl', {
+                    detail: {
+                        tpl,
+                    }
+                }));
+            }
+
+        } catch (error) {
+            tplError.innerHTML = '* Your uploaded JSON file has got a problem: <br/>' + error.toString();
+        }
+    };
+
+
+    self.value = ''; // Reset required for re-upload
+};
+
+function uploadLocations() {
+    var uploadTpl = document.getElementById('uploadTpl');
+    uploadTpl.click();
+};
+
+function downloadJsonTpl() {
+    var base64 = btoa(multiLocationsTemplate);
+    var link = document.createElement('a');
+    link.href = `data:application/json;base64,${base64}`;
+    link.download = "template.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+};
 var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
 var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
 
