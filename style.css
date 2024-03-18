@@ -2,6 +2,22 @@
 @import url("https://fonts.googleapis.com/css?family=Chakra+Petch&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
 
+/* HTML & body */
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
 /* Color Variables */
 :root {
   --primary-color: #fff700;
@@ -122,11 +138,6 @@
   cursor: pointer;
 }
 
-/* body */
-body {
-  margin: 0;
-}
-
 hr {
   margin: 2.25em 0.625em;
   border: 1px solid var(--passive-color);
@@ -134,99 +145,57 @@ hr {
 
 page-header {
   display: flex;
+  flex: none;
   align-items: center;
-  position: fixed;
+  position: sticky;
+  top: 0;
   width: 100%;
   background: var(--passive-color);
   z-index: var(--max-z-index);
 }
 
 page-footer {
-  position: absolute;
   background: var(--secondary-color);
   width: 100%;
 }
 
 .pages-content {
   font-family: Source Sans Pro;
-  padding: 4em 12vw;
+  padding: 1.875em;
 }
 
 .pages-content-container {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 2em;
+  width: 110ch;
+  max-width: 100%;
+}
+
+.pages-content-container + .pages-content-container{
+  margin-top: 2em;
 }
 
 .pages-content-element {
-  width: 50%;
-  padding: 1em;
-  max-width: 30em;
-  margin-right: 1em;
+  flex: 1;
 }
 
-/* TODO: move this to location.css */
+.pages-content-element + * {
+  margin-left: 2em;
+}
+
 .pages-content-element .lead {
   margin-top: 0;
 }
 
-/* TODO: move this to location.css */
 .pages-content-container:first-of-type {
   margin-bottom: 2.25em;
 }
 
-/* TODO: resolve duplicate conflict. move this to the back-anchor component. */
+/* TODO: move this to the back-anchor component. */
 .back-anchor {
-  padding: 1em 0em;
   height: 3rem;
-}
-.coordinates-input-wrapper {
-  margin-bottom: 1rem;
-}
-
-.back-anchor {
   padding: 1em;
   font-size: 1em;
-}
-
-/* TODO: move .coordinates-input-container to location.css */
-.coordinates-input-container {
-  display: flex;
-  margin-bottom: 1em;
-}
-
-.coordinates-input-container .input-number-tags {
-    padding-left: 0;
-}
-
-.add-location-container {
-    width: fit-content;
-    cursor: pointer;
-}
-
-.coordinates-input-container > div {
-  padding: 1rem;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  text-align: justify;
-}
-
-.delete-coordinates-container > svg {
-  margin-top: 2.5rem;
-}
-
-.remove-location-container {
-    display: flex;
-    cursor: pointer;
-}
-
-.add-location-container {
-  display: flex;
-}
-
-.add-location-icon {
-  margin-right: 0.4rem;
 }
 
 .input-container label {
@@ -235,8 +204,8 @@ page-footer {
 }
 
 .map-buttons-container {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .text-input {
@@ -257,21 +226,26 @@ input:focus {
 #content-preview {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .download-default-marker {
   display: flex;
-  vertical-align: middle;
-  font-style: italic;
+  align-items: center;
   font-weight: bold;
   font-size: 18px;
+  line-height: 1;
+}
+
+.download-default-marker svg {
+  display: block;
+  margin-right: 0.5em;
 }
 
 .beta {
   font-family: Source Sans Pro;
-  margin-top: 5em;
   background-color: #fff700;
-  padding: 1em;
+  padding: 1em 1.875em;
 }
 
 .repo-url {
@@ -310,6 +284,11 @@ input:focus {
   .pages-content-container {
     flex-direction: column;
   }
+
+  .pages-content-container > * {
+    margin-left: 0;
+  }
+
   .pages-content-element {
     width: 100%;
   }
