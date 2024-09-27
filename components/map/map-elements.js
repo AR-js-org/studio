@@ -7,10 +7,16 @@ crossorigin=""/>`;
 // styles to hold classnames for the main map and additional maps
 const map_styles = `
 <style>
-    .map-pick-location{
-        height: 380px;
-        width: 800px;
+    :host {
+        display: block;
+        width: 100%;
     }
+
+    .map-pick-location {
+        width: 100%;
+        height: 380px;
+    }
+
     .map-foo-bar {
         height: 100px;
         width: 200px;
@@ -31,8 +37,7 @@ const map_styles = `
         padding-top: 0.3em;
     }
     .location-set-display {
-        visibility: hidden;
-        padding-top: 0;
+        display: none;
     }
     .use-my-location-button{
         background-color: white;

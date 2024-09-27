@@ -9,7 +9,7 @@
 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="../../style.css" />
-    <link rel="stylesheet" href="../../pages/marker/marker.css" />
+    <link rel="stylesheet" href="./marker.css" />
 
     <!-- import studio-backend api -->
     <script
@@ -43,7 +43,7 @@
     <page-header assetsUrl="../../assets"></page-header>
     <img class="default-marker-hidden" style="position: absolute; top: 0; right: -1000px;" src="../../assets/default-marker-no-border.png"/>
     <div class="pages-content">
-        <back-anchor assetsUrl="../../assets"></back-anchor>
+        <back-anchor href="/" assetsUrl="../../assets"></back-anchor>
         <div class="pages-content-container">
             <div class="pages-content-element">
                 <p class="title">Marker-based</p>
@@ -71,9 +71,11 @@
                 </label>
                 <p id="marker-error" class="error"></p>
             </div>
-            <div id="marker-preview" target="marker-file">
-                <div class="marker">
-                    <img src="../../assets/default-marker.png" alt="Default marker png"/>
+            <div id="marker-preview" class="pages-content-element" target="marker-file">
+                <div class="marker-wrapper">
+                    <div class="marker">
+                        <img src="../../assets/default-marker.png"/>
+                    </div>
                 </div>
                 <div class="download-marker" style="display: flex; justify-content: flex-end; padding: 1em 0;">
                     <div class="download-default-marker">
@@ -110,12 +112,10 @@
                 </label>
                 <p id="content-error" class="error"></p>
             </div>
-            <div id="content-preview" target="content-file">
+            <div id="content-preview" class="pages-content-element" target="content-file">
                 <file-holder></file-holder>
             </div>
         </div>
-
-        <hr>
     </div>
     <page-footer></page-footer>
     <feedback-button></feedback-button>
